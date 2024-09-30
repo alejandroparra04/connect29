@@ -1,0 +1,159 @@
+.generar-avance-container {
+    display: flex;
+}
+
+.sidebar {
+  width: 100px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .menu-button {
+    position: fixed;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    color: #999;
+  }
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+
+    nav {
+      a {
+        color: white;
+        text-decoration: none;
+        margin-right: 20px;
+      }
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+
+      input {
+        padding: 5px;
+        margin-right: 10px;
+      }
+
+      button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 40px;  // Ajusta el ancho de la imagen según tus necesidades
+          height: 40px; // Ajusta la altura de la imagen según tus necesidades
+        }
+      }
+    }
+  }
+}
+
+  .generar-avance-header {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 50px;
+  
+    h2 {
+      color: #4285f4;
+      font-size: 24px;
+    }
+  
+    .icon-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 30px;
+      color: #333;
+      transition: color 0.3s;
+  
+      &:hover {
+        color: #357ae8;
+      }
+  
+      .material-icons {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .diagrams {
+    margin-top: 3px;
+    margin-left: 50px;
+
+    .charts {
+      display: flex;
+      justify-content: space-around;
+      margin-left: 50px;
+
+      .bar-chart, .pie-chart {
+        width: 100%;
+        height: 300px;
+      }
+    }
+
+    .legend {
+      margin-top: 10px;
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+
+          span {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 10px;
+          }
+
+          .green { background-color: green; }
+          .blue { background-color: blue; }
+          .red { background-color: red; }
+        }
+      }
+    }
+  }
+
+  .progress-container {
+    margin-top: 10px;
+    margin-left: 50px;
+    
+    progress {
+      width: 80%;
+      height: 20px;
+    }
+
+    span {
+      margin-left: 10px;
+    }
+  }
+
+  

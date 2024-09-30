@@ -1,0 +1,61 @@
+<div class="detallesproyecto-container">
+  <div class="sidebar">
+    <button class="menu-button">☰</button>
+  </div>
+  <div class="main-content">
+    <div class="navbar">
+        <nav>
+            <a routerLink="/home">Inicio</a>
+            <a routerLink="/proyectos">Proyectos</a>
+            
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar">
+            <button (click)="irABuscar()" class="icon-button">
+                <span class="material-icons">search</span>
+            </button> 
+        </div>
+    </div>
+    <div class="detallesproyecto-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+    <h2>Detalles Del Proyecto</h2>
+    </div>
+  
+    <form class="detallesproyecto-form">
+      <div>
+        <label for="id">Id</label>
+        <input type="text" id="id" [value]="proyecto.numeroId" readonly />
+      </div>
+  
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" [value]="proyecto.nombre" readonly />
+      </div>
+
+      <div>
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" [value]="proyecto.descripcion" readonly></textarea>
+      </div>
+  
+      <div>
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input type="text" id="fechaInicio" [value]="proyecto.fecha_inicio" readonly />
+      </div>
+  
+      <div>
+        <label for="fechaFin">Fecha de Fin</label>
+        <input type="text" id="fechaFin" [value]="proyecto.fecha_fin" readonly />
+      </div>
+  
+      <div>
+        <label for="responsable">Responsable</label>
+        <input type="text" id="responsable" [value]="proyecto.responsable" readonly />
+      </div>
+  
+      <button (click)="cerrar()" type="button" class="btn-cerrar">Cerrar</button>
+    </form>
+  </div>
+</div>
+  

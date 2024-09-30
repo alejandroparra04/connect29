@@ -1,0 +1,130 @@
+.detalle-entregable-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 100px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .menu-button {
+    position: fixed;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    color: #999;
+  }
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+
+    nav {
+      a {
+        color: white;
+        text-decoration: none;
+        margin-right: 20px;
+      }
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+
+      input {
+        padding: 5px;
+        margin-right: 10px;
+      }
+
+      button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 40px;  // Ajusta el ancho de la imagen según tus necesidades
+          height: 40px; // Ajusta la altura de la imagen según tus necesidades
+        }
+      }
+    }
+  }
+}
+
+
+.detalle-entregable-header {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-left: 25px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+}
+
+.icon-button:hover {
+  color: #007bff;
+}
+
+
+h2 {
+  text-align: center;
+  color: #2979ff;
+}
+
+form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-left:300px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 auto;
+  background-color: #2979ff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #2962ff;
+}

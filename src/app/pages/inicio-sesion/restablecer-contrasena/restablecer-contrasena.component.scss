@@ -1,0 +1,121 @@
+.restablecer-contrasena-container {
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 80px;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .restablecer-contrasena-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+   
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+}
+
+.icon-button:hover {
+  color: #007BFF;
+}
+      
+  h2 {
+    white-space: nowrap;
+    text-align: center;
+    font-size: 24px;
+    color: #007BFF;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #cdcdcd;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      
+  
+      input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+  
+        input {
+          flex: 1;
+          padding-right: 5px; // Espacio suficiente para el ícono sin afectar el campo de texto
+          border-radius: 4px;
+        }
+  
+        .toggle-password {
+          position: absolute;
+          left: 150px;  // Icono a la derecha del input
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          mat-icon {
+            font-size: 20px;
+            color: #ccc;
+            transition: color 0.3s ease;
+          }
+  
+          &:hover mat-icon {
+            color: #4285f4;
+          }
+        }
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 0 auto;
+    width: 80%;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Espacio inferior para los botones */
+    align-items: center;
+
+    &:hover {
+      background-color: #357ae8;
+    }
+  }
+
+  .btn-atras {
+    background-color: white;
+    color: #999;
+    border: 1px solid #696868;
+  }

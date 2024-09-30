@@ -1,0 +1,9 @@
+<div class="contrasena-container">
+    <div class="status-icon">
+      <mat-icon *ngIf="success" class="icon-success">check_circle</mat-icon>
+      <mat-icon *ngIf="!success" class="icon-failed">cancel</mat-icon>
+    </div>
+    <p class="message">{{ success ? 'Restablecimiento de contraseña exitoso' : 'Error al restablecer la contraseña' }}</p>
+    <button class="btn-inicio-sesion" (click)="volverInicio()">Inicio de Sesión</button>
+  </div>
+  

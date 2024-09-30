@@ -1,0 +1,59 @@
+<div class="emision-certificado-container">
+  <div class="sidebar">
+    <button class="menu-button">☰</button>
+  </div>
+  <div class="main-content">
+    <div class="navbar">
+        <nav>
+            <a routerLink="/home">Inicio</a>
+            <a routerLink="/proyectos">Proyectos</a>
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar">
+            <button (click)="irABuscar()" class="icon-button">
+                <span class="material-icons">search</span>
+            </button> 
+        </div>
+    </div>
+    <div class="header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Emisión de Certificado</h2>
+    </div>
+  
+    <div class="content">
+      <div class="tabla-certificados">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td>{{ item.id }}</td>
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.descripcion }}</td>
+              <td>{{ item.estado }}</td>
+              <td>{{ item.fecha }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <div class="certificado-container">
+        <button (click)="generarCertificado()" class="btn-generar">Generar Certificado</button>
+        <div class="certificado">
+          <p>Certificado</p>
+        </div>
+        <button (click)="descargarCertificado()" class="btn-descargar">Descargar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  

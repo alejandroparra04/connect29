@@ -1,0 +1,123 @@
+.crear-usuario-container {
+  padding: 20px;
+  width: 400px;
+  margin: 0 auto;
+  padding-top: 80px;
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+}
+
+.crear-usuario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+  
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+}
+  
+.icon-button:hover {
+  color: #007bff;
+}
+
+  h2 {
+    white-space: nowrap;
+    text-align: center;
+    color: #2979ff;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      input {
+        flex: 1;
+        padding-right: 5px; // Espacio suficiente para el ícono sin afectar el campo de texto
+        border-radius: 4px;
+      }
+
+      .toggle-password {
+        position: absolute;
+        left: 150px;  // Icono a la derecha del input
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        mat-icon {
+          font-size: 20px;
+          color: #ccc;
+          transition: color 0.3s ease;
+        }
+
+        &:hover mat-icon {
+          color: #4285f4;
+        }
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #357ae8;
+    }
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+
+    a {
+      color: #4285f4;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+

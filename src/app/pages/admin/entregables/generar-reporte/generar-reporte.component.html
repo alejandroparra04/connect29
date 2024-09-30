@@ -1,0 +1,102 @@
+<div class="generar-reporte-container">
+  <div class="sidebar">
+    <button class="menu-button">☰</button>
+  </div>
+  <div class="main-content">
+    <div class="navbar">
+        <nav>
+            <a routerLink="/home">Inicio</a>
+            <a routerLink="/proyectos">Proyectos</a>
+        
+        </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar">
+            <button (click)="irABuscar()" class="icon-button">
+                <span class="material-icons">search</span>
+            </button> 
+        </div>
+    </div>
+    <div class="generar-reporte-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Generar Reporte</h2>
+    </div>
+  
+    <div class="generar-reporte-body">
+    <div class="parametros-section">
+      <h3>Parámetros</h3>
+      <div class="form-group">
+        <label for="fechaInicio">Fecha de Inicio</label>
+        <input [(ngModel)]="fecha_inicio"  type="date" id="fechaInicio">
+      </div>
+  
+      <div class="form-group">
+        <label for="fechaFin">Fecha de Fin</label>
+        <input [(ngModel)]="fecha_fin"  type="date" id="fechaFin">
+      </div>
+  
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select [(ngModel)]="estado" id="estado">
+          <option value="pendiente">Pendiente</option>
+          <option value="en_progreso">En Progreso</option>
+          <option value="completado">Completado</option>
+        </select>
+      </div>
+  
+      <div class="button-group">
+        <button class="btn-reporte" (click)="Reporte()">Generar reporte</button>
+        <button class="btn-avance" (click)="Avance()">Generar Avance</button>
+        <button class="btn-reset" (click)="resetearFormulario()">Reiniciar</button>
+        <button class="btn-download" (click)="descargar()">Descargar</button>
+      </div>
+    </div>
+  
+    <div class="reporte-section"  *ngIf="proyecto">
+
+      <div class="reporte-info">
+        <h3>Reporte</h3>
+        <div *ngFor="let proyecto of proyecto">
+        <p><strong>Proyecto:</strong> {{proyecto.nombre}}</p>
+        <p><strong>Responsable:</strong> {{proyecto.responsable}}</p>
+        <p><strong>Fecha de Inicio:</strong>{{proyecto.fecha_inicio}}</p>
+        <p><strong>Fecha de Fin:</strong> {{proyecto.fecha_fin}}</p>
+        <p><strong>Progreso:</strong>{{proyecto.progreso}}%</p>
+        </div>
+      </div>
+  
+
+      <div class="graficos-section">
+        <div class="grafico-torta">
+          <canvas #graficaProgreso></canvas>
+        </div>
+        <div class="grafico-barras">
+          <canvas #graficaEntregables></canvas>
+        </div>
+      </div>
+  
+      <div class="tabla-entregables">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+      
+            <tr *ngFor="let entregable of entregables">
+              <td>{{ entregable.id}}</td>
+              <td>{{ entregable.nombre}}</td>
+              <td>{{ entregable.descripcion}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+  

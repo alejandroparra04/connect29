@@ -1,0 +1,33 @@
+<div class="restablecer-contrasena-container">
+    <div class="restablecer-contrasena-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Restablecer la contraseña</h2>
+    </div>
+
+    <p style="color: #696868;">Elija una nueva contraseña para su cuenta</p>
+
+    <form (ngSubmit)="restablecerContrasena()">
+        <div class="form-group">
+            <label for="password"></label>
+            <div class="password-wrapper">
+              <input id="password" [type]="passwordFieldType" [(ngModel)]="user.password" placeholder="Tu nueva contraseña" />
+              <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+                <mat-icon>{{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword"></label>
+            <div class="password-wrapper">
+              <input id="confirmPassword" [type]="passwordFieldType" [(ngModel)]="user.confirmPassword" placeholder="Confirmar tu nueva Contraseña" />
+              <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+                <mat-icon>{{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </div>
+        </div>
+        <button  type="submit" class="btn-restablecer" [routerLink]="['/contrasena']">Restablecer contraseña</button>
+        <button type="submit" class="btn-atras" (click)="volver()">Atrás al inicio de sesión</button>
+    </form>
+</div>

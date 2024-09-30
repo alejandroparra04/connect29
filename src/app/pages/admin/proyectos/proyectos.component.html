@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="sidebar">
+        <button class="menu-button">☰</button>
+    </div>
+    <div class="main-content">
+        <div class="navbar">
+            <nav>
+                <a routerLink="/home">Inicio</a>
+                <a routerLink="/proyectos">Proyectos</a>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar">
+                <button (click)="irABuscar()" class="icon-button">
+                    <span class="material-icons">search</span>
+                </button> 
+            </div>
+        </div>
+
+        
+        <div class="modal" *ngIf="mostrarModalEliminar">
+            <div class="modal-content">
+              <span class="close" (click)="cancelarEliminacion()">&times;</span>
+              <h2>Confirmar Eliminación</h2>
+              <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
+              <button (click)="confirmarEliminacion()">Eliminar</button>
+              <button (click)="cancelarEliminacion()">Cancelar</button>
+            </div>
+          </div>
+
+         <!-- Tabla de Entregables -->
+         <table class="entregables-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Responsable</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                 @for (proyecto of proyectos; track proyecto.id){
+                <tr>
+                    <td>{{ proyecto.numeroId}}</td>
+                    <td>{{ proyecto.nombre }}</td>
+                    <td>{{ proyecto.descripcion }}</td>
+                    <td>{{ proyecto.fecha_inicio }}</td>
+                    <td>{{ proyecto.fecha_fin }}</td>
+                    <td>{{ proyecto.responsable}}</td>
+                    <td>
+                        <button  (click)="editarProyectos(proyecto.id)">Editar</button>
+                        <button  (click)="eliminarProyecto(proyecto.id, proyecto.nombre)">Eliminar</button>
+                        <button (click)="verDetalles(proyecto.id)">Detalles</button> 
+                        <button (click)="Procesos()">Procesos</button> 
+
+                    </td>
+                </tr>
+                } 
+            </tbody>
+        </table>
+
+
+        <div class="action-buttons">
+            <button class="btn btn-primary"   (click)="crearProyecto()">Crear Proyectos</button> 
+        </div>
+    </div>
+</div>

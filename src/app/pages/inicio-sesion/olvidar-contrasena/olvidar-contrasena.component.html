@@ -1,0 +1,22 @@
+<div class="olvidar-contrasena-container">
+    <div class="olvidar-contrasena-header">
+      <h2>Ha olvidado su contraseña</h2>
+        <button (click)="volver()" class="icon-button">
+          <span class="material-icons">arrow_back</span>
+        </button>
+    </div>
+
+    <p style="color: #696868;">Ingrese el coreo electrónico que utilizo para crea su cuenta
+        <br> para que podamos enviarle instrucciones sobre como restablecer
+        <br> su contraseña.
+    </p>
+    <form>
+        <div class="form-group">
+            <label for="correoElectronico"></label>
+            <input type="email" id="correoElectronico" name="correoElectronico" required placeholder="Correo">
+        </div>
+        
+            <button  type="submit" class="btn-enviar" [routerLink]="['/restablecer-contrasena']">Enviar</button>
+            <button type="submit" class="btn-atras" [routerLink]="['/inicio-sesion']">Atrás al inicio de sesión</button>
+    </form>
+</div>

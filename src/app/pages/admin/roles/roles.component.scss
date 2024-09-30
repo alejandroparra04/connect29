@@ -1,0 +1,83 @@
+.roles-container {
+    padding: 20px;
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 80px;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .roles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-right: 80px;
+    margin-left : 20px;
+
+  }
+    
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+  }
+    
+  .icon-button:hover {
+    color: #007bff;
+  }
+  
+    h2 {
+      white-space: nowrap;
+      text-align: center;
+      color: #2979ff;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      
+            label {
+                display: block;
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 5px;
+                text-align: left;
+            }
+            #asignacion-label {
+                color: #999;
+            }
+      
+            input, select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+      
+            select option:disabled{
+                color: #999;
+            }
+      }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 auto;
+        background-color: #2979ff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+      }
+      
+      button:hover {
+        background-color: #2962ff;
+      }

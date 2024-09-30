@@ -1,0 +1,40 @@
+.contrasena-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .status-icon {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  
+  .icon-success {
+    color: green;
+    font-size: 72px;
+  }
+  
+  .icon-failed {
+    color: red;
+    font-size: 72px;
+  }
+  
+  .message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .btn-inicio-sesion {
+    background-color: #4285f4;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-inicio-sesion:hover {
+    background-color: #357ae8;
+  }
+  

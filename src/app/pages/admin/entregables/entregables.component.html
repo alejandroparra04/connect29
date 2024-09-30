@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="sidebar">
+        <button class="menu-button">☰</button>
+    </div>
+    <div class="main-content">
+        <div class="navbar">
+            <nav>
+                <a routerLink="/home">Inicio</a>
+                <a routerLink="/proyectos">Proyectos</a>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar">
+                <button (click)="irABuscar()" class="icon-button">
+                    <span class="material-icons">search</span>
+                </button> 
+            </div>
+        </div>
+        
+
+        <div class="modal" *ngIf="mostrarModalEliminar">
+            <div class="modal-content">
+              <span class="close" (click)="cancelarEliminacion()">&times;</span>
+              <h2>Confirmar Eliminación</h2>
+              <p>¿Estás seguro de que deseas eliminar el entregable: {{ selectedEntregableEliminar?.nombre }}?</p>
+              <button (click)="confirmarEliminacion()">Eliminar</button>
+              <button (click)="cancelarEliminacion()">Cancelar</button>
+            </div>
+          </div>
+          
+
+        <!-- Tabla de Entregables -->
+        <table class="entregables-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (entregable of entregables; track entregable.id){
+                <tr>
+                    <td>{{ entregable.numeroId}}</td>
+                    <td>{{ entregable.nombre }}</td>
+                    <td>{{ entregable.descripcion }}</td>
+                    <td>{{ entregable.estado }}</td>
+                    <td>{{ entregable.fecha }}</td>
+                    <td>
+                        <button  (click)="editarEntregable(entregable.id)">Editar</button>
+                        <button  (click)="eliminarEntregable(entregable.id, entregable.nombre)">Eliminar</button>
+                        <button (click)="abrirDetalles(entregable.id)">Detalles</button>
+                        <button  (click)="subirEntregable()">Subir</button> 
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Botones de Acción -->
+        <div class="action-buttons">
+            <button (click)="generarReporte()">Generar Reporte</button>
+            <button class="btn btn-primary" (click)="crearEntregable()">Crear Entregable</button>
+        </div>
+    </div>
+</div>
