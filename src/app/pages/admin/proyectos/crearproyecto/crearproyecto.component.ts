@@ -23,8 +23,14 @@ export class CrearproyectoComponent {
     descripcion: '',
    };
 
+   menuCerrado = false
+
   constructor (private router: Router, private proyectoService: ProyectoService){}
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+   }
+   
   volver(): void{
     this.router.navigate(['/proyectos']);
   }

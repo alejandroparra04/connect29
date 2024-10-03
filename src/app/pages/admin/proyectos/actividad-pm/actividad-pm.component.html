@@ -1,7 +1,40 @@
 <div class="container">
-    <div class="sidebar">
-        <button class="menu-button">☰</button>
+    <div class="sidebar" [class.closed]="menuCerrado">
+        <button class="menu-button" (click)="toggleMenu()">☰</button>
+        <ul>
+            <li>
+                <button [routerLink]="['/crearproyecto']">
+                    <span class="icon">
+                      <img src="assets/icons/icono_crear_proyecto.png">
+                    </span>
+                    Crear Proyecto
+                  </button>
+                </li>
+                <li>
+                  <button [routerLink]="['/usuarios']">
+                    <span class="icon">
+                      <img src="assets/icons/icono_crear_usuario.png">
+                    </span>
+                    Crear Usuario
+                  </button>
+                </li>
+                <li>
+                  <button [routerLink]="['/roles']">
+                    <span class="icon">
+                      <img src="assets/icons/icono_crear_rol.png">
+                    </span>
+                    Crear Roles
+                  </button>
+                </li>
+                <li>
+                  <button [routerLink]="['/inicio-sesion']">
+                    <span class="material-icons">logout</span>
+                    Cerrar Sesión
+                  </button>
+                </li>
+        </ul>
     </div>
+
     <div class="main-content">
         <div class="navbar">
             <nav>
@@ -14,6 +47,12 @@
                     <span class="material-icons">search</span>
                 </button> 
             </div>
+        </div>
+        <div  class="actividadPm-header">
+            <button (click)="volver()" class="icon-button">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <h2>Actividades del Proceso de Gestión de Proyectos (PM)</h2>
         </div>
 
          <table class="actividad-table">

@@ -17,6 +17,8 @@ export class EditarproyectosComponent implements OnInit {
   id: string = '';
   editForm: FormGroup;
 
+  menuCerrado = false;
+
   constructor( private fb: FormBuilder,
     private route: ActivatedRoute, 
     private proyectoService: ProyectoService,
@@ -30,6 +32,10 @@ export class EditarproyectosComponent implements OnInit {
       });
     }
 
+    toggleMenu(){
+      this.menuCerrado = !this.menuCerrado;
+    }
+    
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') || '';
     if (this.id) {

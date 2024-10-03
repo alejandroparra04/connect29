@@ -19,10 +19,14 @@ export class DetallesComponent {
      descripcion:'',
     fecha:'',
   };
-
+  menuCerrado = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private entregableService: EntregableService){}
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+  
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {

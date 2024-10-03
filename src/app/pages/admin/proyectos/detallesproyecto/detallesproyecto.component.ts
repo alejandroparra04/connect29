@@ -20,8 +20,14 @@ export class DetallesproyectoComponent implements OnInit {
     responsable:''
   };
 
+  menuCerrado = false;
+
   constructor( private  route: ActivatedRoute, private proyectoService: ProyectoService, private router: Router) {}
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+  
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
      if (id) {

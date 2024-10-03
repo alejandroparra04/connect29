@@ -10,8 +10,14 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class EmisionCertificadoComponent {
 
+  menuCerrado = false;
+
   constructor(private router: Router){}
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+  
   irABuscar(){
     this.router.navigate(['/buscar']);
   }

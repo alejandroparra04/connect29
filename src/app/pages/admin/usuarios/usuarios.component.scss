@@ -1,17 +1,142 @@
 .crear-usuario-container {
-  padding: 20px;
+  display: flex;
+
+ /* padding: 20px;
   width: 400px;
   margin: 0 auto;
   padding-top: 80px;
   text-align: left;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Arial', sans-serif;*/
 }
+ .sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    transition: width 0.3 ease;
+    overflow: hidden;
+
+    &.closed {
+      width: 50px;
+      ul, .logo-img {
+        opacity: 0;
+        transition: opacity 0.3 ease;
+      }
+    }
+
+    
+    .menu-button {
+      position: fixed;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+
+    
+    .icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    .icon img {
+      width: 16px;
+      height: auto;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul li {
+      margin-bottom: 15px;
+    }
+
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      position: fixed;
+      top: 60px;
+  
+      li {
+        margin: 10px 0;
+  
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding-left: 10px;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+  
+      nav {
+        a {
+          color: white;
+          text-decoration: none;
+          margin-right: 20px;
+        }
+      }
+  
+      .search-bar {
+        display: flex;
+        align-items: center;
+  
+        input {
+          padding: 5px;
+          margin-right: 10px;
+        }
+  
+        button {
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+  
+          img {
+            width: 40px;  // Ajusta el ancho de la imagen según tus necesidades
+            height: 40px; // Ajusta la altura de la imagen según tus necesidades
+          }
+        }
+      }
+    }
 
 .crear-usuario-header {
+  width: 55%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  margin-left: 0px;
+  margin-right: 50px;
 }
   
 .icon-button {
@@ -33,6 +158,11 @@
   }
 
   .form-group {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 400px;
     margin-bottom: 20px;
 
     label {
@@ -65,7 +195,7 @@
 
       .toggle-password {
         position: absolute;
-        left: 150px;  // Icono a la derecha del input
+       right: 50px;  // Icono a la derecha del input
         background: none;
         border: none;
         cursor: pointer;
@@ -88,7 +218,7 @@
   }
 
   button {
-    width: 100%;
+    width: 10%;
     padding: 12px;
     background-color: #4285f4;
     color: white;
@@ -98,6 +228,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: 550px;
 
     &:hover {
       background-color: #357ae8;
@@ -118,6 +249,4 @@
       }
     }
   }
-
-
-
+  }

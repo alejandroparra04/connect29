@@ -36,9 +36,27 @@ export class EntregablesComponent implements OnInit {
   crearNuevoEntregable: boolean = false;
   mostrarModalEliminar = false;
 
+  selectedProyecto:  any = null;
+  selectedProceso: string = '';
+  selectedActividad: any  = null;
+
+  menuCerrado = false;
+
   constructor(private router:Router, private entregableService: EntregableService, private authService: AuthService) {
     this.cargarEntregables();
     this.userRole = this.authService.getUserRole() || 'Usuario';
+   }
+
+   toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+   }
+
+   trackById(index: number, entregable: Entregable): string{
+    return entregable.numeroId;
+   }
+
+   volver(){
+    this.router.navigate(['/procesos']);
    }
 
   irABuscar(){
@@ -66,8 +84,8 @@ export class EntregablesComponent implements OnInit {
   }
 
   // Métodos para eliminar entregables
-  eliminarEntregable(id: number, nombre: string) {
-    this.selectedEntregableEliminar = this.entregables.find(entregable => entregable.id === id) || null;
+  eliminarEntregable(numeroId: string, nombre: string) {
+    this.selectedEntregableEliminar = this.entregables.find(entregable => entregable.numeroId === numeroId) || null;
     this.mostrarModalEliminar = true; 
   }
   
@@ -78,7 +96,7 @@ export class EntregablesComponent implements OnInit {
 
   confirmarEliminacion(): void {
     if (this.selectedEntregableEliminar) {
-      this.entregableService.eliminarEntregable(this.selectedEntregableEliminar.id.toString()).then(() => {
+      this.entregableService.eliminarEntregable(this.selectedEntregableEliminar.numeroId.toString()).then(() => {
         console.log('Entregable eliminado con éxito');
         this.mostrarModalEliminar = false;
         this.selectedEntregableEliminar = null;
@@ -109,17 +127,56 @@ export class EntregablesComponent implements OnInit {
     
   }
 //metodo para crea entregables
-  crearEntregable() {
+  crearEntregable(proyectoId: number, proceso: string, actividadId: number, numeroEntregable: number) {
     this.router.navigate(['/crear-entregable']);
+
+    const idJerarquico = `${proyectoId}.${proceso}.${actividadId}.${numeroEntregable}`;
+
+    const nuevoEntregable: Entregable = {
+      id: 0,
+      numeroId: idJerarquico,
+      nombre: 'Nuevo Entregable',
+      descripcion:  'Descripción del nuevo entregable',
+      estado:  'Pendiente',
+      fecha:   new Date().toISOString().slice(0, 10),
+    };
+
+    this.guardarNuevoEntregable(nuevoEntregable);
+  }
+
+  crearEntregableConDatos() {
+    this.router.navigate(['/crear-entregable']);
+    if (!this.selectedProyecto || !this.selectedProceso || !this.selectedActividad) {
+      console.error('Proyecto, proceso o actividad no seleccionados correctamente.');
+      return;
+    }
+
+    const proyectoId = this.selectedProyecto.id;
+    const proceso = this.selectedProceso; // 'pm' o 'si'
+    const actividadId = this.selectedActividad.id;
+    const numeroEntregable = this.obtenerUltimoNumeroEntregable(proyectoId, proceso, actividadId);
+
+    // Llama a la función que crea el entregable
+    this.crearEntregable(proyectoId, proceso, actividadId, numeroEntregable);
   }
 
   guardarNuevoEntregable(entregable: Entregable){
     this.entregableService.crearEntregables(entregable).then(()=> {
-      console.log('Entregable guardado correctamente');
-      this.crearNuevoEntregable = false;
+      console.log('Entregable guardado correctamente con ID: ', entregable.numeroId);
     }).catch((error) => {
       console.error('Error al guardar el entregable', error);
     });
+  }
+
+  obtenerUltimoNumeroEntregable(proyectoId: number, proceso: string, actividadId: number): number {
+    const entregablesFiltrados = this.entregables.filter(entregables => {
+      const numeroIdStr = entregables.numeroId?.toString();
+      return numeroIdStr.startsWith(`${proyectoId}.${proceso}.${actividadId}`);
+    });
+    
+    const ultimoEntregable = entregablesFiltrados.length > 0 ?
+     Math.max(...entregablesFiltrados.map(e => parseInt(e.numeroId.split('.').pop()!))) : 0;
+    return ultimoEntregable + 1;
   }
 
   cancelarCreacion(){
@@ -128,5 +185,5 @@ export class EntregablesComponent implements OnInit {
 
   subirEntregable(){
     this.router.navigate(['/subir-entregables'])
-  }
+  }
 }

@@ -78,13 +78,13 @@
         left: 0; // Lo posiciona pegado al borde izquierdo del sidebar
         width: 300px; // Ancho igual al 100% del sidebar
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
         padding: 10px 0; // Añade un padding opcional para separación de los botones
   
       img {
-        width: 40px;
-        height: auto;
+        width: 130px;
+        height: 90px; //ajutado y listo//
       }
     }
   }

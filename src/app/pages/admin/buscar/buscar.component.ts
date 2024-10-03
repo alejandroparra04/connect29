@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BusquedaService } from '../../../services/busqueda.service';
 
 
 @Component({
   selector: 'app-buscar',
   standalone: true,
-  imports: [CommonModule, FormsModule, ],
+  imports: [CommonModule, FormsModule, RouterLink ],
   templateUrl: './buscar.component.html',
   styleUrl: './buscar.component.scss'
 })
@@ -21,7 +21,13 @@ export class BuscarComponent {
   categoriaEntregables: boolean = false;
   resultados: any[] = [];
 
+  menuCerrado = false;
+
   constructor(private router: Router, private busquedaService: BusquedaService) {}
+
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
 
   buscar(){
     this.busquedaService.buscar(this.searchTerm, this.fecha_inicio, this.fecha_fin, this.estado).subscribe(resultados => {

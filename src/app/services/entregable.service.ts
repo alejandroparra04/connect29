@@ -11,7 +11,7 @@ export class EntregableService {
 
   constructor(private firestore: Firestore) { }
 
-  ObtenerEntregables():  Observable<Entregable[]> {
+  ObtenerEntregables(): Observable<Entregable[]> {
     const entregableCollection = collection(this.firestore, 'entregables');
     return collectionData(entregableCollection, { idField: 'id' }) as Observable<Entregable[]>;
   }
@@ -34,6 +34,7 @@ export class EntregableService {
     } else {
       throw new Error('El contador no existe en Firestore');
     }
+    
   }
 
   async crearEntregables(entregable: Entregable): Promise<void> {
@@ -63,5 +64,5 @@ export class EntregableService {
      return deleteDoc(entregableDoc);
    }
 
-
+   
 }

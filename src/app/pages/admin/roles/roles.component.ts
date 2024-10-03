@@ -19,8 +19,18 @@ export class RolesComponent {
     Asignacion: ''
   };
 
+  menuCerrado = false;
+
   constructor(private router: Router, private firestore: Firestore) {}
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+
+  irABuscar(){
+    this.router.navigate(['/buscar']);
+  }
+  
   volver(): void{
     this.router.navigate(['/home']);
   }

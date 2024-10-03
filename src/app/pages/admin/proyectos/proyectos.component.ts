@@ -4,6 +4,7 @@ import { RouterLink, Router } from '@angular/router';
 import { CrearproyectoComponent } from './crearproyecto/crearproyecto.component';
 import {Proyectos} from '../../../models/proyecto.model';
 import { ProyectoService } from '../../../services/proyecto.service';
+import { ProcesosComponent} from './procesos/procesos.component';
 import { EliminarproyectoComponent } from "./eliminarproyecto/eliminarproyecto.component";
 import { DetallesComponent } from '../entregables/detalles/detalles.component';
 import { BuscarComponent } from "../buscar/buscar.component";
@@ -33,10 +34,16 @@ export class ProyectosComponent implements OnInit {
   crearNuevoProyecto: boolean = false;
   mostrarModalEliminar = false;
 
+  menuCerrado = false;
+
   constructor(private router:Router, private proyectoService: ProyectoService) {
     this.cargarProyectos();
   }
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+  
   irABuscar(){
     this.router.navigate(['/buscar']);
   }
@@ -108,10 +115,11 @@ export class ProyectosComponent implements OnInit {
     this.crearNuevoProyecto = false;
   }
 
-  Procesos(){
-    this.router.navigate(['/procesos']);
+  trackById(index: number, proyecto: Proyectos): number {
+    return proyecto.id;
   }
 
-
-
+  Procesos(id:number) {
+    this.router.navigate(['/procesos', id.toString()]);
+  }
 }

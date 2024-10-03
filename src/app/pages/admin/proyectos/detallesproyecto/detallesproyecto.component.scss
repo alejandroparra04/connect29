@@ -3,12 +3,23 @@
 }
 
 .sidebar {
-  width: 100px;
+  width: 250px;
   background-color: #f8f9fa;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100vh;
+  transition: width 0.3 ease;
+  overflow: hidden;
+
+  &.closed {
+    width: 50px;
+    ul, .logo-img {
+      opacity: 0;
+      transition: opacity 0.3 ease;
+    }
+  }
 
   .menu-button {
     position: fixed;
@@ -16,10 +27,54 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
-    color: #999;
+    margin-bottom: 20px;
+    color: black;
+  }
+
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .icon img {
+    width: 16px;
+    height: auto;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  ul li {
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    position: fixed;
+    top: 60px;
+
+    li {
+      margin: 10px 0;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding-left: 10px;
+        text-align: left;
+        color: black;
+      }
+    }
   }
 }
+
 
 .main-content {
   flex: 1;

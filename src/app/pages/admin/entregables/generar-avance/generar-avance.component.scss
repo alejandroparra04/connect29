@@ -3,12 +3,13 @@
 }
 
 .sidebar {
-  width: 100px;
+  width: 250px;
   background-color: #f8f9fa;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: black;
 
   .menu-button {
     position: fixed;
@@ -17,7 +18,7 @@
     border: none;
     cursor: pointer;
     padding: 10px 20px;
-    color: #999;
+    color: black;
   }
 }
 

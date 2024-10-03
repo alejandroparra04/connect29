@@ -19,6 +19,8 @@ export class EditarEntregablesComponent implements  OnInit {
   editForm: FormGroup;
   entregableId!: number;
 
+  menuCerrado = false;
+
   constructor(private fb: FormBuilder, 
     private router: Router, 
     private route: ActivatedRoute,
@@ -29,6 +31,10 @@ export class EditarEntregablesComponent implements  OnInit {
       estado: ['', Validators.required],
       fecha: ['', Validators.required]
     });
+  }
+
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
   }
 
   ngOnInit(): void{

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {provideStorage,  getStorage} from '@angular/fire/storage';
 import { SubirEntregablesComponent } from './subir-entregables.component';
 
 describe('SubirEntregablesComponent', () => {
@@ -20,4 +20,5 @@ describe('SubirEntregablesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

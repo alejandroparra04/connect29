@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-actividad-pm',
@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './actividad-pm.component.scss'
 })
 export class ActividadPmComponent {
+  proyectoId: string;
   actividad = [
     {id: 1, nombre_actividad: 'Planificación del Proyecto'},
     {id: 2, nombre_actividad: 'Ejecución del plan de Proyecto'},
@@ -16,7 +17,19 @@ export class ActividadPmComponent {
     {id: 4, nombre_actividad: 'Cierre del Proyecto'},
   ]
 
-  constructor (private router: Router){}
+  menuCerrado = false;
+
+  constructor (private route: ActivatedRoute, private router:Router){
+    this.proyectoId = this.route.snapshot.paramMap.get('id')!;
+  }
+
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+  
+  volver(){
+    this.router.navigate(['/procesos']);
+  }
 
   irABuscar(){
     this.router.navigate(['/buscar']);

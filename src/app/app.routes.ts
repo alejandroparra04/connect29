@@ -51,9 +51,9 @@ export const routes: Routes = [
     {path: 'certificado', component: CertificadoComponent},
     {path: 'subir-entregables', component: SubirEntregablesComponent},
     {path: 'generar-avance', component: GenerarAvanceComponent},
-    {path: 'actividad-pm', component: ActividadPmComponent},
-    {path: 'actividad-si', component: ActividadSiComponent},
-    {path: 'procesos', component: ProcesosComponent},
+    {path: 'actividad-pm/:id', component: ActividadPmComponent},
+    {path: 'actividad-si/:id', component: ActividadSiComponent},
+    {path: 'procesos/:id', component: ProcesosComponent},
 
 
 

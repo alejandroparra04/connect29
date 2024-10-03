@@ -1,7 +1,41 @@
 <div class="container">
-    <div class="sidebar">
-        <button class="menu-button">☰</button>
+    <div class="sidebar" [class.closed]="menuCerrado">
+        <button class="menu-button" (click)="toggleMenu()">☰</button>
+        <ul>
+            <li>
+                <button [routerLink]="['/crearproyecto']">
+                    <span class="icon">
+                      <img src="assets/icons/icono_crear_proyecto.png">
+                    </span>
+                    Crear Proyecto
+                  </button>
+                </li>
+                <li>
+                  <button [routerLink]="['/usuarios']">
+                    <span class="icon">
+                      <img src="assets/icons/icono_crear_usuario.png">
+                    </span>
+                    Crear Usuario
+                  </button>
+                </li>
+                <li>
+                  <button [routerLink]="['/roles']">
+                    <span class="icon">
+                      <img src="assets/icons/icono_crear_rol.png">
+                    </span>
+                    Crear Roles
+                  </button>
+                </li>
+                <li>
+                  <button [routerLink]="['/inicio-sesion']">
+                    <span class="material-icons">logout</span>
+                    Cerrar Sesión
+                  </button>
+                </li>
+        </ul>
     </div>
+
+    
     <div class="main-content">
         <div class="navbar">
             <nav>
@@ -41,8 +75,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (entregable of entregables; track entregable.id){
-                <tr>
+              <tr *ngFor="let entregable of entregables; trackBy: trackById">
                     <td>{{ entregable.numeroId}}</td>
                     <td>{{ entregable.nombre }}</td>
                     <td>{{ entregable.descripcion }}</td>
@@ -50,19 +83,19 @@
                     <td>{{ entregable.fecha }}</td>
                     <td>
                         <button  (click)="editarEntregable(entregable.id)">Editar</button>
-                        <button  (click)="eliminarEntregable(entregable.id, entregable.nombre)">Eliminar</button>
+                        <button  (click)="eliminarEntregable(entregable.numeroId, entregable.nombre)">Eliminar</button>
                         <button (click)="abrirDetalles(entregable.id)">Detalles</button>
                         <button  (click)="subirEntregable()">Subir</button> 
                     </td>
                 </tr>
-                }
+                
             </tbody>
         </table>
 
         <!-- Botones de Acción -->
         <div class="action-buttons">
             <button (click)="generarReporte()">Generar Reporte</button>
-            <button class="btn btn-primary" (click)="crearEntregable()">Crear Entregable</button>
+            <button class="btn btn-primary" (click)="crearEntregableConDatos()">Crear Entregable</button>
         </div>
     </div>
 </div>

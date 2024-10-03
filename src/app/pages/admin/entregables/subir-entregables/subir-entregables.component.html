@@ -1,7 +1,41 @@
 <div class="subir-entregables-container">
-  <div class="sidebar">
-    <button class="menu-button">☰</button>
+  <div class="sidebar" [class.closed]="menuCerrado">
+    <button class="menu-button" (click)="toggleMenu()">☰</button>
+    <ul>
+      <li>
+        <button [routerLink]="['/crearproyecto']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_proyecto.png">
+          </span>
+          Crear Proyecto
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/usuarios']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_usuario.png">
+          </span>
+          Crear Usuario
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/roles']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_rol.png">
+          </span>
+          Crear Roles
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/inicio-sesion']">
+          <span class="material-icons">logout</span>
+          Cerrar Sesión
+        </button>
+      </li>
+    </ul>
   </div>
+
+
   <div class="main-content">
     <div class="navbar">
         <nav>

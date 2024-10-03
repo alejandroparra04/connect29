@@ -17,8 +17,14 @@ export class CertificadoComponent {
   fechaInicio: string = '';
   fechaFin: string = '';
 
+  menuCerrado = false;
+
   constructor (private router: Router){}
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
+  
   descargarCertificado(){
     const doc = new jsPDF();
 

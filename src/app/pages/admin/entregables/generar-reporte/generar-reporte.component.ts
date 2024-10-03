@@ -22,12 +22,18 @@ export class GenerarReporteComponent implements OnInit {
   fecha_fin: Date = new Date();
   estado:  string = '';
 
+  menuCerrado = false;
+
   @ViewChild('graficaProgreso', { static: true }) graficaProgreso!: ElementRef<HTMLCanvasElement>;
   @ViewChild('graficaEntregables', { static: true }) graficaEntregables!: ElementRef<HTMLCanvasElement>;
 
 
   constructor (private router: Router, private reporteService: ReporteService){
     Chart.register(...registerables);
+  }
+  
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
   }
 
   ngOnInit() {}

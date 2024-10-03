@@ -20,9 +20,18 @@ export class UsuariosComponent {
     password: '',
   };
 
+  menuCerrado = false;
+
   constructor (private router: Router, private authService: AuthService, private firestore:  Firestore) { }
 
+  toggleMenu(){
+    this.menuCerrado = !this.menuCerrado;
+  }
 
+  irABuscar(){
+    this.router.navigate(['/buscar']);
+  }
+  
   passwordFieldType: string = 'password';
   passwordIcon: string = 'visility';
 

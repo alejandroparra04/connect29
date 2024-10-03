@@ -1,6 +1,38 @@
 <div class="crear-entregable-container">
-  <div class="sidebar">
-    <button class="menu-button">☰</button>
+  <div class="sidebar" [class.closed]="menuCerrado">
+    <button class="menu-button" (click)="toggleMenu()">☰</button>
+    <ul>
+      <li>
+        <button [routerLink]="['/crearproyecto']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_proyecto.png">
+          </span>
+          Crear Proyecto
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/usuarios']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_usuario.png">
+          </span>
+          Crear Usuario
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/roles']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_rol.png">
+          </span>
+          Crear Roles
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/inicio-sesion']">
+          <span class="material-icons">logout</span>
+          Cerrar Sesión
+        </button>
+      </li>
+    </ul>
   </div>
   <div class="main-content">
     <div class="navbar">
@@ -23,26 +55,25 @@
     <h2>Crear Nuevo Entregable</h2>
   </div>
 
-    <form (ngSubmit)="guardarNuevoEntregable()">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" [(ngModel)]="nuevoEntregable.nombre" name="nombre">
+  <form (ngSubmit)="crearEntregable(selectedProyecto?.id, selectedProceso, selectedActividad?.id)">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [(ngModel)]="nuevoEntregable.nombre" name="nombre">
 
-      <label for="descripcion">Descripción:</label>
-      <textarea id="descripcion" [(ngModel)]="nuevoEntregable.descripcion" name="descripcion"></textarea>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" [(ngModel)]="nuevoEntregable.descripcion" name="descripcion"></textarea>
 
-      <label for="estado">Estado:</label>
-      <select id="estado" [(ngModel)]="nuevoEntregable.estado" name="estado">
-        <option value="Pendiente">Pendiente</option>
-        <option value="En progreso">Revisado</option>
-        <option value="En progreso">No aprobado</option>
-        <option value="Completado">Aprobado</option>
-      </select>
+    <label for="estado">Estado:</label>
+    <select id="estado" [(ngModel)]="nuevoEntregable.estado" name="estado">
+      <option value="Pendiente">Pendiente</option>
+      <option value="En progreso">Revisado</option>
+      <option value="En progreso">No aprobado</option>
+      <option value="Completado">Aprobado</option>
+    </select>
 
-      <label for="fecha">Fecha:</label>
-      <input type="date" id="fecha" [(ngModel)]="nuevoEntregable.fecha" name="fecha">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" [(ngModel)]="nuevoEntregable.fecha" name="fecha">
 
-      <button type="submit">Guardar</button>
-    </form>
-  </div>
+    <button type="submit">Guardar</button>
+  </form>
+  </div>
 </div>
-
