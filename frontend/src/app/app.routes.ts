@@ -26,36 +26,38 @@ import { AdminGuardService } from './services/admin-guard.service';
 import { ActividadPmComponent } from './pages/admin/proyectos/actividad-pm/actividad-pm.component';
 import { ActividadSiComponent } from './pages/admin/proyectos/actividad-si/actividad-si.component';
 import { ProcesosComponent } from './pages/admin/proyectos/procesos/procesos.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
-    {path: 'home', component: HomeComponent},
-    {path: 'entregables', component: EntregablesComponent},
-    {path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuardService]},
-    {path: 'inicio-sesion', component: InicioSesionComponent},
-    {path: 'editar-entregables/:id', component: EditarEntregablesComponent, canActivate: [AdminGuardService]},
-    {path: 'eliminar-entregables', component: EliminarEntregablesComponent},
-    {path: 'crear-entregable', component: CrearEntregableComponent},
-    {path: 'detalles/:id', component: DetallesComponent},
-    {path: 'proyectos', component: ProyectosComponent},
-    {path: 'roles', component: RolesComponent, canActivate: [AdminGuardService]},
-    {path: 'crearproyecto', component: CrearproyectoComponent}, 
-    {path: 'editarproyectos/:id', component: EditarproyectosComponent},
-    {path: 'detallesproyecto/:id', component: DetallesproyectoComponent},
-    {path: 'buscar', component: BuscarComponent},
-    {path: 'inicio-sesion', component: InicioSesionComponent},
-    {path: 'olvidar-contrasena', component: OlvidarContrasenaComponent},
-    {path: 'restablecer-contrasena', component: RestablecerContrasenaComponent},
-    {path: 'contrasena', component: ContrasenaComponent},
-    {path: 'generar-reporte', component: GenerarReporteComponent},
-    {path: 'emision-certificado', component: EmisionCertificadoComponent},
-    {path: 'certificado', component: CertificadoComponent},
-    {path: 'subir-entregables', component: SubirEntregablesComponent},
-    {path: 'generar-avance', component: GenerarAvanceComponent},
-    {path: 'actividad-pm/:id', component: ActividadPmComponent},
-    {path: 'actividad-si/:id', component: ActividadSiComponent},
-    {path: 'procesos/:id', component: ProcesosComponent},
+  { path: 'home', component: HomeComponent, canActivate: [AdminGuardService] },
+  { path: 'entregables', component: EntregablesComponent },
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuardService] },
+  { path: 'editar-entregables/:id', component: EditarEntregablesComponent, canActivate: [AdminGuardService] },
+  { path: 'eliminar-entregables', component: EliminarEntregablesComponent },
+  { path: 'crear-entregable', component: CrearEntregableComponent },
+  { path: 'detalles/:id', component: DetallesComponent },
+  { path: 'proyectos', component: ProyectosComponent },
+  { path: 'roles', component: RolesComponent, canActivate: [AdminGuardService] },
+  { path: 'crearproyecto', component: CrearproyectoComponent },
+  { path: 'editarproyectos/:id', component: EditarproyectosComponent },
+  { path: 'detallesproyecto/:id', component: DetallesproyectoComponent },
+  { path: 'buscar', component: BuscarComponent },
+  { path: 'inicio-sesion', component: InicioSesionComponent },
+  { path: 'olvidar-contrasena', component: OlvidarContrasenaComponent },
+  { path: 'restablecer-contrasena', component: RestablecerContrasenaComponent },
+  { path: 'contrasena', component: ContrasenaComponent },
+  { path: 'generar-reporte', component: GenerarReporteComponent },
+  { path: 'emision-certificado', component: EmisionCertificadoComponent },
+  { path: 'certificado', component: CertificadoComponent },
+  { path: 'subir-entregables', component: SubirEntregablesComponent },
+  { path: 'generar-avance', component: GenerarAvanceComponent },
+  { path: 'actividad-pm/:id', component: ActividadPmComponent },
+  { path: 'actividad-si/:id', component: ActividadSiComponent },
+  { path: 'procesos/:id', component: ProcesosComponent },
+
+  { path: 'not-found', component: NotFoundComponent },
 
 
 
-    {path: '**', pathMatch: 'full', redirectTo: 'home'}
+  { path: '**', pathMatch: 'full', redirectTo: 'not-found' }
 ];

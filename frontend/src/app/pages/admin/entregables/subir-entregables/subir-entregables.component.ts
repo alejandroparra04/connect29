@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage' ;
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { finalize, Observable } from 'rxjs';
 
@@ -14,30 +14,32 @@ import { finalize, Observable } from 'rxjs';
 export class SubirEntregablesComponent {
   nombreEntregable: string = '';
   nombreProyecto: string = '';
-  responsable:  string = '';
+  responsable: string = '';
   fechaInicio: string = '';
-  fechaFin:  string = '';
+  fechaFin: string = '';
   descripcion: string = '';
 
   menuCerrado = false;
 
-  file: File | null =  null;
-  uploadProgress: Observable<number> |  null = null;
-  downloadURL: string |  null = null;
+  file: File | null = null;
+  uploadProgress: Observable<number> | null = null;
+  downloadURL: string | null = null;
 
-  constructor (private router: Router, private firestore: Firestore, private storage: Storage) {}
+  constructor(private router: Router, private firestore: Firestore, private storage: Storage) { }
 
   onFileSelect(event: any) {
     this.file = event.target.files[0];
   }
 
-  onSubmit(){
+  onSubmit() {
     if (this.file) {
-      const filePath  = entregables/${this.file.name};
+      // const filePath  = entregables/${this.file.name};
+      const filePath = `entregables/${this.file.name}`;
+
       const storageRef = ref(this.storage, filePath);
       const uploadTask = uploadBytesResumable(storageRef, this.file);
 
-      uploadTask.on('state_changed', 
+      uploadTask.on('state_changed',
         (snapshot) => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log('Subida está en ' + progress + '%');
@@ -66,7 +68,7 @@ export class SubirEntregablesComponent {
       fechaSubida: new Date(),
     };
 
-    
+
     addDoc(collection(this.firestore, 'entregables'), entregableData).then(() => {
       console.log('Entregable guardado correctamente');
     }).catch((error) => {
@@ -74,19 +76,19 @@ export class SubirEntregablesComponent {
     });
   }
 
-  toggleMenu(){
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
 
-  home(){
+  home() {
     this.router.navigate(['/home']);
   }
 
-  volver(){
+  volver() {
     this.router.navigate(['/entregables'])
   }
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar'])
-  }
+  }
 
 }

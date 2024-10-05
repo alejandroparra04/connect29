@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon'  ;
-import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,13 +13,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class InicioSesionComponent {
   user = {
-    rol: '',
+    // rol: '',
     correo: '',
     password: ''
   };
   userRole: string | null = '';
 
-  constructor (private router: Router, private authService: AuthService){}
+  constructor(private readonly router: Router, private readonly authService: AuthService) { }
 
   passwordFieldType: string = 'password';
   passwordIcon: string = 'visility';
@@ -32,33 +30,39 @@ export class InicioSesionComponent {
       this.passwordIcon = 'visility_off';
     } else {
       this.passwordFieldType = 'password';
-      this.passwordIcon = 'visility'; 
+      this.passwordIcon = 'visility';
     }
   }
 
-  volver(): void{
+  volver(): void {
     this.router.navigate(['/usuarios']);
   }
 
-  async iniciarSesion() {
-    try {
-      const result = await this.authService.login(this.user.correo, this.user.password);
-      console.log('Inicio de sesio´n exitoso: ', result);
-      alert('Inicio de sesión exitoso');
-      this.router.navigate(['/home']); 
-    } catch (error) {
-      console.error('Error al iniciar sesión: ', error);
-      alert('Error al iniciar sesión. Verifique sus credenciales.');
-    }
+  iniciarSesion(): void {
+    this.authService.login(this.user.correo, this.user.password).subscribe({
+      next: (response) => {
+        console.log('Inicio de sesión exitoso: ', response);
+        if (response.token) {
+          alert('Inicio de sesión exitoso');
+          this.router.navigate(['/home']);
+        } else {
+          alert('Error: No se recibió el token');
+        }
+      },
+      error: (error) => {
+        console.error('Error al iniciar sesión: ', error);
+        alert('Error al iniciar sesión. Verifique sus credenciales.');
+      }
+    });
   }
 
-  async iniciarConGoogle(){
+  async iniciarConGoogle() {
     try {
       await this.authService.iniciarConGoogle();
       alert('Inicio de sesión exitoso con Google');
       this.router.navigate(['/home']);
     } catch (error) {
-      console.error('Error al iniciar sesión con Google:',error);
+      console.error('Error al iniciar sesión con Google:', error);
       alert('Error al iniciar sesión con Google');
     }
   }

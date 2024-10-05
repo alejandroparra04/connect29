@@ -15,32 +15,32 @@ export class HomeComponent {
 
   menuCerrado = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
-  
-  toggleMenu(){
+  constructor(private readonly router: Router, private readonly authService: AuthService) { }
+
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
-  
-  irABuscar(){
+
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 
-  irACrearproyecto(){
-   this.router.navigate(['/crearproyecto']);
+  irACrearproyecto() {
+    this.router.navigate(['/crearproyecto']);
   }
 
   irACrearUsuario() {
     this.router.navigate(['/crear-usuario']);
   }
 
-  irARoles(){
+  irARoles() {
     this.router.navigate(['/roles']);
   }
 
   cerrarSesion() {
-    this.authService.cerrarSesion().then(() =>{
+    this.authService.cerrarSesion().then(() => {
       this.router.navigate(['/iniciar-sesion']);
-    }). catch((error) => {
+    }).catch((error) => {
       console.error('Error al cerrar sesión: ', error);
     });
   }

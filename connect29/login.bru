@@ -1,0 +1,18 @@
+meta {
+  name: login
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8000/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "emilimuelas@unimayor.edu.co",
+    "password": "Connect1234*"
+  }
+}
