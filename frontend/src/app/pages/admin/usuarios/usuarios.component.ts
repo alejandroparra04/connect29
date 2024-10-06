@@ -16,69 +16,72 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 export class UsuariosComponent {
   usuario = {
     nombre: '',
+    apellido: '',
     correo: '',
     password: '',
   };
 
-  menuCerrado = false;
+  repeatPassword: string = '';
+  passwordFieldType: string = 'password';
+  passwordMismatch: boolean = false;
 
   // constructor (private router: Router, private authService: AuthService, private firestore:  Firestore) { }
   constructor(private readonly router: Router, private readonly authService: AuthService) { }
-
-  toggleMenu() {
-    this.menuCerrado = !this.menuCerrado;
-  }
 
   irABuscar() {
     this.router.navigate(['/buscar']);
   }
 
-  passwordFieldType: string = 'password';
-  passwordIcon: string = 'visility';
-
   togglePasswordVisibility() {
     if (this.passwordFieldType === 'password') {
       this.passwordFieldType = 'text';
-      this.passwordIcon = 'visility_off';
     } else {
       this.passwordFieldType = 'password';
-      this.passwordIcon = 'visility';
     }
-  }
-
-  registrarse() {
-    this.authService.registrarse(this.usuario.correo, this.usuario.password, this.usuario.nombre).then(() => {
-      alert('Usuario creado con éxito ');
-      this.router.navigate(['/inicio-sesion']);
-    }).catch(error => {
-      console.error('Error al crear el usuario: ', error);
-      alert('Error al crear el usuario');
-    });
-  }
-
-  volver(): void {
-    this.router.navigate(['/home']);
   }
 
   irHome(): void {
     this.router.navigate(['/home'])
   }
 
+  registrarse() {
+    // this.authService.registrarse(this.usuario.correo, this.usuario.password, this.usuario.nombre).then(() => {
+    //   alert('Usuario creado con éxito ');
+    //   this.router.navigate(['/inicio-sesion']);
+    // }).catch(error => {
+    //   console.error('Error al crear el usuario: ', error);
+    //   alert('Error al crear el usuario');
+    // });
+  }
+
+
+
   async crearUsuario() {
 
-    // try {
-    //   if (this.usuario.nombre && this.usuario.correo && this.usuario.password) {
-    //     const usuarioCollection = collection(this.firestore, 'usuario');
-    //     await addDoc(usuarioCollection, this.usuario);
-    //     console.log('Usuario creado con exito')
-    //     alert('Usuario creado con éxito.');
+    if (this.usuario.password !== this.repeatPassword) {
+      this.passwordMismatch = true;
+      return;
+    }
 
-    //     this.usuario = { nombre: '', correo: '', password: '' };
-    //   } else {
-    //     console.error('Por favor, complete todos los campos.');
-    //   }
-    // } catch (error) {
-    //   console.error('Error al crear el usuario: ', error);
-    // }
+    const payload = {
+      username: this.usuario.correo.split('@')[0],
+      email: this.usuario.correo,
+      first_name: this.usuario.nombre,
+      last_name: this.usuario.apellido,
+      password: this.usuario.password
+    };
+
+    this.authService.createUser(payload).subscribe({
+      next: (res) => {
+        console.log('Usuario creado exitosamente:', res);
+        alert('Usuario creado exitosamente');
+        this.irHome();
+      },
+      error: (error) => {
+        console.error('Error al crear el usuario:', error);
+        alert('Hubo un error al crear el usuario');
+      },
+      complete: () => { }
+    });
   }
 }

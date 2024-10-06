@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from rest_framework.authtoken.models import Token
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
@@ -20,9 +20,14 @@ class EmailLoginTokenView(APIView):
     Vista para iniciar sesión usando el email y obtener un token de autenticación.
     """
 
+    permission_classes = [AllowAny]
+
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
+
+        print("-"*50)
+        print(email, password)
 
         try:
             user = User.objects.get(email=email)
