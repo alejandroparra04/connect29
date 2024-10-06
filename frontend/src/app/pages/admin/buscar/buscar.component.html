@@ -2,52 +2,52 @@
   <div class="sidebar" [class.closed]="menuCerrado">
     <button class="menu-button" (click)="toggleMenu()">☰</button>
     <ul>
-        <li>
-            <button [routerLink]="['/crearproyecto']">
-                <span class="icon">
-                  <img src="assets/icons/icono_crear_proyecto.png">
-                </span>
-                Crear Proyecto
-              </button>
-            </li>
-            <li>
-              <button [routerLink]="['/usuarios']">
-                <span class="icon">
-                  <img src="assets/icons/icono_crear_usuario.png">
-                </span>
-                Crear Usuario
-              </button>
-            </li>
-            <li>
-              <button [routerLink]="['/roles']">
-                <span class="icon">
-                  <img src="assets/icons/icono_crear_rol.png">
-                </span>
-                Crear Roles
-              </button>
-            </li>
-            <li>
-              <button [routerLink]="['/inicio-sesion']">
-                <span class="material-icons">logout</span>
-                Cerrar Sesión
-              </button>
-            </li>
+      <li>
+        <button [routerLink]="['/crearproyecto']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_proyecto.png">
+          </span>
+          Crear Proyecto
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/usuarios']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_usuario.png">
+          </span>
+          Crear Usuario
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/roles']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_rol.png">
+          </span>
+          Asignar Roles
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/inicio-sesion']">
+          <span class="material-icons">logout</span>
+          Cerrar Sesión
+        </button>
+      </li>
     </ul>
   </div>
   <div class="main-content">
     <div class="navbar">
-        <nav>
-            <a routerLink="/home">Inicio</a>
-            <a routerLink="/proyectos">Proyectos</a>
-        </nav>
+      <nav>
+        <a routerLink="/home">Inicio</a>
+        <a routerLink="/proyectos">Proyectos</a>
+      </nav>
     </div>
-      <div class="buscar-header">
-        <button (click)="volver()" class="icon-button">
-          <span class="material-icons">arrow_back</span>
-        </button>
-        <h2>Buscar</h2>
-      </div>
-  
+    <div class="buscar-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Buscar</h2>
+    </div>
+
     <form class="buscar-form">
       <div class="buscar-input">
         <input type="text" placeholder="Buscar..." [(ngModel)]="searchTerm" name="searchTerm" />
@@ -55,15 +55,15 @@
           <span class="material-icons">search</span>
         </button>
       </div>
-  
+
       <div class="buscar-fecha">
         <label for="fechaInicio">Fecha Inicio:</label>
-        <input type="date" [(ngModel)]="fecha_inicio" name="fecha_inicio"/>
-  
+        <input type="date" [(ngModel)]="fecha_inicio" name="fecha_inicio" />
+
         <label for="fechaFin">Fecha Fin:</label>
-        <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin"/>
+        <input type="date" [(ngModel)]="fecha_fin" name="fecha_fin" />
       </div>
-  
+
       <div class="buscar-estado">
         <label for="estado">Estado:</label>
         <select [(ngModel)]="estado" name="estado">
@@ -73,14 +73,14 @@
           <option value="completado">Completado</option>
         </select>
       </div>
-  
+
       <div class="buscar-categoria">
         <label>Categoría:</label>
         <input type="checkbox" [(ngModel)]="categoriaProyectos" name="categoriaProyectos" /> Proyectos
-        <input type="checkbox" [(ngModel)]="categoriaEntregables" name="categoriaEntregables"/> Entregables
+        <input type="checkbox" [(ngModel)]="categoriaEntregables" name="categoriaEntregables" /> Entregables
       </div>
     </form>
-  
+
     <div class="buscar-resultados">
       <div *ngIf="resultados.length > 0">
         <ul>
@@ -90,9 +90,8 @@
         </ul>
       </div>
       <div *ngIf="resultados.length === 0">
-          No se encontraron resultados
+        No se encontraron resultados
       </div>
     </div>
   </div>
 </div>
-  

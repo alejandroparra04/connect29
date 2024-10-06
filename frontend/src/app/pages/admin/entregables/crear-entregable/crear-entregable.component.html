@@ -23,7 +23,7 @@
           <span class="icon">
             <img src="assets/icons/icono_crear_rol.png">
           </span>
-          Crear Roles
+          Asignar Roles
         </button>
       </li>
       <li>
@@ -36,44 +36,45 @@
   </div>
   <div class="main-content">
     <div class="navbar">
-        <nav>
-            <a routerLink="/home">Inicio</a>
-            <a routerLink="/proyectos">Proyectos</a>
-           
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <button (click)="irABuscar()" class="icon-button">
-                <span class="material-icons">search</span>
-            </button> 
-        </div>
+      <nav>
+        <a routerLink="/home">Inicio</a>
+        <a routerLink="/proyectos">Proyectos</a>
+
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar">
+        <button (click)="irABuscar()" class="icon-button">
+          <span class="material-icons">search</span>
+        </button>
+      </div>
     </div>
-  <div class="crear-entregable-header">
-    <button (click)="volver()" class="icon-button">
-      <span class="material-icons">arrow_back</span>
-    </button>
-    <h2>Crear Nuevo Entregable</h2>
+    <div class="crear-entregable-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Crear Nuevo Entregable</h2>
+    </div>
+
+    <form (ngSubmit)="crearEntregable(selectedProyecto?.id, selectedProceso, selectedActividad?.id)">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="nuevoEntregable.nombre" name="nombre">
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" [(ngModel)]="nuevoEntregable.descripcion" name="descripcion"></textarea>
+
+      <label for="estado">Estado:</label>
+      <select id="estado" [(ngModel)]="nuevoEntregable.estado" name="estado">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En progreso">Revisado</option>
+        <option value="En progreso">No aprobado</option>
+        <option value="Completado">Aprobado</option>
+      </select>
+
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" [(ngModel)]="nuevoEntregable.fecha" name="fecha">
+
+      <button type="submit">Guardar</button>
+    </form>
+      
   </div>
-
-  <form (ngSubmit)="crearEntregable(selectedProyecto?.id, selectedProceso, selectedActividad?.id)">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" [(ngModel)]="nuevoEntregable.nombre" name="nombre">
-
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" [(ngModel)]="nuevoEntregable.descripcion" name="descripcion"></textarea>
-
-    <label for="estado">Estado:</label>
-    <select id="estado" [(ngModel)]="nuevoEntregable.estado" name="estado">
-      <option value="Pendiente">Pendiente</option>
-      <option value="En progreso">Revisado</option>
-      <option value="En progreso">No aprobado</option>
-      <option value="Completado">Aprobado</option>
-    </select>
-
-    <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" [(ngModel)]="nuevoEntregable.fecha" name="fecha">
-
-    <button type="submit">Guardar</button>
-  </form>
-  </div>
 </div>

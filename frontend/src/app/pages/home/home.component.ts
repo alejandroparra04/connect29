@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { BuscarComponent } from "../admin/buscar/buscar.component";
@@ -11,7 +11,13 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  role: string | null = '';
+
+  ngOnInit() {
+    this.role = this.authService.getRole();
+  }
 
   menuCerrado = false;
 

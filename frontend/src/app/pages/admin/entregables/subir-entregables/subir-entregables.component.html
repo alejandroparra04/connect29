@@ -23,7 +23,7 @@
           <span class="icon">
             <img src="assets/icons/icono_crear_rol.png">
           </span>
-          Crear Roles
+          Asignar Roles
         </button>
       </li>
       <li>
@@ -38,59 +38,59 @@
 
   <div class="main-content">
     <div class="navbar">
-        <nav>
-            <a routerLink="/home">Inicio</a>
-            <a routerLink="/proyectos">Proyectos</a>
-        
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <button (click)="irABuscar()" class="icon-button">
-                <span class="material-icons">search</span>
-            </button> 
-        </div>
+      <nav>
+        <a routerLink="/home">Inicio</a>
+        <a routerLink="/proyectos">Proyectos</a>
+
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar">
+        <button (click)="irABuscar()" class="icon-button">
+          <span class="material-icons">search</span>
+        </button>
+      </div>
     </div>
-    <div class="subir-entregables-header">   
-    <button (click)="volver()" class="icon-button">
-      <span class="material-icons">arrow_back</span>
-    </button>
+    <div class="subir-entregables-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
       <h2>Subir Entregables</h2>
     </div>
-     
-    
+
+
     <div class="subir-entregables-body">
       <div class="form-section">
         <div class="form-group">
           <label for="nombreEntregable">Nombre del Entregable</label>
           <input type="text" id="nombreEntregable" placeholder="Nombre del Entregable">
         </div>
-        
+
         <div class="form-group">
           <label for="nombreProyecto">Nombre de la actvidad</label>
           <input type="text" id="nombreProyecto" placeholder="Nombre del Actividad">
         </div>
-  
+
         <div class="form-group">
           <label for="responsable">Responsable</label>
           <input type="text" id="responsable" placeholder="Responsable">
         </div>
-  
+
         <div class="form-group">
           <label for="fechaInicio">Fecha de Inicio</label>
           <input type="date" id="fechaInicio">
         </div>
-  
+
         <div class="form-group">
           <label for="fechaFin">Fecha de Fin</label>
           <input type="date" id="fechaFin">
         </div>
-  
+
         <div class="form-group">
           <label for="descripcion">Descripción</label>
           <textarea id="descripcion" rows="4" placeholder="Descripción"></textarea>
         </div>
       </div>
-  
+
       <!-- Lado derecho: Subir archivo y botones -->
       <div class="action-section">
         <div class="file-upload">
@@ -100,15 +100,14 @@
           <div class="button-group">
             <button class="btn-add">Añadir</button>
           </div>
-    
+
           <button class="btn-submit">Enviar</button>
         </div>
-  
+
       </div>
     </div>
     <div class="button-container">
-        <button class="btn-atras">Atras</button>
-    </div>
+      <button class="btn-atras">Atras</button>
     </div>
   </div>
-  
+</div>

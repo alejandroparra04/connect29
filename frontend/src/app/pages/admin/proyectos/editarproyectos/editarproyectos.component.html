@@ -23,7 +23,7 @@
           <span class="icon">
             <img src="assets/icons/icono_crear_rol.png">
           </span>
-          Crear Roles
+          Asignar Roles
         </button>
       </li>
       <li>
@@ -31,24 +31,24 @@
           <span class="material-icons">logout</span>
           Cerrar Sesión
         </button>
-      </li>  
+      </li>
     </ul>
   </div>
 
-  
+
   <div class="main-content">
     <div class="navbar">
-        <nav>
-            <a routerLink="/home">Inicio</a>
-            <a routerLink="/proyectos">Proyectos</a>
-           
-        </nav>
-        <div class="search-bar">
-            <input type="text" placeholder="Buscar">
-            <button (click)="irABuscar()" class="icon-button">
-                <span class="material-icons">search</span>
-            </button> 
-        </div>
+      <nav>
+        <a routerLink="/home">Inicio</a>
+        <a routerLink="/proyectos">Proyectos</a>
+
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar">
+        <button (click)="irABuscar()" class="icon-button">
+          <span class="material-icons">search</span>
+        </button>
+      </div>
     </div>
     <div class="header">
       <button (click)="volver()" class="icon-button">
@@ -56,16 +56,16 @@
       </button>
       <h2>Editar Proyectos</h2>
     </div>
-  
-  <form [formGroup]="editForm" (ngSubmit)="guardarCambios()">
+
+    <form [formGroup]="editForm" (ngSubmit)="guardarCambios()">
       <div class="form-group">
-          <label for="nombre">Nombre Completo</label>
-          <input id="nombre" formControlName="nombre" type="text" class="form-control">
+        <label for="nombre">Nombre Completo</label>
+        <input id="nombre" formControlName="nombre" type="text" class="form-control">
       </div>
       <div class="form-group">
         <label for="descripcion">Descripción</label>
         <textarea id="descripcion" formControlName="descripcion" class="form-control"></textarea>
-    </div>
+      </div>
       <div class="form-group">
         <label for="fecha_inicio">Fecha Inicio</label>
         <input id="fecha_inicio" formControlName="fecha_inicio" type="date" class="form-control">
@@ -73,17 +73,17 @@
       <div class="form-group">
         <label for="fecha_fin">Fecha Fin</label>
         <input id="fecha_fin" formControlName="fecha_fin" type="date" class="form-control">
-    </div>
+      </div>
       <div class="form-group">
-          <label for="responsable">Responsable</label>
-          <input  id="responsable" formControlName="responsable" type="text" class="form-control">
+        <label for="responsable">Responsable</label>
+        <input id="responsable" formControlName="responsable" type="text" class="form-control">
 
       </div>
-   
+
       <div class="button-group">
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-          <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
       </div>
-  </form>
+    </form>
   </div>
 </div>

@@ -29,6 +29,7 @@ import { ProcesosComponent } from './pages/admin/proyectos/procesos/procesos.com
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
+  { path: '', component: HomeComponent, canActivate: [AdminGuardService] },
   { path: 'home', component: HomeComponent, canActivate: [AdminGuardService] },
   { path: 'entregables', component: EntregablesComponent },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuardService] },

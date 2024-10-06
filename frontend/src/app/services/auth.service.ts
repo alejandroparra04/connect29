@@ -28,6 +28,7 @@ export class AuthService {
           // console.log(res);
           if (res.token) {
             this.setToken(res.token);
+            this.setRole(res.role);
           }
         })
       )
@@ -41,8 +42,17 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
+  setRole(role: string): void {
+    localStorage.setItem('auth_role', role);
+  }
+
+  getRole(): string | null {
+    return localStorage.getItem('auth_role');
+  }
+
   logout(): void {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_role');
   }
 
   async registrarse(email: string, password: string, nombre: string) {

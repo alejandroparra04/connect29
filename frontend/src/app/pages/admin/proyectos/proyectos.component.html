@@ -1,100 +1,100 @@
 <div class="container">
-    <div class="sidebar" [class.closed]="menuCerrado">
-        <button class="menu-button" (click)="toggleMenu()">☰</button>
-        <ul>
-          <li>
-            <button [routerLink]="['/crearproyecto']">
-              <span class="icon">
-                <img src="assets/icons/icono_crear_proyecto.png">
-              </span>
-              Crear Proyecto
-            </button>
-          </li>
-          <li>
-            <button [routerLink]="['/usuarios']">
-              <span class="icon">
-                <img src="assets/icons/icono_crear_usuario.png">
-              </span>
-              Crear Usuario
-            </button>
-          </li>
-          <li>
-            <button [routerLink]="['/roles']">
-              <span class="icon">
-                <img src="assets/icons/icono_crear_rol.png">
-              </span>
-              Crear Roles
-            </button>
-          </li>
-          <li>
-            <button [routerLink]="['/inicio-sesion']">
-              <span class="material-icons">logout</span>
-              Cerrar Sesión
-            </button>
-          </li>
-        </ul>
+  <div class="sidebar" [class.closed]="menuCerrado">
+    <button class="menu-button" (click)="toggleMenu()">☰</button>
+    <ul>
+      <li>
+        <button [routerLink]="['/crearproyecto']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_proyecto.png">
+          </span>
+          Crear Proyecto
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/usuarios']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_usuario.png">
+          </span>
+          Crear Usuario
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/roles']">
+          <span class="icon">
+            <img src="assets/icons/icono_crear_rol.png">
+          </span>
+          Asignar Roles
+        </button>
+      </li>
+      <li>
+        <button [routerLink]="['/inicio-sesion']">
+          <span class="material-icons">logout</span>
+          Cerrar Sesión
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="navbar">
+      <nav>
+        <a routerLink="/home">Inicio</a>
+        <a routerLink="/proyectos">Proyectos</a>
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar">
+        <button (click)="irABuscar()" class="icon-button">
+          <span class="material-icons">search</span>
+        </button>
       </div>
-      
-    <div class="main-content">
-        <div class="navbar">
-            <nav>
-                <a routerLink="/home">Inicio</a>
-                <a routerLink="/proyectos">Proyectos</a>
-            </nav>
-            <div class="search-bar">
-                <input type="text" placeholder="Buscar">
-                <button (click)="irABuscar()" class="icon-button">
-                    <span class="material-icons">search</span>
-                </button> 
-            </div>
-        </div>
-
-        
-        <div class="modal" *ngIf="mostrarModalEliminar">
-            <div class="modal-content">
-              <span class="close" (click)="cancelarEliminacion()">&times;</span>
-              <h2>Confirmar Eliminación</h2>
-              <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
-              <button (click)="confirmarEliminacion()">Eliminar</button>
-              <button (click)="cancelarEliminacion()">Cancelar</button>
-            </div>
-          </div>
-
-         <!-- Tabla de Entregables -->
-         <table class="entregables-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha fin</th>
-                    <th>Responsable</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let proyecto of proyectos; trackBy: trackById">
-                
-                    <td>{{ proyecto.numeroId}}</td>
-                    <td>{{ proyecto.nombre }}</td>
-                    <td>{{ proyecto.descripcion }}</td>
-                    <td>{{ proyecto.fecha_inicio }}</td>
-                    <td>{{ proyecto.fecha_fin }}</td>
-                    <td>{{ proyecto.responsable}}</td>
-                    <td>
-                        <button  (click)="editarProyectos(proyecto.id)">Editar</button>
-                        <button  (click)="eliminarProyecto(proyecto.id, proyecto.nombre)">Eliminar</button>
-                        <button (click)="verDetalles(proyecto.id)">Detalles</button> 
-                        <button (click)="Procesos(proyecto.id)">Procesos</button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <div class="action-buttons">
-            <button class="btn btn-primary"   (click)="crearProyecto()">Crear Proyectos</button> 
-        </div>
     </div>
+
+
+    <div class="modal" *ngIf="mostrarModalEliminar">
+      <div class="modal-content">
+        <span class="close" (click)="cancelarEliminacion()">&times;</span>
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
+        <button (click)="confirmarEliminacion()">Eliminar</button>
+        <button (click)="cancelarEliminacion()">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Tabla de Entregables -->
+    <table class="entregables-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha fin</th>
+          <th>Responsable</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proyecto of proyectos; trackBy: trackById">
+
+          <td>{{ proyecto.numeroId}}</td>
+          <td>{{ proyecto.nombre }}</td>
+          <td>{{ proyecto.descripcion }}</td>
+          <td>{{ proyecto.fecha_inicio }}</td>
+          <td>{{ proyecto.fecha_fin }}</td>
+          <td>{{ proyecto.responsable}}</td>
+          <td>
+            <button (click)="editarProyectos(proyecto.id)">Editar</button>
+            <button (click)="eliminarProyecto(proyecto.id, proyecto.nombre)">Eliminar</button>
+            <button (click)="verDetalles(proyecto.id)">Detalles</button>
+            <button (click)="Procesos(proyecto.id)">Procesos</button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" (click)="crearProyecto()">Crear Proyectos</button>
+    </div>
+  </div>
 </div>

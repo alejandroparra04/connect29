@@ -16,3 +16,10 @@ body:json {
     "password": "Connect1234*"
   }
 }
+
+tests {
+  test("get tokens", function() {
+  const data = res.body;
+  let token = bru.setEnvVar("token", data.token);
+  });
+}
