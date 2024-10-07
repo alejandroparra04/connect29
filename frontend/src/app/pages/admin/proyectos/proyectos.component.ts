@@ -9,6 +9,8 @@ import { EliminarproyectoComponent } from "./eliminarproyecto/eliminarproyecto.c
 import { DetallesComponent } from '../entregables/detalles/detalles.component';
 import { BuscarComponent } from "../buscar/buscar.component";
 import { AuthService } from '../../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-proyectos',
@@ -16,28 +18,66 @@ import { AuthService } from '../../../services/auth.service';
   imports: [CommonModule,
     RouterLink, CrearproyectoComponent,
     EliminarproyectoComponent, DetallesComponent,
-    BuscarComponent],
+    BuscarComponent, FormsModule],
   templateUrl: './proyectos.component.html',
   styleUrl: './proyectos.component.scss'
 })
 export class ProyectosComponent implements OnInit {
-  proyectos: Proyectos[] = [
-    //   {id: 1, nombre: 'Proyecto 1', descripcion: 'Descripcion 1', fecha_inicio: '2023-02-01', fecha_fin: '2023-08-01', responsable: 'Pepito Perez'},
-    //   {id: 2, nombre: 'Proyecto 2', descripcion: 'Descripcion 2', fecha_inicio: '2023-02-15', fecha_fin: '2023-08-15', responsable: 'Pepito Perez'},
-    //   {id: 3, nombre: 'Proyecto 3', descripcion: 'Descripcion 3', fecha_inicio: '2023-02-20', fecha_fin: '2023-08-20', responsable: 'Pepito Perez'},
-  ];
-  userRole: string | null = '';
+  proyectos: Proyectos[] = [];
+  usuarios: any = [];
+  role: string | null = '';
 
   selectedProyecto: any = null;
   proyectoEliminar: any = [];
+  proyectoEditar: any = {
+    nombre: '',
+    responsable_id: null,
+    fecha_inicio: '',
+    fecha_fin: '',
+    descripcion: '',
+  };
   proyectoSeleccionado: Proyectos | null = null;
   crearNuevoProyecto: boolean = false;
+  mostrarModalEditar = false;
   mostrarModalEliminar = false;
-
+  currentUserEmail: string | null = '';
   menuCerrado = false;
 
-  constructor(private router: Router, private proyectoService: ProyectoService) {
+  constructor(
+    private readonly router: Router,
+    private readonly proyectoService: ProyectoService,
+    private readonly authService: AuthService
+  ) { }
+
+  ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.cargarProyectos();
+    this.currentUserEmail = this.authService.getEmail();
+
+    this.authService.getUsers().subscribe(
+      (res) => {
+        this.usuarios = res;
+
+        const currentUser = this.usuarios.find((user: { email: string | null; }) => user.email === this.currentUserEmail);
+        if (currentUser) {
+          this.proyectoEditar.responsable_id = currentUser.id;
+        }
+      },
+      (error) => {
+        console.error('Error al cargar los usuarios:', error);
+      }
+    );
+  }
+
+  cargarProyectos() {
+    this.proyectoService.obtenerProyectos().subscribe({
+      next: (proyectos) => {
+        this.proyectos = proyectos;
+      },
+      error: (error) => {
+        console.error('Error al cargar los proyectos:', error);
+      },
+    });
   }
 
   toggleMenu() {
@@ -48,11 +88,35 @@ export class ProyectosComponent implements OnInit {
     this.router.navigate(['/buscar']);
   }
 
-  ngOnInit(): void { }
 
-  cargarProyectos() {
-
+  abrirModalEditar(proyecto: any): void {
+    this.proyectoEditar = { ...proyecto }; // Clonamos el proyecto para editar
+    this.mostrarModalEditar = true;
   }
+
+  cancelarEdicion(): void {
+    this.mostrarModalEditar = false;
+    this.proyectoEditar = {
+      nombre: '',
+      responsable_id: null,
+      fecha_inicio: '',
+      fecha_fin: '',
+      descripcion: '',
+    };
+  }
+
+  guardarCambios(): void {
+    this.proyectoService.actualizarProyecto(this.proyectoEditar).subscribe({
+      next: () => {
+        this.cancelarEdicion();
+        this.cargarProyectos();
+      },
+      error: (error) => {
+        console.error('Error al actualizar el proyecto:', error);
+      },
+    });
+  }
+
 
   //metodo para editar un proyecto
   editarProyectos(id: number) {
@@ -71,7 +135,15 @@ export class ProyectosComponent implements OnInit {
 
   confirmarEliminacion() {
     if (this.proyectoEliminar) {
-
+      this.proyectoService.eliminarProyecto(this.proyectoEliminar.id).subscribe({
+        next: () => {
+          this.cargarProyectos();
+          this.cancelarEliminacion();
+        },
+        error: (error) => {
+          console.error('Error al eliminar el proyecto:', error);
+        },
+      });
     }
   }
 

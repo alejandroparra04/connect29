@@ -15,8 +15,14 @@ export class ProyectoService {
 
   constructor(private readonly http: HttpClient, private readonly authService: AuthService) { }
 
-  obtenerProyectos(): void {
+  obtenerProyectos(): Observable<any> {
+    const token = this.authService.getToken();
 
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/projects/`, { headers });
   }
 
   obtenerProyectoPorId(id: string): void {
@@ -39,11 +45,21 @@ export class ProyectoService {
 
 
 
-  actualizarProyecto(id: string, data: any): void {
+  actualizarProyecto(proyectoEditado: Proyectos): Observable<any> {
+    const token = this.authService.getToken();
 
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.put(`${this.apiUrl}/projects/${proyectoEditado.id}/`, proyectoEditado, { headers });
   }
 
-  eliminarProyecto(id: string): void {
+  eliminarProyecto(id: string): Observable<any> {
+    const token = this.authService.getToken();
 
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.delete(`${this.apiUrl}/projects/${id}/`, { headers });
   }
 }
