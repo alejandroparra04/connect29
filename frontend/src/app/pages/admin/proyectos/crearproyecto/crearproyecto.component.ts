@@ -6,10 +6,13 @@ import { Proyectos } from '../../../../models/proyecto.model';
 import { ProyectoService } from '../../../../services/proyecto.service';
 import { AuthService } from '../../../../services/auth.service';
 
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
+
 @Component({
   selector: 'app-crearproyecto',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, SidebarComponent, NavbarComponent],
   templateUrl: './crearproyecto.component.html',
   styleUrl: './crearproyecto.component.scss'
 })

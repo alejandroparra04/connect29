@@ -1,0 +1,88 @@
+.sidebar {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  transition: width 0.3 ease;
+  overflow: hidden;
+
+  &.closed {
+    width: 50px;
+
+    ul,
+    .logo-img {
+      opacity: 0;
+      transition: opacity 0.3 ease;
+    }
+  }
+
+  .menu-button {
+    position: fixed;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .icon img {
+    width: 16px;
+    height: auto;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  ul li {
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    position: fixed;
+    top: 60px;
+
+    li {
+      margin: 10px 0;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding-left: 10px;
+        text-align: left;
+      }
+    }
+  }
+
+  .logo-img {
+    position: absolute; // Posición absoluta dentro del sidebar
+    bottom: 20px; // Ajusta la distancia desde el borde inferior del sidebar
+    left: 0; // Lo posiciona pegado al borde izquierdo del sidebar
+    width: 300px; // Ancho igual al 100% del sidebar
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0; // Añade un padding opcional para separación de los botones
+
+    img {
+      width: 130px;
+      height: 90px; //ajutado y listo//
+    }
+  }
+}

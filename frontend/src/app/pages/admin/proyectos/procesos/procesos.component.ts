@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute,Router, RouterLink } from '@angular/router';
-import { flatMap } from 'rxjs';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-procesos',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SidebarComponent, NavbarComponent],
   templateUrl: './procesos.component.html',
   styleUrl: './procesos.component.scss'
 })
@@ -13,22 +15,22 @@ export class ProcesosComponent {
 
   proyectoId: string;
 
-  menuCerrado= false;
+  menuCerrado = false;
 
-  constructor(private route: ActivatedRoute,private router: Router){ 
+  constructor(private readonly route: ActivatedRoute, private readonly router: Router) {
     // Obtener el ID del proyecto de la ruta
     this.proyectoId = this.route.snapshot.paramMap.get('id')!;
   }
   toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
-  
 
-  volver(){
+
+  volver() {
     this.router.navigate(['/proyectos']);
   }
 
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 

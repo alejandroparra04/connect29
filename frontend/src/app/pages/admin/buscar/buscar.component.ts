@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { BusquedaService } from '../../../services/busqueda.service';
 
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-buscar',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink ],
+  imports: [CommonModule, FormsModule, RouterLink, SidebarComponent, NavbarComponent],
   templateUrl: './buscar.component.html',
   styleUrl: './buscar.component.scss'
 })
@@ -23,20 +25,20 @@ export class BuscarComponent {
 
   menuCerrado = false;
 
-  constructor(private router: Router, private busquedaService: BusquedaService) {}
+  constructor(private readonly router: Router, private readonly busquedaService: BusquedaService) { }
 
-  toggleMenu(){
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
 
-  buscar(){
+  buscar() {
     this.busquedaService.buscar(this.searchTerm, this.fecha_inicio, this.fecha_fin, this.estado).subscribe(resultados => {
       console.log(resultados);
       this.resultados = resultados;
     }, error => {
       console.error('Error al buscar: ', error);
     });
-   
+
   }
 
   irHome() {

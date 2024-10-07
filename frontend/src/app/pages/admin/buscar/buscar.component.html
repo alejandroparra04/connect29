@@ -1,46 +1,7 @@
 <div class="buscar-container">
-  <div class="sidebar" [class.closed]="menuCerrado">
-    <button class="menu-button" (click)="toggleMenu()">☰</button>
-    <ul>
-      <li>
-        <button [routerLink]="['/crearproyecto']">
-          <span class="icon">
-            <img src="assets/icons/icono_crear_proyecto.png">
-          </span>
-          Crear Proyecto
-        </button>
-      </li>
-      <li>
-        <button [routerLink]="['/usuarios']">
-          <span class="icon">
-            <img src="assets/icons/icono_crear_usuario.png">
-          </span>
-          Crear Usuario
-        </button>
-      </li>
-      <li>
-        <button [routerLink]="['/roles']">
-          <span class="icon">
-            <img src="assets/icons/icono_crear_rol.png">
-          </span>
-          Asignar Roles
-        </button>
-      </li>
-      <li>
-        <button [routerLink]="['/inicio-sesion']">
-          <span class="material-icons">logout</span>
-          Cerrar Sesión
-        </button>
-      </li>
-    </ul>
-  </div>
+  <app-sidebar></app-sidebar>
   <div class="main-content">
-    <div class="navbar">
-      <nav>
-        <a routerLink="/home">Inicio</a>
-        <a routerLink="/proyectos">Proyectos</a>
-      </nav>
-    </div>
+    <app-navbar></app-navbar>
     <div class="buscar-header">
       <button (click)="volver()" class="icon-button">
         <span class="material-icons">arrow_back</span>

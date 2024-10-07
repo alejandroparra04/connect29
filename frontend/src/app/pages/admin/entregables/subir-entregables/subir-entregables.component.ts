@@ -4,10 +4,13 @@ import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fir
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { finalize, Observable } from 'rxjs';
 
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
+
 @Component({
   selector: 'app-subir-entregables',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SidebarComponent, NavbarComponent],
   templateUrl: './subir-entregables.component.html',
   styleUrl: './subir-entregables.component.scss'
 })

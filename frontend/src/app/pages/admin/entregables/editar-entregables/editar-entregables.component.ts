@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { EntregableService } from '../../../../services/entregable.service';
+
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-editar-entregables',
   standalone: true,
-  imports: [RouterLink, FormsModule, ReactiveFormsModule, MatIconModule],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, MatIconModule, SidebarComponent, NavbarComponent],
   templateUrl: './editar-entregables.component.html',
   styleUrl: './editar-entregables.component.scss'
 })
-export class EditarEntregablesComponent implements  OnInit {
+export class EditarEntregablesComponent implements OnInit {
   entregable: any = {};
   id: string = '';
   editForm: FormGroup;
@@ -21,10 +22,11 @@ export class EditarEntregablesComponent implements  OnInit {
 
   menuCerrado = false;
 
-  constructor(private fb: FormBuilder, 
-    private router: Router, 
-    private route: ActivatedRoute,
-    private entregableService: EntregableService) { 
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly entregableService: EntregableService) {
     this.editForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -33,11 +35,11 @@ export class EditarEntregablesComponent implements  OnInit {
     });
   }
 
-  toggleMenu(){
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') || '';
     if (this.id) {
       this.entregableService.obtenerEntregablePorId(this.id).subscribe(entregable => {
@@ -54,7 +56,7 @@ export class EditarEntregablesComponent implements  OnInit {
   }
 
   onSubmit(): void {
-    if(this.editForm.valid){
+    if (this.editForm.valid) {
       this.entregableService.actualizarEntregable(this.id, this.editForm.value).subscribe(() => {
         this.router.navigate(['/entregables']);
       });
@@ -75,14 +77,14 @@ export class EditarEntregablesComponent implements  OnInit {
   }
 
   cancelarEdicion() {
-    this.router.navigate(['/entregables']); 
+    this.router.navigate(['/entregables']);
   }
 
   volver() {
     this.router.navigate(['entregables']);
   }
 
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 

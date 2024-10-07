@@ -1,283 +1,151 @@
 .subir-entregables-container {
-    display: flex;
-  }
+  display: flex;
+}
 
-  .sidebar {
-    width: 250px;
-    background-color: #f8f9fa;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    transition: width 0.3 ease;
-    overflow: hidden;
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
-    &.closed {
-      width: 50px;
-      ul, .logo-img {
-        opacity: 0;
-        transition: opacity 0.3 ease;
-      }
-    }
+.subir-entregables-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 250px;
 
-    .menu-button {
-      position: fixed;
-      font-size: 24px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      
-    }
-    .icon {
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-
-    .icon img {
-      width: 16px;
-      height: auto;
-    }
-
-    
-    button {
-      display: flex;
-      align-items: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    ul li {
-      margin-bottom: 15px;
-    }
-  
-    ul {
-      list-style: none;
-      padding: 0;
-      position: fixed;
-      top: 60px;
-  
-      li {
-        margin: 10px 0;
-  
-        button {
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding-left: 10px;
-          text-align: left;
-        }
-      }
-    }
-  }
-
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-  
-      nav {
-        a {
-          color: white;
-          text-decoration: none;
-          margin-right: 20px;
-        }
-      }
-  
-      .search-bar {
-        display: flex;
-        align-items: center;
-  
-        input {
-          padding: 5px;
-          margin-right: 10px;
-        }
-  
-        button {
-          background: none;
-          border: none;
-          color: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-  
-          img {
-            width: 40px;  // Ajusta el ancho de la imagen según tus necesidades
-            height: 40px; // Ajusta la altura de la imagen según tus necesidades
-          }
-        }
-      }
-    }
-  }
-  
-  .subir-entregables-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-left: 250px;
-    
-    h2 {
-      flex-grow: 1;
-      text-align: center;  
-      font-size: 24px;
-      font-weight: bold;
-      color: #4285f4;
-      margin: 0;
-    }
-  
-    .icon-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      font-size: 24px;
-      color: #333;
-      transition: color 0.3s;
-  
-      &:hover {
-        color: #357ae8;
-      }
-  
-      .material-icons {
-        font-size: 30px;
-      }
-    }
-  }
-  
-  /* Contenedor principal para las dos columnas */
-  .subir-entregables-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 50px;  
-    margin-left: 200px;
-  }
-  
-  /* Sección izquierda: Formulario */
-  .form-section {
-    flex: 0,95;  // Ocupa el 60% del ancho disponible
-    display: flex;
-    flex-direction: column;
-  
-    .form-group {
-      margin-bottom: 15px;
-  
-      label {
-        font-size: 14px;
-        font-weight: 500;
-        color: rgba(0, 0, 0, 1.0);
-        margin-bottom: 5px;
-        display: inline-block;
-      }
-  
-      input, textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-        font-size: 14px;
-  
-        &:focus {
-          border-color: #4285f4;
-          outline: none;
-        }
-      }
-  
-      textarea {
-        resize: vertical;
-      }
-    }
-  }
-  
-  /* Sección derecha: Subida de archivo y botones */
-  .action-section {
-    flex: 0.4;  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 200px;
-  
-    .file-upload {
-      width: 100%;
-      padding: 20px;
-      border: 2px dashed #ccc;
-      border-radius: 5px;
-      background-color: #e0e0e0;  
-      text-align: center;
-      margin-bottom: 20px;
-  
-      label {
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-        display: block;
-      }
-  
-      input[type="file"] {
-        display: block;
-        margin: 0 auto;
-      }
-
-      .button-group {
-        margin-top: 10px;
-        margin-bottom: 20px;
-    
-        .btn-add {
-          background-color: #4285f4;
-          color: white;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
-          transition: background-color 0.3s;
-    
-          &:hover {
-            background-color: #357ae8;
-          }
-        }
-      }
-    }
-  
-    
-  
-    .btn-submit {
-      background-color: #34a853;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-  
-      &:hover {
-        background-color: #2c8c45;
-      }
-    }
-  }
-
-  .button-container {
+  h2 {
+    flex-grow: 1;
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4285f4;
+    margin: 0;
   }
 
-  .btn-atras {
-    background-color: #4285f4;
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #357ae8;
+    }
+
+    .material-icons {
+      font-size: 30px;
+    }
+  }
+}
+
+/* Contenedor principal para las dos columnas */
+.subir-entregables-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  margin-left: 200px;
+}
+
+/* Sección izquierda: Formulario */
+.form-section {
+  flex: 0, 95; // Ocupa el 60% del ancho disponible
+  display: flex;
+  flex-direction: column;
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 1.0);
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #fff;
+      font-size: 14px;
+
+      &:focus {
+        border-color: #4285f4;
+        outline: none;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  }
+}
+
+/* Sección derecha: Subida de archivo y botones */
+.action-section {
+  flex: 0.4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 200px;
+
+  .file-upload {
+    width: 100%;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    text-align: center;
+    margin-bottom: 20px;
+
+    label {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    input[type="file"] {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .button-group {
+      margin-top: 10px;
+      margin-bottom: 20px;
+
+      .btn-add {
+        background-color: #4285f4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #357ae8;
+        }
+      }
+    }
+  }
+
+
+
+  .btn-submit {
+    background-color: #34a853;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -287,7 +155,26 @@
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #4285f4;
+      background-color: #2c8c45;
     }
   }
-  
+}
+
+.button-container {
+  text-align: center;
+}
+
+.btn-atras {
+  background-color: #4285f4;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #4285f4;
+  }
+}

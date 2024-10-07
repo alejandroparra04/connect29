@@ -2,123 +2,10 @@
   display: flex;
 }
 
-.sidebar {
-  width: 250px;
-  background-color: #f8f9fa;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-  transition: width 0.3 ease;
-  overflow: hidden;
-
-  &.closed {
-    width: 50px;
-    ul, .logo-img {
-      opacity: 0;
-      transition: opacity 0.3 ease;
-    }
-  }
-
-  .menu-button {
-    position: fixed;
-    font-size: 24px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #999;
-  }
-  .icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 8px;
-  }
-
-  .icon img {
-    width: 16px;
-    height: auto;
-  }
-
-  
-  button {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  ul li {
-    margin-bottom: 15px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    position: fixed;
-    top: 60px;
-
-    li {
-      margin: 10px 0;
-
-      button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding-left: 10px;
-        text-align: left;
-      }
-    }
-  }
-}
-
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-
-    nav {
-      a {
-        color: white;
-        text-decoration: none;
-        margin-right: 20px;
-      }
-    }
-
-    .search-bar {
-      display: flex;
-      align-items: center;
-
-      input {
-        padding: 5px;
-        margin-right: 10px;
-      }
-
-      button {
-        background: none;
-        border: none;
-        color: white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-          width: 40px;  // Ajusta el ancho de la imagen según tus necesidades
-          height: 40px; // Ajusta la altura de la imagen según tus necesidades
-        }
-      }
-    }
-  }
 }
 
 .generar-reporte-header {
@@ -180,14 +67,15 @@
       margin-bottom: 5px;
     }
 
-    input, select {
+    input,
+    select {
       width: 80%;
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 14px;
       color: #333;
-      box-sizing: border-box; 
+      box-sizing: border-box;
 
       &:focus {
         border-color: #4285f4;
@@ -202,7 +90,8 @@
     gap: 10px;
 
     button {
-      width: 180px;  /* Ajusta este valor según el tamaño que desees */
+      width: 180px;
+      /* Ajusta este valor según el tamaño que desees */
       height: 40px;
       padding: 5px 10px;
       margin: 0 auto;
@@ -284,7 +173,8 @@
     justify-content: space-between;
     gap: 10px;
 
-    .grafico-torta, .grafico-barras {
+    .grafico-torta,
+    .grafico-barras {
       flex: 1;
       height: 200px;
       background-color: #f5f5f5;
@@ -302,7 +192,8 @@
       width: 100%;
       border-collapse: collapse;
 
-      th, td {
+      th,
+      td {
         padding: 10px;
         border: 1px solid #ccc;
         text-align: left;

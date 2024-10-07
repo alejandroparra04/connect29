@@ -3,29 +3,32 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { jsPDF } from 'jspdf';
 
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
+
 @Component({
   selector: 'app-certificado',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, SidebarComponent, NavbarComponent],
   templateUrl: './certificado.component.html',
   styleUrl: './certificado.component.scss'
 })
 export class CertificadoComponent {
 
-  nombreEmpresa: string= '';
+  nombreEmpresa: string = '';
   nombreProyecto: string = '';
   fechaInicio: string = '';
   fechaFin: string = '';
 
   menuCerrado = false;
 
-  constructor (private router: Router){}
+  constructor(private readonly router: Router) { }
 
-  toggleMenu(){
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
-  
-  descargarCertificado(){
+
+  descargarCertificado() {
     const doc = new jsPDF();
 
     // const logo =  new Image();
@@ -57,8 +60,8 @@ export class CertificadoComponent {
   volver() {
     this.router.navigate(['/emision-certificado']);
   }
-  
-  irABuscar(){
+
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 

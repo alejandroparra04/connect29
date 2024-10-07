@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { BuscarComponent } from "../admin/buscar/buscar.component";
 import { AuthService } from '../../services/auth.service';
+
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, BuscarComponent],
+  imports: [RouterLink, BuscarComponent, SidebarComponent, NavbarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

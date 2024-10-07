@@ -11,6 +11,9 @@ import { BuscarComponent } from "../buscar/buscar.component";
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
+
 
 @Component({
   selector: 'app-proyectos',
@@ -18,7 +21,9 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule,
     RouterLink, CrearproyectoComponent,
     EliminarproyectoComponent, DetallesComponent,
-    BuscarComponent, FormsModule],
+    BuscarComponent, FormsModule,
+    SidebarComponent, NavbarComponent,
+  ],
   templateUrl: './proyectos.component.html',
   styleUrl: './proyectos.component.scss'
 })
@@ -54,8 +59,8 @@ export class ProyectosComponent implements OnInit {
     this.cargarProyectos();
     this.currentUserEmail = this.authService.getEmail();
 
-    this.authService.getUsers().subscribe(
-      (res) => {
+    this.authService.getUsers().subscribe({
+      next: (res) => {
         this.usuarios = res;
 
         const currentUser = this.usuarios.find((user: { email: string | null; }) => user.email === this.currentUserEmail);
@@ -63,10 +68,10 @@ export class ProyectosComponent implements OnInit {
           this.proyectoEditar.responsable_id = currentUser.id;
         }
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al cargar los usuarios:', error);
-      }
-    );
+      },
+    });
   }
 
   cargarProyectos() {

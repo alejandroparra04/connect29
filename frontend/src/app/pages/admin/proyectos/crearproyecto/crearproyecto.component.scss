@@ -1,19 +1,106 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
+.container {
+  display: flex;
+  height: 100vh;
+  /* Asegura que la altura ocupe todo el viewport */
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  /* Asegura que la barra de navegación ocupe todo el ancho del contenedor */
+  app-navbar {
+    width: 100%;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    /* Ajuste del ancho del formulario */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin: auto;
+    /* Centrar el formulario vertical y horizontalmente */
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2979ff;
+    }
+
+    form {
+      width: 100%;
+
+      .form-group {
+        width: 100%;
+        margin-bottom: 20px;
+
+        label {
+          display: block;
+          margin-bottom: 8px;
+          color: rgba(0, 0, 0, 0.7);
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        select,
+        input,
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          box-sizing: border-box;
+          background-color: white;
+        }
+
+        textarea {
+          height: 100px;
+          resize: none;
+        }
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4285f4;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #357ae8;
+        }
+
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
 }
 
 .navbar {
+  width: 100%;
+  /* Asegura que la barra ocupe todo el ancho */
+  background-color: #007bff;
+  /* Color azul de la barra */
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  width: 100%;
   box-sizing: border-box;
 
   nav {
@@ -48,103 +135,4 @@ body {
       }
     }
   }
-}
-
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 60px);
-  box-sizing: border-box;
-  overflow-y: auto;
-
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-
-    h2 {
-      margin-bottom: 20px;
-      color: #2979ff;
-    }
-
-    form {
-      width: 100%;
-
-      .form-group {
-        width: 100%;
-        margin-bottom: 20px;
-
-        label {
-          display: block;
-          margin-bottom: 8px;
-          color: rgba(0, 0, 0, 0.7);
-          font-size: 14px;
-          font-weight: 500;
-        }
-
-        select {
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 14px;
-          box-sizing: border-box;
-          background-color: white;
-        }
-
-        input,
-        textarea {
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 14px;
-          box-sizing: border-box;
-        }
-
-        textarea {
-          height: 100px;
-          resize: none;
-        }
-      }
-
-      button {
-        width: 100%;
-        padding: 12px;
-        background-color: #4285f4;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #357ae8;
-        }
-
-        &:disabled {
-          background-color: #ccc;
-          cursor: not-allowed;
-        }
-      }
-    }
-  }
-}
-
-.error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
 }

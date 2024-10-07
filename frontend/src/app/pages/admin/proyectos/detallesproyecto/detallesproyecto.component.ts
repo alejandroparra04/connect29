@@ -3,10 +3,13 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProyectoService } from '../../../../services/proyecto.service';
 import { Proyectos } from '../../../../models/proyecto.model';
 
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
+
 @Component({
   selector: 'app-detallesproyecto',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SidebarComponent, NavbarComponent],
   templateUrl: './detallesproyecto.component.html',
   styleUrl: './detallesproyecto.component.scss'
 })
@@ -22,7 +25,10 @@ export class DetallesproyectoComponent implements OnInit {
 
   menuCerrado = false;
 
-  constructor(private route: ActivatedRoute, private proyectoService: ProyectoService, private router: Router) { }
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly proyectoService: ProyectoService,
+    private readonly router: Router) { }
 
   toggleMenu() {
     this.menuCerrado = !this.menuCerrado;

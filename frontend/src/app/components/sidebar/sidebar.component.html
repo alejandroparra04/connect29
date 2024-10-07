@@ -1,0 +1,37 @@
+<div class="sidebar" [class.closed]="menuCerrado">
+  <button class="menu-button" (click)="toggleMenu()">☰</button>
+  <ul>
+    <li>
+      <button [routerLink]="['/crearproyecto']">
+        <span class="icon">
+          <img src="assets/icons/icono_crear_proyecto.png" alt="icono_crear_proyecto">
+        </span>
+        Crear Proyecto
+      </button>
+    </li>
+    @if(role === 'admin') {
+    <li>
+      <button [routerLink]="['/usuarios']">
+        <span class="icon">
+          <img src="assets/icons/icono_crear_usuario.png" alt="icono_crear_usuario">
+        </span>
+        Crear Usuario
+      </button>
+    </li>
+    <li>
+      <button [routerLink]="['/roles']">
+        <span class="icon">
+          <img src="assets/icons/icono_crear_rol.png" alt="icono_crear_rol">
+        </span>
+        Asignar Roles
+      </button>
+    </li>
+    }
+    <li>
+      <button [routerLink]="['/inicio-sesion']">
+        <span class="material-icons">logout</span>
+        Cerrar Sesión
+      </button>
+    </li>
+  </ul>
+</div>

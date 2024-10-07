@@ -2,25 +2,28 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Proyectos } from '../../../../models/proyecto.model'; 
+import { Proyectos } from '../../../../models/proyecto.model';
 import { Entregable } from '../../../../models/entegable.model';
 import { Chart, registerables } from 'chart.js'
 import { ReporteService } from '../../../../services/reporte.service';
 
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
+
 @Component({
   selector: 'app-generar-reporte',
   standalone: true,
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [RouterLink, FormsModule, CommonModule, SidebarComponent, NavbarComponent],
   templateUrl: './generar-reporte.component.html',
   styleUrl: './generar-reporte.component.scss'
 })
 export class GenerarReporteComponent implements OnInit {
-  proyecto: Proyectos [] = [];
-  entregables: Entregable [] = [];
+  proyecto: Proyectos[] = [];
+  entregables: Entregable[] = [];
   progreso: number = 0;
   fecha_inicio: Date = new Date();
   fecha_fin: Date = new Date();
-  estado:  string = '';
+  estado: string = '';
 
   menuCerrado = false;
 
@@ -28,25 +31,25 @@ export class GenerarReporteComponent implements OnInit {
   @ViewChild('graficaEntregables', { static: true }) graficaEntregables!: ElementRef<HTMLCanvasElement>;
 
 
-  constructor (private router: Router, private reporteService: ReporteService){
+  constructor(private router: Router, private reporteService: ReporteService) {
     Chart.register(...registerables);
   }
-  
-  toggleMenu(){
+
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  volver(){
+  volver() {
     this.router.navigate(['/entregables']);
   }
 
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 
-  Reporte(){
+  Reporte() {
     this.reporteService.getReporte(this.fecha_inicio, this.fecha_fin, this.estado)
       .subscribe(({ entregables, proyectos }) => {
         this.entregables = entregables;
@@ -54,19 +57,19 @@ export class GenerarReporteComponent implements OnInit {
       }, error => {
         console.error('Error generando reporte:', error);
       });
-    
+
   }
 
-  Avance(){
+  Avance() {
     this.router.navigate(['/generar-avance']);
   }
 
-  calcularProgreso(){
+  calcularProgreso() {
     const entregablesCompletos = this.entregables.filter(e => e.estado === 'Completado').length;
-    if (this.entregables.length > 0){
+    if (this.entregables.length > 0) {
       this.progreso = (entregablesCompletos / this.entregables.length) * 100;
     } else {
-      this.progreso  = 0;
+      this.progreso = 0;
 
     }
   }
@@ -103,7 +106,7 @@ export class GenerarReporteComponent implements OnInit {
         datasets: [
           {
             label: 'Entregables',
-            data: this.entregables.map(entregable => 
+            data: this.entregables.map(entregable =>
               entregable.estado === 'completado' ? 100 : entregable.estado === 'en_progreso' ? 50 : 0),
             backgroundColor: ['#36a2eb']
           }
@@ -121,15 +124,15 @@ export class GenerarReporteComponent implements OnInit {
   }
 
 
-  resetearFormulario() { 
+  resetearFormulario() {
     this.fecha_inicio = new Date();
     this.fecha_fin = new Date();
     this.estado = '';
     this.entregables = [];
-    this.proyecto  = [];
+    this.proyecto = [];
   }
 
-  descargar(){
+  descargar() {
     this.router.navigate(['/emision-certificado'])
   }
 }

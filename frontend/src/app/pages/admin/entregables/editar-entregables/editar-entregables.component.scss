@@ -1,124 +1,10 @@
-
 .edit-entregables-container {
- display: flex;
-
- .sidebar {
-    width: 250px;
-    background-color: #f8f9fa;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    transition: width 0.3 ease;
-    overflow: hidden;
-
-    &.closed {
-      width: 50px;
-      ul, .logo-img {
-        opacity: 0;
-        transition: opacity 0.3 ease;
-      }
-    }
-
-    .menu-button {
-      position: fixed;
-      font-size: 24px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      
-    }
-  
-  .icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 8px;
-  }
-
-  .icon img {
-    width: 16px;
-    height: auto;
-  }
-
-  
-  button {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  ul li {
-    margin-bottom: 15px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    position: fixed;
-    top: 60px;
-
-    li {
-      margin: 10px 0;
-
-      button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding-left: 10px;
-        text-align: left;
-      }
-    }
-  }
-}
+  display: flex;
 
   .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
-  
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-  
-      nav {
-        a {
-          color: white;
-          text-decoration: none;
-          margin-right: 20px;
-        }
-      }
-  
-      .search-bar {
-        display: flex;
-        align-items: center;
-  
-        input {
-          padding: 5px;
-          margin-right: 10px;
-        }
-  
-        button {
-          background: none;
-          border: none;
-          color: white;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-  
-          img {
-            width: 40px;  // Ajusta el ancho de la imagen según tus necesidades
-            height: 40px; // Ajusta la altura de la imagen según tus necesidades
-          }
-        }
-      }
-    }
   }
 
   .header {
@@ -130,85 +16,85 @@
     margin-left: 100px;
   }
 
-    .icon-button {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 24px;
-      color: #333;
-    }
-    
-    .material-icons {
-      font-size: 24px;
-      color: #000;
-    }
+  .icon-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+  }
 
-  
+  .material-icons {
+    font-size: 24px;
+    color: #000;
+  }
+
+
   h2 {
-      font-size: 24px;
-      color: #007BFF;
-      margin-bottom: 30px;
+    font-size: 24px;
+    color: #007BFF;
+    margin-bottom: 30px;
   }
 
   .form-group {
     width: 50%;
-      margin-bottom: 20px;
-      margin-left: 300px;
+    margin-bottom: 20px;
+    margin-left: 300px;
 
-      label {
-          display: block;
-          font-size: 14px;
-          color: #666;
-          margin-bottom: 5px;
-          text-align: left;
-      }
+    label {
+      display: block;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+      text-align: left;
+    }
 
-      input, textarea, select {
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 16px;
-          box-sizing: border-box; 
-      }
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
 
-      textarea {
-          resize: vertical;
-          height: 100px;
-      }
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
   }
 
   .button-group {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 
-      .btn {
-          padding: 10px 20px;
-          font-size: 16px;
-          border-radius: 4px;
-          border: none;
-          cursor: pointer;
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #007BFF;
+      color: white;
+
+      &:hover {
+        background-color: #0056b3;
       }
+    }
 
-      .btn-primary {
-          background-color: #007BFF;
-          color: white;
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
 
-          &:hover {
-              background-color: #0056b3;
-          }
+      &:hover {
+        background-color: #5a6268;
       }
-
-      .btn-secondary {
-          background-color: #6c757d;
-          color: white;
-
-          &:hover {
-              background-color: #5a6268;
-          }
-      }
+    }
   }
 }
-
-  

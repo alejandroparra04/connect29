@@ -5,10 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
+import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
+import { NavbarComponent } from '../../../../components/navbar/navbar.component';
+
 @Component({
   selector: 'app-editarproyectos',
   standalone: true,
-  imports: [RouterLink, FormsModule, ReactiveFormsModule, MatIconModule],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, MatIconModule, SidebarComponent, NavbarComponent],
   templateUrl: './editarproyectos.component.html',
   styleUrl: './editarproyectos.component.scss'
 })
@@ -19,10 +22,12 @@ export class EditarproyectosComponent implements OnInit {
 
   menuCerrado = false;
 
-  constructor(private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private proyectoService: ProyectoService,
-    private router: Router) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly proyectoService: ProyectoService,
+    private readonly router: Router
+  ) {
     this.editForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: [''],
