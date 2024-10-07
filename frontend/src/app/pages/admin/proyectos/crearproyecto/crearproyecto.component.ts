@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Proyectos } from '../../../../models/proyecto.model';
 import { ProyectoService } from '../../../../services/proyecto.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-crearproyecto',
@@ -12,43 +13,69 @@ import { ProyectoService } from '../../../../services/proyecto.service';
   templateUrl: './crearproyecto.component.html',
   styleUrl: './crearproyecto.component.scss'
 })
-export class CrearproyectoComponent {
-   nuevoProyecto: Proyectos = {
-    numeroId: 1,
-     id: 0,  // El ID se asignará al guardar
-     nombre: '',
-    fecha_inicio: '',
-     fecha_fin: '',
-     responsable: '',
+export class CrearproyectoComponent implements OnInit {
+  nuevoProyecto: Proyectos = {
+    // numeroId: 1,
+    id: 0,
+    nombre: '',
     descripcion: '',
-   };
+    fecha_inicio: '',
+    fecha_fin: '',
+    responsable: '',
+  };
 
-   menuCerrado = false
+  usuarios: any = [];
+  currentUserEmail: string | null = '';
 
-  constructor (private router: Router, private proyectoService: ProyectoService){}
 
-  toggleMenu(){
-    this.menuCerrado = !this.menuCerrado;
-   }
-   
-  volver(): void{
+  constructor(private readonly router: Router, private readonly proyectoService: ProyectoService, private readonly authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.currentUserEmail = this.authService.getEmail();
+
+    this.authService.getUsers().subscribe(
+      (res) => {
+        this.usuarios = res;
+
+        const currentUser = this.usuarios.find((user: { email: string | null; }) => user.email === this.currentUserEmail);
+        if (currentUser) {
+          this.nuevoProyecto.responsable = currentUser.id;
+        }
+      },
+      (error) => {
+        console.error('Error al cargar los usuarios:', error);
+      }
+    );
+  }
+
+  volver(): void {
     this.router.navigate(['/proyectos']);
   }
 
-  irHome(): void{
+  irHome(): void {
     this.router.navigate(['/home'])
   }
 
-  guardarNuevoProyecto() {
-    this.proyectoService.crearProyecto(this.nuevoProyecto).then(()=> {
-      alert('proyecto creado con éxito');
-      this.router.navigate(['/proyectos']);
-    }).catch ((error) => {
-      console.error('Error al crear el proyecto', error);
+  async guardarNuevoProyecto() {
+    const payload = {
+      ...this.nuevoProyecto,
+    }
+
+    this.proyectoService.crearProyecto(payload).subscribe({
+      next: (res) => {
+        console.log('Proyecto creado exitosamente:', res);
+        alert('Proyecto creado exitosamente');
+        this.irHome();
+      },
+      error: (error) => {
+        console.error('Error al crear el proyecto:', error);
+        alert('Hubo un error al crear el proyecto');
+      },
+      complete: () => { }
     });
   }
 
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 }

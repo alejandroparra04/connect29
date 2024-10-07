@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-usuarios',
@@ -44,17 +43,6 @@ export class UsuariosComponent {
     this.router.navigate(['/home'])
   }
 
-  registrarse() {
-    // this.authService.registrarse(this.usuario.correo, this.usuario.password, this.usuario.nombre).then(() => {
-    //   alert('Usuario creado con éxito ');
-    //   this.router.navigate(['/inicio-sesion']);
-    // }).catch(error => {
-    //   console.error('Error al crear el usuario: ', error);
-    //   alert('Error al crear el usuario');
-    // });
-  }
-
-
 
   async crearUsuario() {
 
@@ -83,5 +71,9 @@ export class UsuariosComponent {
       },
       complete: () => { }
     });
+  }
+
+  registrarse() {
+
   }
 }

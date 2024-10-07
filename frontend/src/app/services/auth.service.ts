@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, updatePassword, User as FirebaseUser } from '@angular/fire/auth';
 import { Observable, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -22,6 +20,7 @@ export class AuthService {
           if (res.token) {
             this.setToken(res.token);
             this.setRole(res.role);
+            this.setEmail(res.email);
           }
         })
       )
@@ -43,6 +42,14 @@ export class AuthService {
     return localStorage.getItem('auth_role');
   }
 
+  setEmail(email: string): void {
+    localStorage.setItem('auth_email', email);
+  }
+
+  getEmail(): string | null {
+    return localStorage.getItem('auth_email');
+  }
+
   logout(): void {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('auth_role');
@@ -56,6 +63,16 @@ export class AuthService {
     });
 
     return this.http.post(`${this.apiUrl}/users/`, data, { headers });
+  }
+
+  getUsers(): Observable<any> {
+    const token = this.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/users/`, { headers });
   }
 
   async registrarse(email: string, password: string, nombre: string) {

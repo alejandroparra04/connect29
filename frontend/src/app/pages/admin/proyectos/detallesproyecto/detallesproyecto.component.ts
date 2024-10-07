@@ -13,30 +13,30 @@ import { Proyectos } from '../../../../models/proyecto.model';
 export class DetallesproyectoComponent implements OnInit {
   proyecto: any = {
     numberId: 0,
-    nombre:'',
-     descripcion:'',
-    fecha_inicio:'',
-    fecha_fin:'',
-    responsable:''
+    nombre: '',
+    descripcion: '',
+    fecha_inicio: '',
+    fecha_fin: '',
+    responsable: ''
   };
 
   menuCerrado = false;
 
-  constructor( private  route: ActivatedRoute, private proyectoService: ProyectoService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private proyectoService: ProyectoService, private router: Router) { }
 
-  toggleMenu(){
+  toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
   }
-  
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-     if (id) {
-       this.proyectoService.obtenerProyectoPorId(id). subscribe(proyecto => {
-        this.proyecto = proyecto;
-       }, error =>{
-        console.log('Error al obtener los detalles del proyecto:',error);
-       });
-    }
+    //  if (id) {
+    //    this.proyectoService.obtenerProyectoPorId(id). subscribe(proyecto => {
+    //     this.proyecto = proyecto;
+    //    }, error =>{
+    //     console.log('Error al obtener los detalles del proyecto:',error);
+    //    });
+    // }
   }
 
   volver(): void {
@@ -51,7 +51,7 @@ export class DetallesproyectoComponent implements OnInit {
     this.router.navigate(['/proyectos']);
   }
 
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 

@@ -76,7 +76,7 @@
       <tbody>
         <tr *ngFor="let proyecto of proyectos; trackBy: trackById">
 
-          <td>{{ proyecto.numeroId}}</td>
+          <td>{{ proyecto.id}}</td>
           <td>{{ proyecto.nombre }}</td>
           <td>{{ proyecto.descripcion }}</td>
           <td>{{ proyecto.fecha_inicio }}</td>
@@ -92,9 +92,5 @@
         </tr>
       </tbody>
     </table>
-
-    <div class="action-buttons">
-      <button class="btn btn-primary" (click)="crearProyecto()">Crear Proyectos</button>
-    </div>
   </div>
 </div>
