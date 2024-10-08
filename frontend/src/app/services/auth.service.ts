@@ -75,6 +75,30 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/users/`, { headers });
   }
 
+  actualizarUsuario(usuario: object): Observable<any> {
+    console.log("K".repeat(20) + " Obj: usuario: " + JSON.stringify(usuario));
+    const token = this.getToken();
+    const usuario_id = (usuario as { id: number })['id'];
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.put(`${this.apiUrl}/users/${usuario_id}/`, usuario, { headers });
+  }
+
+  eliminarUsuario(id: string): Observable<any> {
+    const token = this.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.delete(`${this.apiUrl}/users/${id}/`, { headers });
+  }
+
+  // ---------------------------------------------
+
   async registrarse(email: string, password: string, nombre: string) {
   }
 

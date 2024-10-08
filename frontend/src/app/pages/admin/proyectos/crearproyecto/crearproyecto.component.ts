@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Proyectos } from '../../../../models/proyecto.model';
 import { ProyectoService } from '../../../../services/proyecto.service';
 import { AuthService } from '../../../../services/auth.service';
+import Swal from 'sweetalert2';
 
 import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../../components/navbar/navbar.component';
@@ -67,12 +68,22 @@ export class CrearproyectoComponent implements OnInit {
     this.proyectoService.crearProyecto(payload).subscribe({
       next: (res) => {
         console.log('Proyecto creado exitosamente:', res);
-        alert('Proyecto creado exitosamente');
+        Swal.fire({
+          icon: 'success',
+          title: 'Proyecto creado exitosamente',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.irHome();
       },
       error: (error) => {
         console.error('Error al crear el proyecto:', error);
-        alert('Hubo un error al crear el proyecto');
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al crear el proyecto',
+          showConfirmButton: false,
+          timer: 1500
+        })
       },
       complete: () => { }
     });

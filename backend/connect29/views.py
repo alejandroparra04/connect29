@@ -8,7 +8,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 
 from .models import Project
-from .serializers import UserSerializer, ProjectSerializer
+from .serializers import UserSerializer, EditUserSerializer, ProjectSerializer
 
 
 # -------------------------------------------------------------
@@ -26,8 +26,6 @@ class EmailLoginTokenView(APIView):
         email = request.data.get("email")
         password = request.data.get("password")
 
-        print("-"*50)
-        print(email, password)
 
         try:
             user = User.objects.get(email=email)
@@ -74,7 +72,7 @@ class UserList(APIView):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            user.is_staff = False
+            # user.is_staff = False
             user.set_password(request.data["password"])
             user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -109,10 +107,9 @@ class UserDetail(APIView):
 
         user = self.get_object(pk)
         if user is not None:
-            serializer = UserSerializer(user, data=request.data)
+            serializer = EditUserSerializer(user, data=request.data, partial=True)
             if serializer.is_valid():
                 user = serializer.save()
-                user.set_password(request.data["password"])
                 user.save()
                 return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

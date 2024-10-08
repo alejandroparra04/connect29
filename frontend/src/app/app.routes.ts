@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { EntregablesComponent } from './pages/admin/entregables/entregables.component';
 import { UsuariosComponent } from './pages/admin/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './pages/admin/usuarios/crear-usuario/crear-usuario.component';
 import { InicioSesionComponent } from './pages/inicio-sesion/inicio-sesion.component';
 import { EditarEntregablesComponent } from './pages/admin/entregables/editar-entregables/editar-entregables.component';
 import { EliminarEntregablesComponent } from './pages/admin/entregables/eliminar-entregables/eliminar-entregables.component';
@@ -33,6 +33,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AdminGuardService] },
   { path: 'entregables', component: EntregablesComponent },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AdminGuardService] },
+  { path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [AdminGuardService] },
   { path: 'editar-entregables/:id', component: EditarEntregablesComponent, canActivate: [AdminGuardService] },
   { path: 'eliminar-entregables', component: EliminarEntregablesComponent },
   { path: 'crear-entregable', component: CrearEntregableComponent },

@@ -2,15 +2,6 @@
   <app-sidebar></app-sidebar>
   <div class="main-content">
     <app-navbar></app-navbar>
-    <div class="modal" *ngIf="mostrarModalEliminar">
-      <div class="modal-content">
-        <span class="close" (click)="cancelarEliminacion()">&times;</span>
-        <h2>Confirmar Eliminación</h2>
-        <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
-        <button (click)="confirmarEliminacion()">Eliminar</button>
-        <button (click)="cancelarEliminacion()">Cancelar</button>
-      </div>
-    </div>
 
     <!-- Tabla de Entregables -->
     <table class="entregables-table">
@@ -39,7 +30,7 @@
             <button class="detalles-button" (click)="verDetalles(proyecto.id)">Detalles</button>
             @if(role === 'admin') {
             <button class="editar-button" (click)="abrirModalEditar(proyecto)">Editar</button>
-            <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id, proyecto.nombre)">Eliminar</button>
+            <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id)">Eliminar</button>
             }
 
           </td>
@@ -81,6 +72,17 @@
         <button type="submit" class="save-button">Guardar Cambios</button>
         <button type="button" class="cancel-button" (click)="cancelarEdicion()">Cancelar</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal para eliminar proyecto -->
+  <div class="delete-modal" *ngIf="mostrarModalEliminar">
+    <div class="delete-modal-content">
+      <span class="close" (click)="cancelarEliminacion()">&times;</span>
+      <h2>Confirmar Eliminación</h2>
+      <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
+      <button (click)="confirmarEliminacion()">Eliminar</button>
+      <button (click)="cancelarEliminacion()">Cancelar</button>
     </div>
   </div>
 

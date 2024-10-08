@@ -10,6 +10,7 @@ import { DetallesComponent } from '../entregables/detalles/detalles.component';
 import { BuscarComponent } from "../buscar/buscar.component";
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
@@ -70,6 +71,11 @@ export class ProyectosComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar los usuarios:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar los usuarios, contacte al administrador',
+        })
       },
     });
   }
@@ -81,6 +87,11 @@ export class ProyectosComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar los proyectos:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar los proyectos, contacte al administrador',
+        })
       },
     });
   }
@@ -115,9 +126,20 @@ export class ProyectosComponent implements OnInit {
       next: () => {
         this.cancelarEdicion();
         this.cargarProyectos();
+        Swal.fire({
+          icon: 'success',
+          title: 'Proyecto actualizado exitosamente',
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       error: (error) => {
         console.error('Error al actualizar el proyecto:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al actualizar el proyecto',
+          text: 'Hubo un problema al actualizar los datos',
+        });
       },
     });
   }
@@ -129,7 +151,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   //metodo para eliminar un proyecto
-  eliminarProyecto(id: number, nombre: string) {
+  eliminarProyecto(id: number) {
     this.proyectoEliminar = this.proyectos.find(proyectos => proyectos.id === id) || null;
     this.mostrarModalEliminar = true;
   }
@@ -138,16 +160,39 @@ export class ProyectosComponent implements OnInit {
     this.mostrarModalEliminar = false;
   }
 
-  confirmarEliminacion() {
+  confirmarEliminacion(): void {
     if (this.proyectoEliminar) {
-      this.proyectoService.eliminarProyecto(this.proyectoEliminar.id).subscribe({
-        next: () => {
-          this.cargarProyectos();
-          this.cancelarEliminacion();
-        },
-        error: (error) => {
-          console.error('Error al eliminar el proyecto:', error);
-        },
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.proyectoService.eliminarProyecto(this.proyectoEliminar.id).subscribe({
+            next: () => {
+              this.cargarProyectos();
+              this.cancelarEliminacion();
+              Swal.fire(
+                'Eliminado',
+                'El proyecto ha sido eliminado.',
+                'success'
+              );
+            },
+            error: (error) => {
+              console.error('Error al eliminar el proyecto:', error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Error al eliminar',
+                text: 'Hubo un problema al eliminar el proyecto',
+              });
+            },
+          });
+        }
       });
     }
   }

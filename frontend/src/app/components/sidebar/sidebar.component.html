@@ -6,32 +6,28 @@
         <span class="icon">
           <img src="assets/icons/icono_crear_proyecto.png" alt="icono_crear_proyecto">
         </span>
-        Crear Proyecto
+        <span>Crear Proyecto</span>
       </button>
     </li>
     @if(role === 'admin') {
     <li>
-      <button [routerLink]="['/usuarios']">
+      <button [routerLink]="['/crear-usuario']">
         <span class="icon">
           <img src="assets/icons/icono_crear_usuario.png" alt="icono_crear_usuario">
         </span>
-        Crear Usuario
-      </button>
-    </li>
-    <li>
-      <button [routerLink]="['/roles']">
-        <span class="icon">
-          <img src="assets/icons/icono_crear_rol.png" alt="icono_crear_rol">
-        </span>
-        Asignar Roles
+        <span>Crear Usuario</span>
       </button>
     </li>
     }
     <li>
       <button [routerLink]="['/inicio-sesion']">
-        <span class="material-icons">logout</span>
-        Cerrar Sesión
+        <span class="material-icons icon">logout</span>
+        <span>Cerrar Sesión</span>
       </button>
     </li>
   </ul>
+
+  <div class="logo-img">
+    <img src="assets/img/imagen_logo.png" alt="logo-connect">
+  </div>
 </div>

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -13,7 +14,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class InicioSesionComponent {
   user = {
-    // rol: '',
     correo: '',
     password: ''
   };
@@ -41,29 +41,24 @@ export class InicioSesionComponent {
   iniciarSesion(): void {
     this.authService.login(this.user.correo, this.user.password).subscribe({
       next: (response) => {
-        console.log('Inicio de sesión exitoso: ', response);
-        if (response.token) {
-          alert('Inicio de sesión exitoso');
-          this.router.navigate(['/home']);
-        } else {
-          alert('Error: No se recibió el token');
-        }
+        console.log('Inicio de sesión exitoso', response.role);
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio de sesión exitoso',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         console.error('Error al iniciar sesión: ', error);
-        alert('Error al iniciar sesión. Verifique sus credenciales.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al iniciar sesión',
+          text: 'Verifique sus credenciales',
+          showConfirmButton: true
+        });
       }
     });
-  }
-
-  async iniciarConGoogle() {
-    try {
-      await this.authService.iniciarConGoogle();
-      alert('Inicio de sesión exitoso con Google');
-      this.router.navigate(['/home']);
-    } catch (error) {
-      console.error('Error al iniciar sesión con Google:', error);
-      alert('Error al iniciar sesión con Google');
-    }
   }
 }
