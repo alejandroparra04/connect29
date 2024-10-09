@@ -40,7 +40,7 @@ class Deliverable(models.Model):
     estado = models.CharField(max_length=1, choices=STATUS_CHOICES, default='P')
     fecha_creacion = models.DateField(auto_now_add=True)
 
-    proyecto = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     categoria = models.CharField(
         max_length=2,
         choices=[('PM', 'Project Management'), ('SI', 'Software Implementation')])

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../../components/navbar/navbar.component';
+import { EntregableService } from '../../../../services/entregable.service';
 
 @Component({
   selector: 'app-actividad-si',
@@ -12,18 +13,36 @@ import { NavbarComponent } from '../../../../components/navbar/navbar.component'
   styleUrl: './actividad-si.component.scss'
 })
 export class ActividadSiComponent {
-  actividad_si = [
-    { id: 1, nombre_actividad: 'Inicio de la Implementación del software' },
-    { id: 2, nombre_actividad: 'Análisis de requisitos' },
-    { id: 3, nombre_actividad: 'Diseño detallado y arquitectura del software' },
-    { id: 4, nombre_actividad: 'Construcción del software' },
-    { id: 5, nombre_actividad: 'Pruebas e integración del software' },
-    { id: 6, nombre_actividad: 'Entrega del producto' },
-  ]
+  proyectoId: string;
+  actividades_si: { id: number; nombre_actividad: string; }[] = [];
+
 
   menuCerrado = false;
 
-  constructor(private readonly router: Router) { }
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly entregableService: EntregableService) {
+    this.proyectoId = this.route.snapshot.paramMap.get('id')!;
+  }
+
+  ngOnInit(): void {
+    this.ObtenerActividades();
+  }
+
+  ObtenerActividades() {
+    this.entregableService.ObtenerActividades('SI').subscribe({
+      next: (data: string[]) => {
+        this.actividades_si = data.map((actividad, index) => ({
+          id: index + 1,
+          nombre_actividad: actividad
+        }));
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   toggleMenu() {
     this.menuCerrado = !this.menuCerrado;

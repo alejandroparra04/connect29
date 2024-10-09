@@ -207,6 +207,23 @@ class ProjectDetail(APIView):
 
 
 # -------------------------------------------------------------
+# ---                        ACTIVIDADES                    ---
+# -------------------------------------------------------------
+class ActivityList(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, category):
+        if category == 'PM':
+            actividades = ACTIVIDADES_PM
+        elif category == 'SI':
+            actividades = ACTIVIDADES_SI
+        else:
+            return Response({"error": "Categoría inválida"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(actividades)
+
+
+# -------------------------------------------------------------
 # ---                        ENTREGABLES                    ---
 # -------------------------------------------------------------
 
@@ -217,19 +234,10 @@ class DeliverableList(APIView):
         try:
             project = Project.objects.get(id=project_id)
 
-            # Obtener las actividades según la categoría
-            if category == 'PM':
-                actividades = ACTIVIDADES_PM
-            elif category == 'SI':
-                actividades = ACTIVIDADES_SI
-            else:
-                return Response({"error": "Categoría inválida"}, status=status.HTTP_400_BAD_REQUEST)
-
-            entregables = Deliverable.objects.filter(proyecto=project, categoria=category)
+            entregables = Deliverable.objects.filter(project=project, categoria=category)
             entregables_serializer = DeliverableSerializer(entregables, many=True)
 
             return Response({
-                "actividades": actividades,
                 "entregables": entregables_serializer.data
             })
         except Project.DoesNotExist:

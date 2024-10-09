@@ -40,7 +40,7 @@ export class EditarEntregablesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.id = this.route.snapshot.paramMap.get('id') ?? '';
     // if (this.id) {
     //   this.entregableService.obtenerEntregablePorId(this.id).subscribe(entregable => {
     //     if (entregable) {

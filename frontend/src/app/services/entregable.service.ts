@@ -3,14 +3,27 @@ import { Firestore, collection, doc, addDoc, updateDoc, deleteDoc, docData, coll
 import { last, Observable } from 'rxjs'
 import { Entregable } from '../models/entegable.model';
 import { getDoc } from 'firebase/firestore';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntregableService {
 
-  // constructor(private firestore: Firestore) { }
-  constructor() { }
+  private readonly apiUrl = 'http://localhost:8000';
+
+  constructor(private readonly authService: AuthService, private readonly http: HttpClient) { }
+
+  ObtenerActividades(categoria: string): Observable<any> {
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/activities/${categoria}/`, { headers });
+  }
 
   ObtenerEntregables(): void {
 
