@@ -1,0 +1,19 @@
+meta {
+  name: get deliverables
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8000/deliverables/
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}

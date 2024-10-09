@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Project
+from .models import Project, Deliverable
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -31,6 +31,7 @@ class EditUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+
 class ProjectSerializer(serializers.ModelSerializer):
     responsable_id = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), source='responsable', required=False
@@ -41,3 +42,9 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ['id', 'nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'responsable', 'responsable_id']
+
+
+class DeliverableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Deliverable
+        fields = ['id', 'nombre', 'descripcion', 'estado', 'fecha_creacion', 'proyecto', 'categoria', 'actividad']

@@ -41,39 +41,39 @@ export class EditarEntregablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') || '';
-    if (this.id) {
-      this.entregableService.obtenerEntregablePorId(this.id).subscribe(entregable => {
-        if (entregable) {
-          this.editForm.patchValue({
-            nombre: entregable.nombre,
-            descripcion: entregable.descripcion,
-            estado: entregable.estado,
-            fecha: entregable.fecha
-          });
-        }
-      });
-    }
+    // if (this.id) {
+    //   this.entregableService.obtenerEntregablePorId(this.id).subscribe(entregable => {
+    //     if (entregable) {
+    //       this.editForm.patchValue({
+    //         nombre: entregable.nombre,
+    //         descripcion: entregable.descripcion,
+    //         estado: entregable.estado,
+    //         fecha: entregable.fecha
+    //       });
+    //     }
+    //   });
+    // }
   }
 
   onSubmit(): void {
-    if (this.editForm.valid) {
-      this.entregableService.actualizarEntregable(this.id, this.editForm.value).subscribe(() => {
-        this.router.navigate(['/entregables']);
-      });
-    }
+    // if (this.editForm.valid) {
+    //   this.entregableService.actualizarEntregable(this.id, this.editForm.value).subscribe(() => {
+    //     this.router.navigate(['/entregables']);
+    //   });
+    // }
   }
 
   guardarCambios() {
-    if (this.editForm.valid) {
-      this.entregableService.actualizarEntregable(this.id, this.editForm.value).subscribe(() => {
-        alert('Entregable actualizado con éxito');
-        this.router.navigate(['/entregables']);
-      }, (error) => {
-        console.error('Error al actualizar el entregable', error);
-      });
-    } else {
-      console.log('El formulario no es válido')
-    }
+    // if (this.editForm.valid) {
+    //   this.entregableService.actualizarEntregable(this.id, this.editForm.value).subscribe(() => {
+    //     alert('Entregable actualizado con éxito');
+    //     this.router.navigate(['/entregables']);
+    //   }, (error) => {
+    //     console.error('Error al actualizar el entregable', error);
+    //   });
+    // } else {
+    //   console.log('El formulario no es válido')
+    // }
   }
 
   cancelarEdicion() {

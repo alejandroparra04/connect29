@@ -75,12 +75,7 @@ export class EntregablesComponent implements OnInit {
   }
 
   cargarEntregables() {
-    this.entregableService.ObtenerEntregables().subscribe(entregables => {
-      console.log('Entregables cargados:', entregables);
-      this.entregables = entregables;
-    }, error => {
-      console.error('Error al cargar los entregables: ', error);
-    });
+
   }
 
   // Métodos para editar entregables
@@ -100,16 +95,7 @@ export class EntregablesComponent implements OnInit {
   }
 
   confirmarEliminacion(): void {
-    if (this.selectedEntregableEliminar) {
-      this.entregableService.eliminarEntregable(this.selectedEntregableEliminar.numeroId.toString()).then(() => {
-        console.log('Entregable eliminado con éxito');
-        this.mostrarModalEliminar = false;
-        this.selectedEntregableEliminar = null;
-        this.cargarEntregables(); // Recargar la lista
-      }).catch(error => {
-        console.error('Error al eliminar el entregable', error);
-      });
-    }
+
   }
 
 
@@ -166,11 +152,7 @@ export class EntregablesComponent implements OnInit {
   }
 
   guardarNuevoEntregable(entregable: Entregable) {
-    this.entregableService.crearEntregables(entregable).then(() => {
-      console.log('Entregable guardado correctamente con ID: ', entregable.numeroId);
-    }).catch((error) => {
-      console.error('Error al guardar el entregable', error);
-    });
+
   }
 
   obtenerUltimoNumeroEntregable(proyectoId: number, proceso: string, actividadId: number): number {

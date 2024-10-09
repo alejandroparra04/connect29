@@ -7,8 +7,9 @@ from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 
-from .models import Project
-from .serializers import UserSerializer, EditUserSerializer, ProjectSerializer
+from .constants import ACTIVIDADES_PM, ACTIVIDADES_SI
+from .models import Project, Deliverable
+from .serializers import UserSerializer, EditUserSerializer, ProjectSerializer, DeliverableSerializer
 
 
 # -------------------------------------------------------------
@@ -25,7 +26,6 @@ class EmailLoginTokenView(APIView):
     def post(self, request):
         email = request.data.get("email")
         password = request.data.get("password")
-
 
         try:
             user = User.objects.get(email=email)
@@ -204,3 +204,51 @@ class ProjectDetail(APIView):
         if project is not None:
             project.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# -------------------------------------------------------------
+# ---                        ENTREGABLES                    ---
+# -------------------------------------------------------------
+
+class DeliverableList(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, project_id, category):
+        try:
+            project = Project.objects.get(id=project_id)
+
+            # Obtener las actividades según la categoría
+            if category == 'PM':
+                actividades = ACTIVIDADES_PM
+            elif category == 'SI':
+                actividades = ACTIVIDADES_SI
+            else:
+                return Response({"error": "Categoría inválida"}, status=status.HTTP_400_BAD_REQUEST)
+
+            entregables = Deliverable.objects.filter(proyecto=project, categoria=category)
+            entregables_serializer = DeliverableSerializer(entregables, many=True)
+
+            return Response({
+                "actividades": actividades,
+                "entregables": entregables_serializer.data
+            })
+        except Project.DoesNotExist:
+            return Response({"error": "Proyecto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request, project_id, category):
+        try:
+            project = Project.objects.get(id=project_id)
+            actividad = request.data.get('actividad')
+
+            if category == 'PM' and actividad not in ACTIVIDADES_PM:
+                return Response({"error": "Actividad inválida para PM"}, status=status.HTTP_400_BAD_REQUEST)
+            if category == 'SI' and actividad not in ACTIVIDADES_SI:
+                return Response({"error": "Actividad inválida para SI"}, status=status.HTTP_400_BAD_REQUEST)
+
+            serializer = DeliverableSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(proyecto=project, categoria=category, actividad=actividad)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Project.DoesNotExist:
+            return Response({"error": "Proyecto no encontrado"}, status=status.HTTP_404_NOT_FOUND)

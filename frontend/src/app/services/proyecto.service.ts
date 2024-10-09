@@ -25,8 +25,14 @@ export class ProyectoService {
     return this.http.get(`${this.apiUrl}/projects/`, { headers });
   }
 
-  obtenerProyectoPorId(id: string): void {
+  obtenerProyectoPorId(id: string): Observable<any> {
 
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/projects/${id}/`, { headers });
   }
 
   obtenerSiguienteId(): void {

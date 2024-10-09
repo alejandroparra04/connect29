@@ -36,13 +36,13 @@ export class DetallesComponent {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.entregableService.obtenerEntregablePorId(id).subscribe(entregable => {
-        this.entregable = entregable;
-      }, error => {
-        console.log('Error al obtener los detalles del entregable:', error);
-      });
-    }
+    // if (id) {
+    //   this.entregableService.obtenerEntregablePorId(id).subscribe(entregable => {
+    //     this.entregable = entregable;
+    //   }, error => {
+    //     console.log('Error al obtener los detalles del entregable:', error);
+    //   });
+    // }
   }
 
   volver(): void {

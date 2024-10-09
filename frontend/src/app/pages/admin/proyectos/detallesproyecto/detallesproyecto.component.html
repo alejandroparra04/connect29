@@ -1,45 +1,39 @@
-<div class="detallesproyecto-container">
-
+<div class="container">
+  <app-sidebar></app-sidebar>
   <div class="main-content">
-    <div class="detallesproyecto-header">
-      <button (click)="volver()" class="icon-button">
-        <span class="material-icons">arrow_back</span>
-      </button>
-      <h2>Detalles Del Proyecto</h2>
+    <app-navbar></app-navbar>
+
+    <div class="detalle-container">
+      <div class="detalle-modal-content">
+        <button (click)="volver()" class="icon-button">
+          <span class="material-icons">arrow_back</span>
+        </button>
+        <h2>Detalle Proyecto</h2>
+        <form>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" [(ngModel)]="proyecto.nombre" name="nombre" />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" [(ngModel)]="proyecto.descripcion" name="descripcion"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fecha_inicio">Fecha de Inicio</label>
+            <input type="date" id="fecha_inicio" [(ngModel)]="proyecto.fecha_inicio" name="fecha_inicio" />
+          </div>
+          <div class="form-group">
+            <label for="fecha_fin">Fecha de Fin</label>
+            <input type="date" id="fecha_fin" [(ngModel)]="proyecto.fecha_fin" name="fecha_fin" />
+          </div>
+          <div class="form-group">
+            <label for="responsable">Responsable</label>
+            <input type="text" id="responsable" [(ngModel)]="proyecto.responsable" name="responsable" />
+          </div>
+          <button (click)="cerrar()" type="button" class="btn-cerrar">Cerrar</button>
+        </form>
+      </div>
     </div>
 
-    <form class="detallesproyecto-form">
-      <div>
-        <label for="id">Id</label>
-        <input type="text" id="id" [value]="proyecto.numeroId" readonly />
-      </div>
-
-      <div>
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" [value]="proyecto.nombre" readonly />
-      </div>
-
-      <div>
-        <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" [value]="proyecto.descripcion" readonly></textarea>
-      </div>
-
-      <div>
-        <label for="fechaInicio">Fecha de Inicio</label>
-        <input type="text" id="fechaInicio" [value]="proyecto.fecha_inicio" readonly />
-      </div>
-
-      <div>
-        <label for="fechaFin">Fecha de Fin</label>
-        <input type="text" id="fechaFin" [value]="proyecto.fecha_fin" readonly />
-      </div>
-
-      <div>
-        <label for="responsable">Responsable</label>
-        <input type="text" id="responsable" [value]="proyecto.responsable" readonly />
-      </div>
-
-      <button (click)="cerrar()" type="button" class="btn-cerrar">Cerrar</button>
-    </form>
   </div>
 </div>

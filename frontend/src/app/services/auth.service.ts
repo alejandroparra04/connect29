@@ -75,8 +75,17 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/users/`, { headers });
   }
 
+  getUser(id: string): Observable<any> {
+    const token = this.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.get(`${this.apiUrl}/users/${id}/`, { headers });
+  }
+
   actualizarUsuario(usuario: object): Observable<any> {
-    console.log("K".repeat(20) + " Obj: usuario: " + JSON.stringify(usuario));
     const token = this.getToken();
     const usuario_id = (usuario as { id: number })['id'];
 

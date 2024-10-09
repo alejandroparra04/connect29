@@ -41,11 +41,11 @@ export class CrearEntregableComponent {
   }
 
   cargarEntregables() {
-    this.entregableService.ObtenerEntregables().subscribe(entregables => {
-      this.entregables = entregables;
-    }, error => {
-      console.error('Error al cargar lo entregables', error);
-    });
+    // this.entregableService.ObtenerEntregables().subscribe(entregables => {
+    //   this.entregables = entregables;
+    // }, error => {
+    //   console.error('Error al cargar lo entregables', error);
+    // });
   }
 
   crearEntregable(proyectoId: number, proceso: string, actividadId: number) {
@@ -58,12 +58,12 @@ export class CrearEntregableComponent {
   }
 
   guardarNuevoEntregable(entregable: Entregable) {
-    this.entregableService.crearEntregables(this.nuevoEntregable).then(() => {
-      console.log('Entregable guardado correctamente con ID:', entregable.numeroId);
-      this.router.navigate(['/entregables']);
-    }).catch((error) => {
-      console.error('Error al crear el entregable', error);
-    });
+    // this.entregableService.crearEntregables(this.nuevoEntregable).then(() => {
+    //   console.log('Entregable guardado correctamente con ID:', entregable.numeroId);
+    //   this.router.navigate(['/entregables']);
+    // }).catch((error) => {
+    //   console.error('Error al crear el entregable', error);
+    // });
   }
 
   obtenerUltimoNumeroEntregable(proyectoId: number, proceso: string, actividadId: number): number {

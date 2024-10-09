@@ -1,0 +1,28 @@
+meta {
+  name: create deliverable
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/deliverables/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Proyecto444",
+    "descripcion": "Descripción del nuevo proyecto22222",
+    "fecha_inicio": "2024-05-01",
+    "fecha_fin": "2024-10-01"
+  }
+}

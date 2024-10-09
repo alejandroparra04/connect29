@@ -1,74 +1,84 @@
-.detallesproyecto-container {
+.container {
   display: flex;
+  height: 100vh;
 }
 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
 
-.detallesproyecto-header {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  margin-left: 290px;
-}
+  app-navbar {
+    width: 100%;
+  }
 
-.icon-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #333;
-}
+  .detalle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    margin: auto;
 
-.icon-button:hover {
-  color: #007bff;
-}
+    h2 {
+      margin-bottom: 20px;
+      color: #2979ff;
+    }
 
-h2 {
-  font-size: 24px;
-  text-align: center;
-  color: #2979ff;
-  flex-grow: 1;
-}
+    form {
+      width: 100%;
 
+      .form-group {
+        width: 100%;
+        margin-bottom: 20px;
 
+        label {
+          display: block;
+          margin-bottom: 8px;
+          color: rgba(0, 0, 0, 0.7);
+          font-size: 14px;
+          font-weight: 500;
+        }
 
-form {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-  margin-left: 300px;
-}
+        select,
+        input,
+        textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          box-sizing: border-box;
+          background-color: white;
+        }
 
-input,
-textarea {
-  flex: 1;
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: auto;
-}
+        textarea {
+          height: 100px;
+          resize: none;
+        }
+      }
 
-button {
-  padding: 10px 20px;
-  margin: 0 auto;
-  background-color: #2979ff;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-}
+      .btn-cerrar {
+        width: 100%;
+        padding: 12px;
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
 
-button:hover {
-  background-color: #2962ff;
+        &:hover {
+          background-color: #c9302c;
+        }
+      }
+    }
+  }
 }
