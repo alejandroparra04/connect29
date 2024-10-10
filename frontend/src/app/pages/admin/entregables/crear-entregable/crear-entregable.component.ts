@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { Entregable } from '../../../../models/entegable.model';
+import { Deliverable } from '../../../../models/entegable.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EntregableService } from '../../../../services/entregable.service';
+
+import Swal from 'sweetalert2';
 
 import { SidebarComponent } from '../../../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../../components/navbar/navbar.component';
@@ -16,28 +18,44 @@ import { NavbarComponent } from '../../../../components/navbar/navbar.component'
   styleUrl: './crear-entregable.component.scss'
 })
 export class CrearEntregableComponent {
-  nuevoEntregable: Entregable = {
-    id: 0,  // El ID se asignará al guardar
-    numeroId: '',
+  nuevoEntregable: Deliverable = {
+    id: 0,
     nombre: '',
+    estado: 'P',
+    fecha_creacion: new Date().toISOString().slice(0, 10),
+    codigo: '',
     descripcion: '',
-    estado: 'Pendiente',
-    fecha: new Date().toISOString().slice(0, 10),
-
+    project: 0,
+    categoria: '',
+    actividad: '',
   };
 
   menuCerrado = false;
 
-  selectedProyecto: any = null;
-  selectedProceso: string = '';
-  selectedActividad: any = null;
+  selectedProyecto: number | null = null;
+  selectedActividad: number | null = null;
+  nombreActividad: string = '';
+  proceso: string = '';
 
-  entregables: Entregable[] = [];
+  entregables: Deliverable[] = [];
 
-  constructor(private router: Router, private entregableService: EntregableService) { }
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly entregableService: EntregableService) { }
 
   ngOnInit(): void {
-    this.cargarEntregables();
+    // this.cargarEntregables();
+
+    this.route.paramMap.subscribe(params => {
+      this.selectedProyecto = +params.get('idProyecto')!;  // Convierte el ID a number
+      this.selectedActividad = +params.get('idActividad')!;
+    });
+
+    this.route.queryParams.subscribe(queryParams => {
+      this.nombreActividad = queryParams['nombre'] || '';
+      this.proceso = queryParams['proceso'] || '';
+    });
   }
 
   cargarEntregables() {
@@ -48,16 +66,53 @@ export class CrearEntregableComponent {
     // });
   }
 
-  crearEntregable(proyectoId: number, proceso: string, actividadId: number) {
-    const numeroEntregable = this.obtenerUltimoNumeroEntregable(proyectoId, proceso, actividadId);
-    const idJerarquico = `${proyectoId}.${proceso}.${actividadId}.${numeroEntregable}`;
+  crearEntregable() {
+    if (this.selectedProyecto && this.selectedActividad) {
+      const entregable: Deliverable = {
+        id: 0,
+        nombre: this.nuevoEntregable.nombre,
+        descripcion: this.nuevoEntregable.descripcion,
+        estado: this.nuevoEntregable.estado,
+        fecha_creacion: this.nuevoEntregable.fecha_creacion,
+        codigo: '',
+        project: this.selectedProyecto,
+        categoria: this.proceso,
+        actividad: this.nombreActividad,
+      };
 
-    this.nuevoEntregable.numeroId = idJerarquico;
+      this.entregableService.crearEntregable(entregable, this.selectedProyecto, this.proceso).subscribe({
+        next: (res) => {
+          console.log('Entregable guardado correctamente', res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Entregable creado exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.volver();
+        },
+        error: (error) => {
+          console.error('Error al crear el entregable', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al crear el entregable',
+            text: 'Ha ocurrido un error al crear el entregable',
+          })
+        }
+      })
 
-    this.guardarNuevoEntregable(this.nuevoEntregable);
+    } else {
+      console.error('Faltan datos para crear el entregable');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al crear el entregable',
+        text: 'Faltan datos para crear el entregable',
+      })
+    }
   }
 
-  guardarNuevoEntregable(entregable: Entregable) {
+
+  guardarNuevoEntregable(entregable: Deliverable) {
     // this.entregableService.crearEntregables(this.nuevoEntregable).then(() => {
     //   console.log('Entregable guardado correctamente con ID:', entregable.numeroId);
     //   this.router.navigate(['/entregables']);
@@ -67,20 +122,22 @@ export class CrearEntregableComponent {
   }
 
   obtenerUltimoNumeroEntregable(proyectoId: number, proceso: string, actividadId: number): number {
-    const entregablesFiltrados = this.entregables.filter(entregable => {
-      if (typeof entregable.numeroId === 'string') {
-        return entregable.numeroId.startsWith(`${proyectoId}.${proceso}.${actividadId}`);
-      } else {
-        console.error('numeroId no es una cadena', entregable);
-        return false; // O manejar el error de otra manera
-      }
-    });
+    // const entregablesFiltrados = this.entregables.filter(entregable => {
+    //   if (typeof entregable.numeroId === 'string') {
+    //     return entregable.numeroId.startsWith(`${proyectoId}.${proceso}.${actividadId}`);
+    //   } else {
+    //     console.error('numeroId no es una cadena', entregable);
+    //     return false; // O manejar el error de otra manera
+    //   }
+    // });
 
-    const ultimoEntregable = entregablesFiltrados.length > 0
-      ? Math.max(...entregablesFiltrados.map(ent => parseInt(ent.numeroId.split('.').pop()!)))
-      : 0;
+    // const ultimoEntregable = entregablesFiltrados.length > 0
+    //   ? Math.max(...entregablesFiltrados.map(ent => parseInt(ent.numeroId.split('.').pop()!)))
+    //   : 0;
 
-    return ultimoEntregable + 1; // Devuelve el siguiente número
+    // return ultimoEntregable + 1; // Devuelve el siguiente número
+
+    return 0;
   }
 
 
@@ -89,7 +146,9 @@ export class CrearEntregableComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/entregables']);
+    this.router.navigate([`/entregables/${this.selectedProyecto}/${this.selectedActividad}`],
+      { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } }
+    );
   }
 
   irHome(): void {

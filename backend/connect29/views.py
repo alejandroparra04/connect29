@@ -237,9 +237,7 @@ class DeliverableList(APIView):
             entregables = Deliverable.objects.filter(project=project, categoria=category)
             entregables_serializer = DeliverableSerializer(entregables, many=True)
 
-            return Response({
-                "entregables": entregables_serializer.data
-            })
+            return Response(entregables_serializer.data)
         except Project.DoesNotExist:
             return Response({"error": "Proyecto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -248,15 +246,43 @@ class DeliverableList(APIView):
             project = Project.objects.get(id=project_id)
             actividad = request.data.get('actividad')
 
-            if category == 'PM' and actividad not in ACTIVIDADES_PM:
-                return Response({"error": "Actividad inválida para PM"}, status=status.HTTP_400_BAD_REQUEST)
-            if category == 'SI' and actividad not in ACTIVIDADES_SI:
-                return Response({"error": "Actividad inválida para SI"}, status=status.HTTP_400_BAD_REQUEST)
+            # Validar la actividad según la categoría
+            if category == 'PM':
+                if actividad not in ACTIVIDADES_PM:
+                    return Response({"error": "Actividad inválida para PM"}, status=status.HTTP_400_BAD_REQUEST)
+                actividad_index = ACTIVIDADES_PM.index(actividad) + 1
+            elif category == 'SI':
+                if actividad not in ACTIVIDADES_SI:
+                    return Response({"error": "Actividad inválida para SI"}, status=status.HTTP_400_BAD_REQUEST)
+                actividad_index = ACTIVIDADES_SI.index(actividad) + 1
+            else:
+                return Response({"error": "Categoría inválida"}, status=status.HTTP_400_BAD_REQUEST)
+
+            entregables_existentes = Deliverable.objects.filter(
+                project=project,
+                categoria=category,
+                actividad=actividad
+            )
+
+            if entregables_existentes.exists():
+                ultimo_codigo = max([int(e.codigo[-1]) for e in entregables_existentes])
+            else:
+                ultimo_codigo = 0
+
+            nuevo_codigo = f"PR{project_id}{category}{actividad_index}NUM{ultimo_codigo + 1}"
+
+            request.data['codigo'] = nuevo_codigo
 
             serializer = DeliverableSerializer(data=request.data)
             if serializer.is_valid():
-                serializer.save(proyecto=project, categoria=category, actividad=actividad)
+                serializer.save(
+                    project=project,
+                    categoria=category,
+                    actividad=actividad,
+                    codigo=nuevo_codigo
+                )
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         except Project.DoesNotExist:
             return Response({"error": "Proyecto no encontrado"}, status=status.HTTP_404_NOT_FOUND)

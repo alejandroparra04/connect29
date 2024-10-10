@@ -22,23 +22,30 @@
           <th>Descripción</th>
           <th>Estado</th>
           <th>Fecha</th>
+          <th>Codigo</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let entregable of entregables; trackBy: trackById">
-          <td>{{ entregable.numeroId}}</td>
+        @for(entregable of entregables; track entregable.id){
+        <tr>
+          <td>{{ entregable.id}}</td>
           <td>{{ entregable.nombre }}</td>
           <td>{{ entregable.descripcion }}</td>
           <td>{{ entregable.estado }}</td>
-          <td>{{ entregable.fecha }}</td>
+          <td>{{ entregable.fecha_creacion }}</td>
+          <td>{{ entregable.codigo }}</td>
           <td>
-            <button (click)="editarEntregable(entregable.id)">Editar</button>
-            <button (click)="eliminarEntregable(entregable.numeroId, entregable.nombre)">Eliminar</button>
-            <button (click)="abrirDetalles(entregable.id)">Detalles</button>
-            <button (click)="subirEntregable()">Subir</button>
+            <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
+            <button class="subir-button" (click)="subirEntregable()">Subir</button>
+            @if(role === 'admin') {
+            <button class="editar-button" (click)="editarEntregable(entregable.id)">Editar</button>
+            <button class="eliminar-button"
+                    (click)="eliminarEntregable(entregable.id, entregable.nombre)">Eliminar</button>
+            }
           </td>
         </tr>
+        }
 
       </tbody>
     </table>

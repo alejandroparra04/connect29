@@ -89,6 +89,18 @@
       &:hover {
         background-color: #0056b3;
       }
+
+      &.editar-button {
+        background-color: #e1c33e;
+      }
+
+      &.eliminar-button {
+        background-color: #e02a2a;
+      }
+
+      &.subir-button {
+        background-color: #0af866;
+      }
     }
   }
 

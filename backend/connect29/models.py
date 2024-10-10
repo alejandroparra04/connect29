@@ -13,33 +13,19 @@ class Project(models.Model):
         return self.nombre
 
 
-# class Process(models.Model):
-#     CATEGORIES_CHOICES = (
-#         ('PM', 'Project Management'),
-#         ('SI', 'Software Implementation'),
-#     )
-#
-#     nombre = models.CharField(max_length=200)
-#     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-#     categoria = models.CharField(max_length=2, choices=CATEGORIES_CHOICES)
-#
-#     def __str__(self):
-#         return self.nombre
-
-
 class Deliverable(models.Model):
     STATUS_CHOICES = (
-        ('P', 'Pendiente'),
-        ('R', 'Revisado'),
-        ('A', 'Aprobado'),
-        ('D', 'Desaprobado'),
+        ('Pendiente', 'Pendiente'),
+        ('Revisado', 'Revisado'),
+        ('Aprobado', 'Aprobado'),
+        ('Desaprobado', 'Desaprobado'),
     )
 
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
-    estado = models.CharField(max_length=1, choices=STATUS_CHOICES, default='P')
+    estado = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pendiente')
     fecha_creacion = models.DateField(auto_now_add=True)
-
+    codigo = models.CharField(max_length=100)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     categoria = models.CharField(
         max_length=2,

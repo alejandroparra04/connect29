@@ -56,7 +56,9 @@ export class ActividadSiComponent {
     this.router.navigate(['/buscar']);
   }
 
-  Entregables() {
-    this.router.navigate(['/entregables']);
+  Entregables(actividadId: number, nombreActividad: string) {
+    this.router.navigate([`/entregables/${this.proyectoId}/${actividadId}`], {
+      queryParams: { nombre: nombreActividad, proceso: 'SI' }
+    });
   }
 }

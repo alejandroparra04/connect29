@@ -47,4 +47,4 @@ class ProjectSerializer(serializers.ModelSerializer):
 class DeliverableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deliverable
-        fields = ['id', 'nombre', 'descripcion', 'estado', 'fecha_creacion', 'proyecto', 'categoria', 'actividad']
+        fields = ['id', 'nombre', 'descripcion', 'estado', 'fecha_creacion', 'codigo', 'project', 'categoria', 'actividad']
