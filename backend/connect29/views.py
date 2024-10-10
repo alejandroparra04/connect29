@@ -11,6 +11,10 @@ from .constants import ACTIVIDADES_PM, ACTIVIDADES_SI
 from .models import Project, Deliverable
 from .serializers import UserSerializer, EditUserSerializer, ProjectSerializer, DeliverableSerializer
 
+MSG_USER_NOT_FOUND = {"error": "Usuario no encontrado"}
+MSG_PROJECT_NOT_FOUND = {"error": "Proyecto no encontrado"}
+MSG_DELIVERABLE_NOT_FOUND = {"error": "Entregable no encontrado"}
+
 
 # -------------------------------------------------------------
 # ---                          LOGIN                        ---
@@ -91,13 +95,15 @@ class UserDetail(APIView):
         try:
             return User.objects.get(pk=pk)
         except User.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return None
 
     def get(self, request, pk):
         user = self.get_object(pk)
         if user is not None:
             serializer = UserSerializer(user)
             return Response(serializer.data)
+        else:
+            return Response(MSG_USER_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk):
         if not request.user.is_staff:
@@ -113,6 +119,8 @@ class UserDetail(APIView):
                 user.save()
                 return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(MSG_USER_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk):
         if not request.user.is_staff:
@@ -122,6 +130,8 @@ class UserDetail(APIView):
         if user is not None:
             user.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(MSG_USER_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
 
 # -------------------------------------------------------------
@@ -162,13 +172,15 @@ class ProjectDetail(APIView):
         try:
             return Project.objects.get(pk=pk)
         except Project.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return None
 
     def get(self, request, pk):
         project = self.get_object(pk)
         if project is not None:
             serializer = ProjectSerializer(project)
             return Response(serializer.data)
+        else:
+            return Response(MSG_PROJECT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk):
         if not request.user.is_staff:
@@ -195,6 +207,8 @@ class ProjectDetail(APIView):
                 serializer.save()
                 return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(MSG_PROJECT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk):
         if not request.user.is_staff:
@@ -204,6 +218,8 @@ class ProjectDetail(APIView):
         if project is not None:
             project.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(MSG_PROJECT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
 
 # -------------------------------------------------------------
@@ -239,7 +255,7 @@ class DeliverableList(APIView):
 
             return Response(entregables_serializer.data)
         except Project.DoesNotExist:
-            return Response({"error": "Proyecto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+            return Response(MSG_PROJECT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request, project_id, category):
         try:
@@ -285,4 +301,41 @@ class DeliverableList(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Project.DoesNotExist:
-            return Response({"error": "Proyecto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+            return Response(MSG_PROJECT_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+
+
+class DeliverableDetail(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, pk):
+        try:
+            return Deliverable.objects.get(pk=pk)
+        except Deliverable.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        deliverable = self.get_object(pk)
+        if deliverable is not None:
+            serializer = DeliverableSerializer(deliverable)
+            return Response(serializer.data)
+        else:
+            return Response(MSG_DELIVERABLE_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk):
+        deliverable = self.get_object(pk)
+        if deliverable is not None:
+            serializer = DeliverableSerializer(deliverable, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(MSG_DELIVERABLE_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        deliverable = self.get_object(pk)
+        if deliverable is not None:
+            deliverable.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(MSG_DELIVERABLE_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)

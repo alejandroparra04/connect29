@@ -1,5 +1,12 @@
 from .views import (
-    EmailLoginTokenView, UserList, UserDetail, ProjectList, ProjectDetail, DeliverableList, ActivityList
+    EmailLoginTokenView,
+    UserList,
+    UserDetail,
+    ProjectList,
+    ProjectDetail,
+    DeliverableList,
+    DeliverableDetail,
+    ActivityList
 )
 from django.urls import path
 
@@ -11,5 +18,6 @@ urlpatterns = [
     path("projects/<int:pk>/", ProjectDetail.as_view(), name="project"),
     path("activities/<str:category>/", ActivityList.as_view(), name="Activities"),
     path("deliverables/<int:project_id>/<str:category>/", DeliverableList.as_view(), name="deliverables"),
+    path("deliverables/<int:pk>/", DeliverableDetail.as_view(), name="deliverable"),
     path("login", EmailLoginTokenView.as_view(), name="obtain_auth_token"),
 ]

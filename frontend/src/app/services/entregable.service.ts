@@ -36,7 +36,6 @@ export class EntregableService {
   }
 
   crearEntregable(deliverable: Deliverable, proyecto: number, actividad: string): Observable<any> {
-    console.log("Z".repeat(20) + " Obj: deliverable: " + JSON.stringify(deliverable));
     const token = this.authService.getToken();
 
     const headers = new HttpHeaders({
@@ -45,8 +44,13 @@ export class EntregableService {
     return this.http.post(`${this.apiUrl}/deliverables/${proyecto}/${actividad}/`, deliverable, { headers });
   }
 
-  obtenerEntregablePorId(id: string): void {
+  obtenerEntregablePorId(id: string): Observable<any> {
+    const token = this.authService.getToken();
 
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.get(`${this.apiUrl}/deliverables/${id}/`, { headers });
   }
 
   obtenerSiguienteId(): void {
@@ -56,11 +60,24 @@ export class EntregableService {
 
 
 
-  actualizarEntregable(id: string, data: any): void {
+  actualizarEntregable(id: number, data: any): Observable<any> {
+
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.put(`${this.apiUrl}/deliverables/${id}/`, data, { headers });
 
   }
 
-  eliminarEntregable(id: string): void {
+  eliminarEntregable(id: number): Observable<any> {
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+    return this.http.delete(`${this.apiUrl}/deliverables/${id}/`, { headers });
 
   }
 

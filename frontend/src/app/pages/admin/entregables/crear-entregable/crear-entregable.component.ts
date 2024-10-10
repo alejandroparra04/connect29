@@ -21,7 +21,7 @@ export class CrearEntregableComponent {
   nuevoEntregable: Deliverable = {
     id: 0,
     nombre: '',
-    estado: 'P',
+    estado: 'Pendiente',
     fecha_creacion: new Date().toISOString().slice(0, 10),
     codigo: '',
     descripcion: '',
