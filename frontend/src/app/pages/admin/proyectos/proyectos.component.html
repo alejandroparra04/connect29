@@ -41,7 +41,8 @@
   </div>
 
   <!-- Modal para editar proyecto -->
-  <div class="edit-modal" *ngIf="mostrarModalEditar">
+  @if(mostrarModalEditar){
+  <div class="edit-modal">
     <div class="edit-modal-content">
       <span class="close" (click)="cancelarEdicion()">&times;</span>
       <h2>Editar Proyecto</h2>
@@ -75,8 +76,10 @@
       </form>
     </div>
   </div>
+  }
 
   <!-- Modal para eliminar proyecto -->
+  @if(mostrarModalEliminar){
   <div class="delete-modal" *ngIf="mostrarModalEliminar">
     <div class="delete-modal-content">
       <span class="close" (click)="cancelarEliminacion()">&times;</span>
@@ -86,5 +89,6 @@
       <button (click)="cancelarEliminacion()">Cancelar</button>
     </div>
   </div>
+  }
 
 </div>

@@ -53,44 +53,6 @@
   margin-left: 200px;
 }
 
-/* Sección izquierda: Formulario */
-.form-section {
-  flex: 0, 95; // Ocupa el 60% del ancho disponible
-  display: flex;
-  flex-direction: column;
-
-  .form-group {
-    margin-bottom: 15px;
-
-    label {
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 1.0);
-      margin-bottom: 5px;
-      display: inline-block;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #fff;
-      font-size: 14px;
-
-      &:focus {
-        border-color: #4285f4;
-        outline: none;
-      }
-    }
-
-    textarea {
-      resize: vertical;
-    }
-  }
-}
-
 /* Sección derecha: Subida de archivo y botones */
 .action-section {
   flex: 0.4;

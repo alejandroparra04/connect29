@@ -37,11 +37,11 @@
           <td>{{ entregable.codigo }}</td>
           <td>
             <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
-            <button class="subir-button" (click)="subirEntregable()">Subir</button>
+            <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
             @if(role === 'admin') {
             <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
             <button class="eliminar-button"
-                    (click)="eliminarEntregable(entregable.id, entregable.nombre)">Eliminar</button>
+                    (click)="eliminarEntregable(entregable.id)">Eliminar</button>
             }
           </td>
         </tr>
@@ -57,9 +57,10 @@
     </div>
   </div>
 
+  @if(mostrarModalEditar){
   <!-- Modal para editar entregable -->
-  <div class="modal" *ngIf="mostrarModalEditar">
-    <div class="modal-content">
+  <div class="edit-modal">
+    <div class="edit-modal-content">
       <span class="close" (click)="cancelarEdicion()">&times;</span>
       <h2>Editar Entregable</h2>
       <form (ngSubmit)="guardarCambios()">
@@ -85,10 +86,12 @@
       </form>
     </div>
   </div>
+  }
 
+  @if(mostrarModalEliminar){
   <!-- Modal para eliminar entregable -->
-  <div class="modal" *ngIf="mostrarModalEliminar">
-    <div class="modal-content">
+  <div class="delete-modal">
+    <div class="delete-modal-content">
       <span class="close" (click)="cancelarEliminacion()">&times;</span>
       <h2>Confirmar Eliminación</h2>
       <p>¿Estás seguro de que deseas eliminar el entregable: {{ selectedEntregableEliminar?.nombre }}?</p>
@@ -96,5 +99,30 @@
       <button (click)="cancelarEliminacion()">Cancelar</button>
     </div>
   </div>
+  }
+
+  @if(mostrarModalSubir){
+  <!-- Modal para subir entregables -->
+  <div class="subir-modal">
+    <div class="subir-modal-content">
+      <span class="close" (click)="cerrarModalSubir()">&times;</span>
+      <h2>Subir Entregables</h2>
+
+      <div class="subir-entregables-body">
+        <div class="action-section">
+          <div class="file-upload">
+            <label for="archivo">Subir Archivo</label>
+            <input type="file" id="archivo" accept="application/pdf" (change)="onFileSelected($event)">
+            <button class="btn-submit" (click)="onSubmit()">Enviar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="btn-atras" (click)="cerrarModalSubir()">Atrás</button>
+      </div>
+    </div>
+  </div>
+  }
 
 </div>

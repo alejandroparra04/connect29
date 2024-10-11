@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, doc, addDoc, updateDoc, deleteDoc, docData, collectionData, docSnapshots } from '@angular/fire/firestore';
-import { last, Observable } from 'rxjs'
+import { catchError, last, Observable, throwError } from 'rxjs'
 import { Entregable, Deliverable } from '../models/entegable.model';
 import { getDoc } from 'firebase/firestore';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from './auth.service';
 
@@ -60,14 +60,14 @@ export class EntregableService {
 
 
 
-  actualizarEntregable(id: number, data: any): Observable<any> {
+  actualizarEntregable(entregableEditar: Deliverable): Observable<any> {
 
     const token = this.authService.getToken();
 
     const headers = new HttpHeaders({
       'Authorization': `Token ${token}`
     });
-    return this.http.put(`${this.apiUrl}/deliverables/${id}/`, data, { headers });
+    return this.http.put(`${this.apiUrl}/deliverables/${entregableEditar.id}/`, entregableEditar, { headers });
 
   }
 
@@ -80,6 +80,21 @@ export class EntregableService {
     return this.http.delete(`${this.apiUrl}/deliverables/${id}/`, { headers });
 
   }
+
+  subirArchivo(formData: FormData): Observable<any> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.post(`${this.apiUrl}/subir-archivo/`, formData, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error("Error en la subida del archivo:", error);
+        return throwError(() => new Error("Error en la subida del archivo"));
+      })
+    );
+  }
+
 
 
 }

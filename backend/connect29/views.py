@@ -1,6 +1,12 @@
+import os
+
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
+from django.core.files.storage import default_storage
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
+from rest_framework.parsers import MultiPartParser
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -339,3 +345,27 @@ class DeliverableDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(MSG_DELIVERABLE_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+
+
+class SubirArchivoView(APIView):
+    """
+    Vista protegida para la subida de archivos PDF relacionados con un entregable
+    """
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser]
+
+    def post(self, request):
+        archivo = request.FILES.get('archivo')
+        codigo_entregable = request.data.get('codigo_entregable')
+
+        if not archivo or archivo.content_type != 'application/pdf':
+            return Response({'error': 'Solo se permiten archivos PDF'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not codigo_entregable:
+            return Response({'error': 'Código de entregable no proporcionado'}, status=status.HTTP_400_BAD_REQUEST)
+
+        ruta_archivo = os.path.join('media', f'{codigo_entregable}.pdf')
+        ruta_guardada = default_storage.save(ruta_archivo, archivo)
+
+        file_url = default_storage.url(ruta_guardada)
+        return Response({'file_url': file_url}, status=status.HTTP_201_CREATED)
