@@ -130,8 +130,15 @@ export class EntregablesComponent implements OnInit {
       },
       error: error => {
         console.error('Error al cargar los entregables', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al cargar información',
+          text: 'Error al cargar los entregables. Por favor, contacte al administrador.',
+        })
       }
     });
+
+
 
   }
 
@@ -171,7 +178,9 @@ export class EntregablesComponent implements OnInit {
   }
   // metodo para generar reporte
   generarReporte() {
-    this.router.navigate(['/generar-reporte']);
+    this.router.navigate([`/generar-reporte/${this.selectedProyecto}/${this.selectedActividad}`],
+      { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } }
+    );
 
   }
 
@@ -224,20 +233,15 @@ export class EntregablesComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
-      console.log("Archivo seleccionado:", this.selectedFile); // Verificar si el archivo es correcto
     } else {
       console.log("No se seleccionó ningún archivo");
     }
   }
 
   onSubmit(): void {
-    console.log("Selected Entregable:", JSON.stringify(this.entregableSeleccionado));
-    console.log("Selected File:", this.selectedFile);
 
     if (this.selectedFile && this.entregableSeleccionado) {
       const codigoEntregable = this.entregableSeleccionado.codigo;
-      console.log("Código del Entregable:", codigoEntregable);
-      console.log("Archivo para enviar:", this.selectedFile);
 
       const formData = new FormData();
       formData.append('archivo', this.selectedFile);
@@ -278,7 +282,6 @@ export class EntregablesComponent implements OnInit {
 
   // Método para abrir el modal de subir
   subirEntregable(entregable: Deliverable): void {
-    console.log("abriendo modal de subir", entregable);
     this.entregableSeleccionado = { ...entregable };
     this.mostrarModalSubir = true;
   }
@@ -287,7 +290,6 @@ export class EntregablesComponent implements OnInit {
   cerrarModalSubir(): void {
     this.mostrarModalSubir = false;
     this.selectedFile = null;
-    console.log("Modal cerrado y archivo limpiado.");
   }
 
 }

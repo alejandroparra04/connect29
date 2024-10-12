@@ -32,7 +32,6 @@ export class EntregableService {
       'Authorization': `Token ${token}`
     });
     return this.http.get(`${this.apiUrl}/deliverables/${proyecto}/${actividad}/`, { headers });
-
   }
 
   crearEntregable(deliverable: Deliverable, proyecto: number, actividad: string): Observable<any> {

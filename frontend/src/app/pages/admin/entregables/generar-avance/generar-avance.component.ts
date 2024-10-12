@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { RouterLink, Router } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 
 
@@ -12,17 +12,33 @@ import { Chart, registerables } from 'chart.js';
   templateUrl: './generar-avance.component.html',
   styleUrl: './generar-avance.component.scss'
 })
-export class GenerarAvanceComponent implements OnInit{
+export class GenerarAvanceComponent implements OnInit {
 
-  @ViewChild('barChart') barChartRef!: ElementRef;  
+  @ViewChild('barChart') barChartRef!: ElementRef;
   @ViewChild('pieChart') pieChartRef!: ElementRef;
 
   public progreso: number = 65;
-  
-  constructor (private router: Router) { }
+
+  selectedProyecto: number | null = null;
+  selectedActividad: number | null = null;
+  nombreActividad: string = '';
+  proceso: string = '';
+
+  constructor(private readonly router: Router, private readonly route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    Chart.register(...registerables);  
+    Chart.register(...registerables);
+
+    this.route.paramMap.subscribe(params => {
+      this.selectedProyecto = +params.get('idProyecto')!;  // Convierte el ID a number
+      this.selectedActividad = +params.get('idActividad')!;
+    });
+
+    this.route.queryParams.subscribe(queryParams => {
+      this.nombreActividad = queryParams['nombre'] || '';
+      this.proceso = queryParams['proceso'] || '';
+    });
+
     this.createBarChart();
     this.createPieChart();
   }
@@ -69,15 +85,17 @@ export class GenerarAvanceComponent implements OnInit{
     });
   }
 
-  home(){
+  home() {
     this.router.navigate(['/home']);
   }
 
-  volver(){
-    this.router.navigate(['/generar-reporte']);
+  volver(): void {
+    this.router.navigate([`/generar-reporte/${this.selectedProyecto}/${this.selectedActividad}`],
+      { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } }
+    );
   }
 
-  irABuscar(){
+  irABuscar() {
     this.router.navigate(['/buscar']);
   }
 

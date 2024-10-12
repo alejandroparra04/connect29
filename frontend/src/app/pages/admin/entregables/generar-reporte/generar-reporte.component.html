@@ -25,6 +25,7 @@
         <div class="form-group">
           <label for="estado">Estado</label>
           <select [(ngModel)]="estado" id="estado">
+            <option value="">Todos</option>
             <option value="pendiente">Pendiente</option>
             <option value="en_progreso">En Progreso</option>
             <option value="completado">Completado</option>
@@ -32,34 +33,39 @@
         </div>
 
         <div class="button-group">
-          <button class="btn-reporte" (click)="Reporte()">Generar reporte</button>
+          <button class="btn-reporte" (click)="Reporte()">Filtrar datos para reporte</button>
           <button class="btn-avance" (click)="Avance()">Generar Avance</button>
           <button class="btn-reset" (click)="resetearFormulario()">Reiniciar</button>
           <button class="btn-download" (click)="descargar()">Descargar</button>
         </div>
       </div>
 
-      <div class="reporte-section" *ngIf="proyecto">
+      @if(proyecto){
+      <div class="reporte-section" id="reporte">
 
         <div class="reporte-info">
-          <h3>Reporte</h3>
-          <div *ngFor="let proyecto of proyecto">
+          <div class="info-column">
             <p><strong>Proyecto:</strong> {{proyecto.nombre}}</p>
             <p><strong>Responsable:</strong> {{proyecto.responsable}}</p>
-            <p><strong>Fecha de Inicio:</strong>{{proyecto.fecha_inicio}}</p>
+          </div>
+          <div class="info-column">
+            <p><strong>Fecha de Inicio:</strong> {{proyecto.fecha_inicio}}</p>
             <p><strong>Fecha de Fin:</strong> {{proyecto.fecha_fin}}</p>
-            <p><strong>Progreso:</strong>{{proyecto.progreso}}%</p>
+            <p><strong>Progreso:</strong> {{progreso}}%</p>
           </div>
         </div>
 
 
         <div class="graficos-section">
+          @if(isDataLoaded){
+
           <div class="grafico-torta">
             <canvas #graficaProgreso></canvas>
           </div>
           <div class="grafico-barras">
             <canvas #graficaEntregables></canvas>
           </div>
+          }
         </div>
 
         <div class="tabla-entregables">
@@ -69,19 +75,26 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
+                <th>Estado</th>
+                <th>Fecha de Creación</th>
               </tr>
             </thead>
             <tbody>
-
-              <tr *ngFor="let entregable of entregables">
-                <td>{{ entregable.id}}</td>
-                <td>{{ entregable.nombre}}</td>
-                <td>{{ entregable.descripcion}}</td>
+              @for(entregable of entregablesFiltrados; track entregable.id){
+              <tr>
+                <td>{{ entregable.id }}</td>
+                <td>{{ entregable.nombre }}</td>
+                <td>{{ entregable.descripcion }}</td>
+                <td>{{ entregable.estado }}</td>
+                <td>{{ entregable.fecha_creacion }}</td>
               </tr>
+              }
             </tbody>
           </table>
         </div>
+
       </div>
+      }
     </div>
   </div>
 </div>

@@ -42,14 +42,16 @@
 .generar-reporte-body {
   display: flex;
   justify-content: space-between;
-  gap: 50px;
+  gap: 20px;
+  /* Ajuste reducido para que los gráficos no ocupen tanto espacio */
   flex-wrap: wrap;
-  margin-left: 100px;
+  margin-left: 20px;
 }
 
 .parametros-section {
   flex: 1;
-  max-width: 40%;
+  max-width: 25%;
+  /* Reducido para dar más espacio a la sección de reporte y gráficos */
 
   h3 {
     font-size: 20px;
@@ -69,7 +71,8 @@
 
     input,
     select {
-      width: 80%;
+      width: 100%;
+      /* Ajustado a 100% */
       padding: 8px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -90,8 +93,8 @@
     gap: 10px;
 
     button {
-      width: 180px;
-      /* Ajusta este valor según el tamaño que desees */
+      width: 100%;
+      /* Ajustado a 100% */
       height: 40px;
       padding: 5px 10px;
       margin: 0 auto;
@@ -139,7 +142,8 @@
 }
 
 .reporte-section {
-  width: 80%;
+  width: 70%;
+  /* Ajustado para dar más espacio a la tabla */
   flex: 1;
   border: 1px solid #ccc;
   padding: 20px;
@@ -155,7 +159,14 @@
   }
 
   .reporte-info {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
+
+    div {
+      flex: 1;
+      padding: 10px;
+    }
 
     p {
       margin: 5px 0;
@@ -168,15 +179,17 @@
     }
   }
 
+
   .graficos-section {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px;
 
     .grafico-torta,
     .grafico-barras {
       flex: 1;
-      height: 200px;
+      height: 300px;
+      /* Reducido para dar más espacio a la tabla */
       background-color: #f5f5f5;
       border-radius: 5px;
       display: flex;
