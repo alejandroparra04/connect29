@@ -2,6 +2,15 @@
   <app-sidebar></app-sidebar>
   <div class="main-content">
     <app-navbar></app-navbar>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o email..." />
+        <button (click)="filtrarUsuarios()">Buscar</button>
+      </div>
+    </div>
+
     <table class="usuarios-table">
       <thead>
         <tr>
@@ -13,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(usuario of usuarios; track usuario.id) {
+        @for(usuario of usuariosFiltrados; track usuario.id) {
         <tr>
           <td>{{ usuario.id }}</td>
           <td>{{ usuario.first_name ? usuario.first_name : 'Admin' }} {{ usuario.last_name }}</td>

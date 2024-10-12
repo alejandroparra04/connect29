@@ -19,6 +19,8 @@ import { Usuario } from '../../../models/user.model';
 })
 export class UsuariosComponent implements OnInit {
   usuarios: any = [];
+  usuariosFiltrados: any = [];
+  filtroBusqueda: string = '';
   role: string | null = '';
   mostrarModalEditar = false;
   mostrarModalEliminar = false;
@@ -49,6 +51,7 @@ export class UsuariosComponent implements OnInit {
     this.authService.getUsers().subscribe({
       next: (data) => {
         this.usuarios = data;
+        this.usuariosFiltrados = this.usuarios;
       },
       error: (error) => {
         console.error('Error al cargar los usuarios:', error);
@@ -59,6 +62,15 @@ export class UsuariosComponent implements OnInit {
         })
       },
     });
+  }
+
+  filtrarUsuarios() {
+    const filtro = this.filtroBusqueda.toLowerCase();
+    this.usuariosFiltrados = this.usuarios.filter((usuario: { first_name: string; last_name: string; email: string; }) =>
+      usuario.first_name.toLowerCase().includes(filtro) ||
+      usuario.last_name.toLowerCase().includes(filtro) ||
+      usuario.email.toLowerCase().includes(filtro)
+    );
   }
 
   abrirModalEditar(usuario: any): void {

@@ -3,6 +3,14 @@
   <div class="main-content">
     <app-navbar></app-navbar>
 
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o responsable..." />
+        <button (click)="filtrarProyectos()">Buscar</button>
+      </div>
+    </div>
+
     <!-- Tabla de Entregables -->
     <table class="entregables-table">
       <thead>
@@ -17,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(proyecto of proyectos; track proyecto.id) {
+        @for(proyecto of proyectosFiltrados; track proyecto.id) {
         <tr>
           <td>{{ proyecto.id}}</td>
           <td>{{ proyecto.nombre }}</td>
@@ -80,7 +88,7 @@
 
   <!-- Modal para eliminar proyecto -->
   @if(mostrarModalEliminar){
-  <div class="delete-modal" *ngIf="mostrarModalEliminar">
+  <div class="delete-modal">
     <div class="delete-modal-content">
       <span class="close" (click)="cancelarEliminacion()">&times;</span>
       <h2>Confirmar Eliminación</h2>

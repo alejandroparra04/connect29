@@ -32,6 +32,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EntregablesComponent implements OnInit {
   entregables: Deliverable[] = [];
+  entregablesFiltrados: Deliverable[] = [];
+  filtroBusqueda: string = '';
   userRole: string | null = '';
   role: string | null = '';
 
@@ -127,6 +129,7 @@ export class EntregablesComponent implements OnInit {
     this.entregableService.ObtenerEntregables(this.selectedProyecto!, this.proceso).subscribe({
       next: entregables => {
         this.entregables = entregables;
+        this.entregablesFiltrados = entregables;
       },
       error: error => {
         console.error('Error al cargar los entregables', error);
@@ -137,9 +140,14 @@ export class EntregablesComponent implements OnInit {
         })
       }
     });
+  }
 
-
-
+  filtrarEntregables() {
+    const filtro = this.filtroBusqueda.toLowerCase();
+    this.entregablesFiltrados = this.entregables.filter((entregable) =>
+      entregable.nombre.toLowerCase().includes(filtro) ||
+      entregable.codigo.toLowerCase().includes(filtro)
+    );
   }
 
   // Métodos para editar entregables

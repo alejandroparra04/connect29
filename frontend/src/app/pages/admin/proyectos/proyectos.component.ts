@@ -30,6 +30,8 @@ import { NavbarComponent } from '../../../components/navbar/navbar.component';
 })
 export class ProyectosComponent implements OnInit {
   proyectos: Proyectos[] = [];
+  proyectosFiltrados: Proyectos[] = [];
+  filtroBusqueda: string = '';
   usuarios: any = [];
   role: string | null = '';
 
@@ -84,6 +86,7 @@ export class ProyectosComponent implements OnInit {
     this.proyectoService.obtenerProyectos().subscribe({
       next: (proyectos) => {
         this.proyectos = proyectos;
+        this.proyectosFiltrados = proyectos;
       },
       error: (error) => {
         console.error('Error al cargar los proyectos:', error);
@@ -94,6 +97,15 @@ export class ProyectosComponent implements OnInit {
         })
       },
     });
+  }
+
+  // Método para filtrar proyectos
+  filtrarProyectos() {
+    const filtro = this.filtroBusqueda.toLowerCase();
+    this.proyectosFiltrados = this.proyectos.filter((proyecto) =>
+      proyecto.nombre.toLowerCase().includes(filtro) ||
+      proyecto.responsable.toLowerCase().includes(filtro)
+    );
   }
 
   toggleMenu() {

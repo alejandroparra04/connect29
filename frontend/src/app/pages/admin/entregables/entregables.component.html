@@ -2,16 +2,14 @@
   <app-sidebar></app-sidebar>
   <div class="main-content">
     <app-navbar></app-navbar>
-    <div class="modal" *ngIf="mostrarModalEliminar">
-      <div class="modal-content">
-        <span class="close" (click)="cancelarEliminacion()">&times;</span>
-        <h2>Confirmar Eliminación</h2>
-        <p>¿Estás seguro de que deseas eliminar el entregable: {{ selectedEntregableEliminar?.nombre }}?</p>
-        <button (click)="confirmarEliminacion()">Eliminar</button>
-        <button (click)="cancelarEliminacion()">Cancelar</button>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o código..." />
+        <button (click)="filtrarEntregables()">Buscar</button>
       </div>
     </div>
-
 
     <!-- Tabla de Entregables -->
     <table class="entregables-table">
@@ -27,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(entregable of entregables; track entregable.id){
+        @for(entregable of entregablesFiltrados; track entregable.id){
         <tr>
           <td>{{ entregable.id}}</td>
           <td>{{ entregable.nombre }}</td>

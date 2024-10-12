@@ -49,7 +49,7 @@ export class ActividadSiComponent {
   }
 
   volver() {
-    this.router.navigate(['/procesos']);
+    this.router.navigate([`/procesos/${this.proyectoId}`]);
   }
 
   irABuscar() {
