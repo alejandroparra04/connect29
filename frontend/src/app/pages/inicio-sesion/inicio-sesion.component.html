@@ -1,22 +1,12 @@
 <div class="inicio-sesion-container">
-  <!-- <div class="inicio-sesion-header">
-    <button *ngIf="userRole === 'Administrador'" (click)="volver()" class="icon-button">
-      <span class="material-icons">arrow_back</span>
-    </button>
-    <h2>Iniciar Sesión</h2>
-  </div> -->
 
-  <!-- <p style="color: #999;">Digite su rol, correo y contraseña</p> -->
+  <h3>INICIO DE SESIÓN</h3>
+  <div class="img-container">
+    <img src="assets/img/imagen_logo.png" alt="logo-connect">
+  </div>
   <p style="color: #999;">Digite su correo y contraseña</p>
   <form>
-    <!-- <div class="form-group">
-      <label for="asignacion"></label>
-      <select id="asignacion" name="rol" [(ngModel)]="user.rol" required aria-placeholder="Rol">
-        <option value="" disabled selected> Rol</option>
-        <option value="administrador">Administrador</option>
-        <option value="usuario">Usuario</option>
-      </select>
-    </div> -->
+
     <div class="form-group">
       <!-- <label for="correoElectronico">Correo Electrônico</label> -->
       <input type="email" id="correoElectronico" name="correoElectronico" [(ngModel)]="user.correo" required
