@@ -63,7 +63,7 @@ export class GenerarReporteComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private cdr: ChangeDetectorRef,
+    private readonly cdr: ChangeDetectorRef,
     private readonly reporteService: ReporteService,
     private readonly proyectoService: ProyectoService
   ) {
@@ -272,8 +272,14 @@ export class GenerarReporteComponent implements OnInit {
     });
   }
 
+  // Avance() {
+  //   this.router.navigate([`/generar-avance/${this.selectedProyecto}/${this.selectedActividad}`],
+  //     { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } });
+
+  // }
+
   Avance() {
-    this.router.navigate([`/generar-avance/${this.selectedProyecto}/${this.selectedActividad}`],
+    this.router.navigate([`/certificado/${this.selectedProyecto}/${this.selectedActividad}`],
       { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } });
 
   }

@@ -50,7 +50,7 @@ export const routes: Routes = [
   { path: 'contrasena', component: ContrasenaComponent, canActivate: [AdminGuardService] },
   { path: 'generar-reporte/:idProyecto/:idActividad', component: GenerarReporteComponent, canActivate: [AdminGuardService] },
   { path: 'emision-certificado', component: EmisionCertificadoComponent, canActivate: [AdminGuardService] },
-  { path: 'certificado', component: CertificadoComponent, canActivate: [AdminGuardService] },
+  { path: 'certificado/:idProyecto/:idActividad', component: CertificadoComponent, canActivate: [AdminGuardService] },
   { path: 'subir-entregables', component: SubirEntregablesComponent, canActivate: [AdminGuardService] },
   { path: 'generar-avance/:idProyecto/:idActividad', component: GenerarAvanceComponent, canActivate: [AdminGuardService] },
   { path: 'actividad-pm/:id', component: ActividadPmComponent, canActivate: [AdminGuardService] },
