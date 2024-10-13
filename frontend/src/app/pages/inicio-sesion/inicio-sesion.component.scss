@@ -40,14 +40,50 @@
   }
 }
 
+.password-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  input {
+    width: 80%;
+    padding-right: 40px;
+    border-radius: 4px;
+  }
+
+  .toggle-password-btn {
+    width: 20%;
+    position: absolute;
+    right: 20px;
+    top: 0.5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .toggle-password-btn mat-icon {
+    font-size: 20px;
+    color: #4285f4;
+  }
+
+  .toggle-password-btn:hover mat-icon {
+    color: #357ae8;
+  }
+}
+
+
+
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
 
-  input,
-  select {
+  input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -55,40 +91,8 @@
     font-size: 14px;
     box-sizing: border-box;
   }
-
-  .password-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    input {
-      flex: 1;
-      padding-right: 40px;
-      border-radius: 4px;
-    }
-
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      mat-icon {
-        font-size: 20px;
-        color: #ccc;
-        transition: color 0.3s ease;
-      }
-
-      &:hover mat-icon {
-        color: #4285f4;
-      }
-    }
-  }
 }
+
 
 button {
   width: 100%;
