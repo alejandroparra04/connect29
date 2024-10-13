@@ -1,10 +1,31 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../../assets/img/marca_agua.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .inicio-sesion-container {
   padding: 20px;
   width: 400px;
-  margin: 0 auto;
-  padding-top: 80px;
   text-align: left;
   font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    white-space: nowrap;
+    text-align: center;
+    color: #2979ff;
+    padding: 10px;
+    margin: auto;
+  }
 
   .img-container {
     display: flex;
@@ -19,50 +40,11 @@
   }
 }
 
-.inicio-sesion-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
-  gap: 10px;
-  margin-right: 50px;
-}
-
-.icon-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #333;
-  margin-left: 20px;
-}
-
-.icon-button:hover {
-  color: #007bff;
-}
-
-h2 {
-  white-space: nowrap;
-  text-align: center;
-  color: #2979ff;
-  margin-left: 20px;
-  margin: auto;
-}
-
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
-
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #cdcdcd;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
 
   input,
   select {
@@ -74,10 +56,6 @@ h2 {
     box-sizing: border-box;
   }
 
-  select option:disabled {
-    color: #cdcdcd;
-  }
-
   .password-wrapper {
     position: relative;
     display: flex;
@@ -85,17 +63,16 @@ h2 {
 
     input {
       flex: 1;
-      padding-right: 5px; // Espacio suficiente para el ícono sin afectar el campo de texto
+      padding-right: 40px;
       border-radius: 4px;
     }
 
     .toggle-password {
       position: absolute;
-      left: 150px; // Icono a la derecha del input
+      right: 10px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -113,44 +90,6 @@ h2 {
   }
 }
 
-.text {
-  color: #999;
-  text-align: center;
-}
-
-.google-sign-in-button {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  /* Color de fondo de Google */
-  color: #999;
-  /* Color del texto */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  /* Espacio inferior */
-  width: 100%;
-  transition: background-color 0.3s ease;
-  border: 1px solid #ccc;
-  gap: 10px;
-  text-align: center;
-
-  .google-logo {
-    width: 24px;
-    /* Tamaño de la imagen */
-    height: auto;
-    /* Mantener la proporción de la imagen */
-  }
-
-  &:hover {
-    background-color: #357ae8;
-    /* Color de fondo al pasar el ratón */
-  }
-}
-
 button {
   width: 100%;
   padding: 12px;
@@ -163,7 +102,6 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 10px;
-  /* Espacio inferior para los botones */
 
   &:hover {
     background-color: #357ae8;
