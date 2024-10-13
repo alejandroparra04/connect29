@@ -107,13 +107,15 @@ export class EntregableService {
     }).pipe(
       tap(response => {
         console.log('Content-Type:', response.headers.get('Content-Type'));
-        console.log('Content-Length:', response.headers.get('Content-Length'));
         console.log('Response status:', response.status);
-        console.log('Response type:', response.body?.type);
-        console.log('Response size:', response.body?.size);
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error en la respuesta:', error);
+        return throwError(() => error);
       })
     );
   }
+
 
 
 
