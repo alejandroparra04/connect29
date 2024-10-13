@@ -1,9 +1,11 @@
 import os
+import re
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from django.core.files.storage import default_storage
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.parsers import MultiPartParser
@@ -364,8 +366,42 @@ class SubirArchivoView(APIView):
         if not codigo_entregable:
             return Response({'error': 'Código de entregable no proporcionado'}, status=status.HTTP_400_BAD_REQUEST)
 
-        ruta_archivo = os.path.join('media', f'{codigo_entregable}.pdf')
+        ruta_archivo = os.path.join('', f'{codigo_entregable}.pdf')
         ruta_guardada = default_storage.save(ruta_archivo, archivo)
 
         file_url = default_storage.url(ruta_guardada)
         return Response({'file_url': file_url}, status=status.HTTP_201_CREATED)
+
+
+class DescargarArchivoView(APIView):
+    """
+    Vista protegida para la descarga de archivos PDF relacionados con un entregable
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, codigo_entregable):
+        if not self.es_codigo_valido(codigo_entregable):
+            return Response({'error': 'Código de entregable inválido'}, status=status.HTTP_400_BAD_REQUEST)
+
+        nombre_archivo = f'{codigo_entregable}.pdf'
+        ruta_archivo = os.path.join(settings.MEDIA_ROOT, nombre_archivo)
+        ruta_archivo = os.path.abspath(ruta_archivo)
+
+        if not ruta_archivo.startswith(os.path.abspath(settings.MEDIA_ROOT)):
+            return Response({'error': 'Acceso no autorizado'}, status=status.HTTP_404_NOT_FOUND)
+
+        if not os.path.exists(ruta_archivo):
+            return Response({'error': 'El archivo no fue encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            archivo = open(ruta_archivo, 'rb')
+            response = FileResponse(archivo, content_type='application/pdf')
+            response['Content-Disposition'] = f'inline; filename="{nombre_archivo}"'
+            return response
+        except Exception as e:
+            print(f"Error al intentar abrir el archivo: {e}")
+            return Response({'error': 'Error al intentar abrir el archivo'}, status=status.HTTP_404_NOT_FOUND)
+
+    def es_codigo_valido(self, codigo):
+        patron = re.compile(r'^PR\d+PM\d+NUM\d+$')
+        return bool(patron.match(codigo))

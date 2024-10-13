@@ -15,7 +15,9 @@ import { SidebarComponent } from '../../../components/sidebar/sidebar.component'
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-entregables',
@@ -44,6 +46,10 @@ export class EntregablesComponent implements OnInit {
   mostrarModalEliminar = false;
   mostrarModalEditar = false;
   mostrarModalSubir = false;
+  mostrarModalVer: boolean = false;
+
+  documentoUrl: SafeResourceUrl | null = null;
+
 
   selectedProyecto: number | null = null;
   selectedActividad: number | null = null;
@@ -82,6 +88,8 @@ export class EntregablesComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly http: HttpClient,
+    private readonly sanitizer: DomSanitizer,
+
     private readonly route: ActivatedRoute,
     private readonly entregableService: EntregableService,
     private readonly authService: AuthService) {
@@ -304,6 +312,89 @@ export class EntregablesComponent implements OnInit {
   cerrarModalSubir(): void {
     this.mostrarModalSubir = false;
     this.selectedFile = null;
+  }
+
+  // verDocumento(entregable: Deliverable): void {
+  //   const codigoEntregable = entregable.codigo;
+
+  //   this.entregableService.obtenerArchivo(codigoEntregable).subscribe({
+  //     next: (response: HttpResponse<Blob>) => {
+  //       const contentType = response.headers.get('Content-Type');
+  //       console.log('respuesta:', response);
+  //       console.log('Tipo de contenido:', contentType);
+  //       console.log('Contenido del archivo:', response.body);
+
+  //       if (contentType === 'application/pdf') {
+  //         const fileURL = URL.createObjectURL(response.body!);
+  //         this.documentoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+  //         console.log('URL del archivo generado: ', fileURL);
+  //         this.mostrarModalVer = true;
+  //       } else {
+  //         console.error('El tipo de contenido no es PDF:', contentType);
+
+  //         // Aquí es donde puedes usar el FileReader para ver el contenido HTML.
+  //         const reader = new FileReader();
+  //         reader.onload = () => {
+  //           console.log('Contenido HTML recibido:', reader.result);  // Aquí verás el contenido del HTML
+  //         };
+  //         reader.readAsText(response.body!);  // Lee el Blob como texto para ver el contenido HTML
+
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Error al cargar el archivo',
+  //           text: 'No se pudo cargar el documento. Tipo de contenido no soportado.',
+  //         });
+  //       }
+  //     },
+  //     error: (error: any) => {
+  //       console.error('Error al cargar el archivo:', error);
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Error al cargar el archivo',
+  //         text: 'No se pudo cargar el documento PDF',
+  //       });
+  //     }
+  //   });
+  // }
+
+
+
+  verDocumento(entregable: Deliverable): void {
+    const codigoEntregable = entregable.codigo;
+
+    this.entregableService.obtenerArchivo(codigoEntregable).subscribe({
+      next: (response: HttpResponse<Blob>) => {
+        if (response.body) {
+          const fileURL = URL.createObjectURL(response.body);
+          this.documentoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+          console.log("Archivo URL creada:", fileURL);
+          console.log("Documento URL sanitizada:", this.documentoUrl);
+          this.mostrarModalVer = true;
+        } else {
+          console.error('El cuerpo de la respuesta está vacío');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al cargar el archivo',
+            text: 'El archivo está vacío',
+          });
+        }
+      },
+      error: (error: any) => {
+        console.error('Error al cargar el archivo:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al cargar el archivo',
+          text: 'No se pudo cargar el documento PDF',
+        });
+      }
+    });
+  }
+
+
+
+  cerrarModalVer(): void {
+    this.mostrarModalVer = false;
+    this.documentoUrl = null;
   }
 
 }

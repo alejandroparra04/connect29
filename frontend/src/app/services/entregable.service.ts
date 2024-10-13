@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, doc, addDoc, updateDoc, deleteDoc, docData, collectionData, docSnapshots } from '@angular/fire/firestore';
-import { catchError, last, Observable, throwError } from 'rxjs'
+import { catchError, last, Observable, tap, throwError } from 'rxjs'
 import { Entregable, Deliverable } from '../models/entegable.model';
 import { getDoc } from 'firebase/firestore';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { AuthService } from './auth.service';
 
@@ -93,6 +93,29 @@ export class EntregableService {
       })
     );
   }
+
+  obtenerArchivo(codigoEntregable: string): Observable<HttpResponse<Blob>> {
+    const token = this.authService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`
+    });
+
+    return this.http.get(`http://localhost:8000/descargar-archivo/${codigoEntregable}/`, {
+      headers: headers,
+      observe: 'response',
+      responseType: 'blob'
+    }).pipe(
+      tap(response => {
+        console.log('Content-Type:', response.headers.get('Content-Type'));
+        console.log('Content-Length:', response.headers.get('Content-Length'));
+        console.log('Response status:', response.status);
+        console.log('Response type:', response.body?.type);
+        console.log('Response size:', response.body?.size);
+      })
+    );
+  }
+
+
 
 
 

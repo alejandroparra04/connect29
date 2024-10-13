@@ -40,6 +40,7 @@
             <td>
               <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
               <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
+              <button class="ver-button" (click)="verDocumento(entregable)">Ver Documento</button>
               @if(role === 'admin') {
               <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
               <button class="eliminar-button"
@@ -125,6 +126,24 @@
 
         <div class="button-container">
           <button class="btn-atras" (click)="cerrarModalSubir()">Atrás</button>
+        </div>
+      </div>
+    </div>
+    }
+
+    @if(mostrarModalVer){
+    <!-- Modal para ver el documento PDF -->
+    <div class="ver-modal">
+      <div class="ver-modal-content">
+        <span class="close" (click)="cerrarModalVer()">&times;</span>
+        <h2>Ver Documento</h2>
+        @if(documentoUrl){
+        <iframe title="Ver Documento" [src]="documentoUrl" width="100%" height="500px"></iframe>
+        }@else {
+        <p>No hay documento disponible</p>
+        }
+        <div class="button-container">
+          <button class="btn-cerrar" (click)="cerrarModalVer()">Cerrar</button>
         </div>
       </div>
     </div>
