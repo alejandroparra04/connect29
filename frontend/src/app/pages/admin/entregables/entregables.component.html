@@ -3,124 +3,130 @@
   <div class="main-content">
     <app-navbar></app-navbar>
 
-    <!-- Barra de búsqueda -->
-    <div class="search-container">
-      <div class="search-bar">
-        <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o código..." />
-        <button (click)="filtrarEntregables()">Buscar</button>
+    <div class="content">
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
+        <div class="search-bar">
+          <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o código..." />
+          <button (click)="filtrarEntregables()">Buscar</button>
+        </div>
+      </div>
+
+      <!-- Tabla de Entregables -->
+      <table class="entregables-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Codigo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(entregable of entregablesFiltrados; track entregable.id){
+          <tr>
+            <td>{{ entregable.id}}</td>
+            <td>{{ entregable.nombre }}</td>
+            <td>{{ entregable.descripcion }}</td>
+            <td>{{ entregable.estado }}</td>
+            <td>{{ entregable.fecha_creacion }}</td>
+            <td>{{ entregable.codigo }}</td>
+            <td>
+              <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
+              <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
+              @if(role === 'admin') {
+              <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
+              <button class="eliminar-button"
+                      (click)="eliminarEntregable(entregable.id)">Eliminar</button>
+              }
+            </td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+
+      <!-- Botones de Acción -->
+      <div class="action-buttons">
+        <button (click)="generarReporte()">Generar Reporte</button>
+        @if(role === 'admin') {
+        <button class="btn btn-primary" (click)="crearEntregableConDatos()">Crear Entregable</button>
+        }
       </div>
     </div>
 
-    <!-- Tabla de Entregables -->
-    <table class="entregables-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Estado</th>
-          <th>Fecha</th>
-          <th>Codigo</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for(entregable of entregablesFiltrados; track entregable.id){
-        <tr>
-          <td>{{ entregable.id}}</td>
-          <td>{{ entregable.nombre }}</td>
-          <td>{{ entregable.descripcion }}</td>
-          <td>{{ entregable.estado }}</td>
-          <td>{{ entregable.fecha_creacion }}</td>
-          <td>{{ entregable.codigo }}</td>
-          <td>
-            <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
-            <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
-            @if(role === 'admin') {
-            <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
-            <button class="eliminar-button"
-                    (click)="eliminarEntregable(entregable.id)">Eliminar</button>
-            }
-          </td>
-        </tr>
-        }
-
-      </tbody>
-    </table>
-
-    <!-- Botones de Acción -->
-    <div class="action-buttons">
-      <button (click)="generarReporte()">Generar Reporte</button>
-      <button class="btn btn-primary" (click)="crearEntregableConDatos()">Crear Entregable</button>
+    @if(mostrarModalEditar){
+    <!-- Modal para editar entregable -->
+    <div class="edit-modal">
+      <div class="edit-modal-content">
+        <span class="close" (click)="cancelarEdicion()">&times;</span>
+        <h2>Editar Entregable</h2>
+        <form (ngSubmit)="guardarCambios()">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" [(ngModel)]="entregableEditar.nombre" name="nombre" required />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" [(ngModel)]="entregableEditar.descripcion" name="descripcion"
+                      required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select id="estado" [(ngModel)]="entregableEditar.estado" name="estado" required>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Revisado">Revisado</option>
+              <option value="Aprobado">Aprobado</option>
+              <option value="Desaprobado">Desaprobado</option>
+            </select>
+          </div>
+          <button type="submit" class="save-button">Guardar Cambios</button>
+          <button type="button" class="cancel-button" (click)="cancelarEdicion()">Cancelar</button>
+        </form>
+      </div>
     </div>
-  </div>
+    }
 
-  @if(mostrarModalEditar){
-  <!-- Modal para editar entregable -->
-  <div class="edit-modal">
-    <div class="edit-modal-content">
-      <span class="close" (click)="cancelarEdicion()">&times;</span>
-      <h2>Editar Entregable</h2>
-      <form (ngSubmit)="guardarCambios()">
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" [(ngModel)]="entregableEditar.nombre" name="nombre" required />
-        </div>
-        <div class="form-group">
-          <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" [(ngModel)]="entregableEditar.descripcion" name="descripcion" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="estado">Estado</label>
-          <select id="estado" [(ngModel)]="entregableEditar.estado" name="estado" required>
-            <option value="Pendiente">Pendiente</option>
-            <option value="Revisado">Revisado</option>
-            <option value="Aprobado">Aprobado</option>
-            <option value="Desaprobado">Desaprobado</option>
-          </select>
-        </div>
-        <button type="submit" class="save-button">Guardar Cambios</button>
-        <button type="button" class="cancel-button" (click)="cancelarEdicion()">Cancelar</button>
-      </form>
+    @if(mostrarModalEliminar){
+    <!-- Modal para eliminar entregable -->
+    <div class="delete-modal">
+      <div class="delete-modal-content">
+        <span class="close" (click)="cancelarEliminacion()">&times;</span>
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar el entregable: {{ selectedEntregableEliminar?.nombre }}?</p>
+        <button (click)="confirmarEliminacion()">Eliminar</button>
+        <button (click)="cancelarEliminacion()">Cancelar</button>
+      </div>
     </div>
-  </div>
-  }
+    }
 
-  @if(mostrarModalEliminar){
-  <!-- Modal para eliminar entregable -->
-  <div class="delete-modal">
-    <div class="delete-modal-content">
-      <span class="close" (click)="cancelarEliminacion()">&times;</span>
-      <h2>Confirmar Eliminación</h2>
-      <p>¿Estás seguro de que deseas eliminar el entregable: {{ selectedEntregableEliminar?.nombre }}?</p>
-      <button (click)="confirmarEliminacion()">Eliminar</button>
-      <button (click)="cancelarEliminacion()">Cancelar</button>
-    </div>
-  </div>
-  }
+    @if(mostrarModalSubir){
+    <!-- Modal para subir entregables -->
+    <div class="subir-modal">
+      <div class="subir-modal-content">
+        <span class="close" (click)="cerrarModalSubir()">&times;</span>
+        <h2>Subir Entregables</h2>
 
-  @if(mostrarModalSubir){
-  <!-- Modal para subir entregables -->
-  <div class="subir-modal">
-    <div class="subir-modal-content">
-      <span class="close" (click)="cerrarModalSubir()">&times;</span>
-      <h2>Subir Entregables</h2>
-
-      <div class="subir-entregables-body">
-        <div class="action-section">
-          <div class="file-upload">
-            <label for="archivo">Subir Archivo</label>
-            <input type="file" id="archivo" accept="application/pdf" (change)="onFileSelected($event)">
-            <button class="btn-submit" (click)="onSubmit()">Enviar</button>
+        <div class="subir-entregables-body">
+          <div class="action-section">
+            <div class="file-upload">
+              <label for="archivo">Subir Archivo</label>
+              <input type="file" id="archivo" accept="application/pdf" (change)="onFileSelected($event)">
+              <button class="btn-submit" (click)="onSubmit()">Enviar</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="button-container">
-        <button class="btn-atras" (click)="cerrarModalSubir()">Atrás</button>
+        <div class="button-container">
+          <button class="btn-atras" (click)="cerrarModalSubir()">Atrás</button>
+        </div>
       </div>
     </div>
+    }
+
   </div>
-  }
 
 </div>

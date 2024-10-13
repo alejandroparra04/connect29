@@ -42,6 +42,9 @@ export class CrearUsuarioComponent {
       this.passwordFieldType = 'password';
     }
   }
+  volver(): void {
+    this.router.navigate(['/usuarios']);
+  }
 
   irHome(): void {
     this.router.navigate(['/home'])
@@ -73,7 +76,7 @@ export class CrearUsuarioComponent {
           showConfirmButton: false,
           timer: 1500
         })
-        this.irHome();
+        this.volver();
       },
       error: (error) => {
         console.error('Error al crear el usuario:', error);

@@ -1,11 +1,29 @@
 .certificado-container {
   display: flex;
+  height: 100vh;
+  /* Para ocupar la altura completa de la vista */
 }
 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  /* Permite el scroll vertical si el contenido excede la altura */
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  /* Asegura que los bloques queden uno al lado del otro */
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+  /* Espacio entre el certificado y las acciones */
+  flex-wrap: wrap;
+  /* Si no cabe en una fila, los elementos saltarán a una nueva fila */
+  overflow-y: auto;
+  /* Habilita scroll si es necesario */
 }
 
 .header {
@@ -39,16 +57,10 @@ h2 {
   margin: 0;
 }
 
-.content {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .certificado {
-  width: 45%;
+  flex: 1;
+  min-width: 300px;
+  /* Para asegurar que tenga un tamaño mínimo */
   background-color: #f9f9f9;
   border-radius: 8px;
   padding: 30px;
@@ -85,7 +97,9 @@ h2 {
 }
 
 .acciones-certificado {
-  width: 45%;
+  flex: 1;
+  min-width: 300px;
+  /* Asegura un tamaño mínimo */
   display: flex;
   flex-direction: column;
   align-items: center;

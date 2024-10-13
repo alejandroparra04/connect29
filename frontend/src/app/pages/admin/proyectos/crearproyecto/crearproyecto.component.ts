@@ -74,7 +74,7 @@ export class CrearproyectoComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-        this.irHome();
+        this.volver();
       },
       error: (error) => {
         console.error('Error al crear el proyecto:', error);

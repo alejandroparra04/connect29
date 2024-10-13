@@ -1,6 +1,7 @@
 <div class="sidebar" [class.closed]="menuCerrado">
   <button class="menu-button" (click)="toggleMenu()">☰</button>
   <ul>
+    @if(role === 'admin') {
     <li>
       <button [routerLink]="['/crearproyecto']">
         <span class="icon">
@@ -9,7 +10,6 @@
         <span>Crear Proyecto</span>
       </button>
     </li>
-    @if(role === 'admin') {
     <li>
       <button [routerLink]="['/crear-usuario']">
         <span class="icon">
