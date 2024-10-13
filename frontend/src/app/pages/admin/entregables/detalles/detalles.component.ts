@@ -46,7 +46,7 @@ export class DetallesComponent {
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('idProyecto')!;
     if (id) {
       this.entregableService.obtenerEntregablePorId(id).subscribe({
         next: (entregable) => {

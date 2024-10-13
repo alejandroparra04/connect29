@@ -42,7 +42,7 @@ export class EditarproyectosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.id = this.route.snapshot.paramMap.get('idProyecto') || '';
 
   }
 

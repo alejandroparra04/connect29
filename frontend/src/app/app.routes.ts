@@ -53,9 +53,9 @@ export const routes: Routes = [
   { path: 'certificado/:idProyecto/:idActividad', component: CertificadoComponent, canActivate: [AdminGuardService] },
   { path: 'subir-entregables', component: SubirEntregablesComponent, canActivate: [AdminGuardService] },
   { path: 'generar-avance/:idProyecto/:idActividad', component: GenerarAvanceComponent, canActivate: [AdminGuardService] },
-  { path: 'actividad-pm/:id', component: ActividadPmComponent, canActivate: [AdminGuardService] },
-  { path: 'actividad-si/:id', component: ActividadSiComponent, canActivate: [AdminGuardService] },
-  { path: 'procesos/:id', component: ProcesosComponent, canActivate: [AdminGuardService] },
+  { path: 'actividad-pm/:idProyecto', component: ActividadPmComponent, canActivate: [AdminGuardService] },
+  { path: 'actividad-si/:idProyecto', component: ActividadSiComponent, canActivate: [AdminGuardService] },
+  { path: 'procesos/:idProyecto', component: ProcesosComponent, canActivate: [AdminGuardService] },
 
   { path: 'not-found', component: NotFoundComponent },
 

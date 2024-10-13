@@ -38,7 +38,7 @@ export class DetallesproyectoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!);
+    const id = parseInt(this.route.snapshot.paramMap.get('idProyecto')!);
     if (id) {
       this.proyectoService.obtenerProyectoPorId(id).subscribe({
         next: (proyecto) => {

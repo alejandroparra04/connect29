@@ -1,18 +1,23 @@
 .generar-reporte-container {
   display: flex;
+  height: 100vh;
+  /* Aseguramos que el contenedor ocupe toda la pantalla */
 }
 
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  justify-items: center;
+  /* Evitamos que se desborde el contenido */
 }
 
 .content {
   flex: 1;
   display: flex;
-  flex-direction: column;
-  overflow: auto;
+  flex-direction: row;
+  overflow: hidden;
 }
 
 .generar-reporte-header {
@@ -21,7 +26,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  margin-left: 250px;
 
   h2 {
     color: #4285f4;
@@ -48,11 +52,14 @@
 
 .generar-reporte-body {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   gap: 20px;
-  /* Ajuste reducido para que los gráficos no ocupen tanto espacio */
   flex-wrap: wrap;
   margin-left: 20px;
+  overflow: auto;
+  height: calc(100vh - 200px);
+  /* Ajusta el tamaño según la altura de la pantalla */
 }
 
 .parametros-section {
@@ -150,42 +157,33 @@
 
 .reporte-section {
   width: 70%;
-  /* Ajustado para dar más espacio a la tabla */
   flex: 1;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 5px;
   background-color: white;
   margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  /* Evitamos que desborde */
 
-  h3 {
-    font-size: 20px;
-    color: #4285f4;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .reporte-info {
+  .graficos-section {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    gap: 20px;
 
-    div {
+    .grafico-torta,
+    .grafico-barras {
       flex: 1;
-      padding: 10px;
-    }
-
-    p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #555;
-
-      strong {
-        color: #333;
-      }
+      height: 300px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
-
 
   .graficos-section {
     display: flex;
@@ -206,7 +204,12 @@
   }
 
   .tabla-entregables {
+    flex: 1;
     margin-top: 20px;
+    overflow: auto;
+    /* Hacemos que la tabla tenga scroll si no cabe en la pantalla */
+    height: 300px;
+    /* Ajustamos la altura máxima de la tabla */
 
     table {
       width: 100%;
@@ -225,4 +228,5 @@
       }
     }
   }
+
 }

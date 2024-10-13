@@ -116,7 +116,9 @@ export class GenerarReporteComponent implements OnInit {
     this.reporteService.getReporte(proyecto, proceso).subscribe({
       next: (entregables: any[]) => {
         this.entregables = entregables;
-        this.entregablesFiltrados = entregables;
+        this.entregablesFiltrados = entregables.filter(
+          (entregable: { actividad: string; }) => entregable.actividad === this.nombreActividad
+        );
 
         this.isDataLoaded = true; this.isDataLoaded = true;
         this.cdr.detectChanges();
@@ -175,17 +177,19 @@ export class GenerarReporteComponent implements OnInit {
       return;
     }
 
+    console.log("E".repeat(20) + " Obj: this.entregablesFiltrados: " + JSON.stringify(this.entregablesFiltrados));
     const entregablesPendientes = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'pendiente').length;
-    const entregablesEnProgreso = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'en_progreso').length;
-    const entregablesCompletados = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'completado').length;
+    const entregablesEnRevisado = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'revisado').length;
+    const entregablesEnAprobado = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'aprobado').length;
+    const entregablesEnDesprobado = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'desaprobado').length;
 
     console.log('Datos para gráfico de torta: ', {
       pendientes: entregablesPendientes,
-      enProgreso: entregablesEnProgreso,
-      completados: entregablesCompletados,
+      enProgreso: entregablesEnRevisado,
+      completados: entregablesEnAprobado,
     });
 
-    const totalEntregables = entregablesPendientes + entregablesEnProgreso + entregablesCompletados;
+    const totalEntregables = entregablesPendientes + entregablesEnRevisado + entregablesEnAprobado + entregablesEnDesprobado;
 
     if (totalEntregables === 0) {
       console.warn('No hay datos suficientes para mostrar el gráfico de torta');
@@ -195,12 +199,12 @@ export class GenerarReporteComponent implements OnInit {
     this.chartTorta = new Chart(this.graficaProgreso.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Pendiente', 'En Progreso', 'Completado'],
+        labels: ['Pendiente', 'Revisado', 'Aprobado', 'Desaprobado'],
         datasets: [
           {
             label: 'Estado de Entregables',
-            data: [entregablesPendientes, entregablesEnProgreso, entregablesCompletados],
-            backgroundColor: ['#ff6384', '#36a2eb', '#4caf50'],
+            data: [entregablesPendientes, entregablesEnRevisado, entregablesEnAprobado, entregablesEnDesprobado],
+            backgroundColor: ['#ffce56', '#36a2eb', '#4caf50', '#ff6384'],
             hoverOffset: 4,
           },
         ],
@@ -218,18 +222,19 @@ export class GenerarReporteComponent implements OnInit {
     }
 
     const cantidadPendientes = this.entregablesFiltrados.filter(entregable => entregable.estado.toLowerCase() === 'pendiente').length;
-    const cantidadEnProgreso = this.entregablesFiltrados.filter(entregable => entregable.estado.toLowerCase() === 'en_progreso').length;
-    const cantidadCompletados = this.entregablesFiltrados.filter(entregable => entregable.estado.toLowerCase() === 'completado').length;
+    const cantidadEnRevisado = this.entregablesFiltrados.filter(entregable => entregable.estado.toLowerCase() === 'revisado').length;
+    const cantidadEnAprobado = this.entregablesFiltrados.filter(entregable => entregable.estado.toLowerCase() === 'aprobado').length;
+    const cantidadDesaprobado = this.entregablesFiltrados.filter(entregable => entregable.estado.toLowerCase() === 'desaprobado').length;
 
     this.chartBarras = new Chart(this.graficaEntregables.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['Pendiente', 'En Progreso', 'Completado'],
+        labels: ['Pendiente', 'Revisado', 'Aprobado', 'Desaprobado'],
         datasets: [
           {
             label: 'Cantidad de Entregables',
-            data: [cantidadPendientes, cantidadEnProgreso, cantidadCompletados],
-            backgroundColor: ['#ff6384', '#36a2eb', '#4caf50']
+            data: [cantidadPendientes, cantidadEnRevisado, cantidadEnAprobado, cantidadDesaprobado],
+            backgroundColor: ['#ffce56', '#36a2eb', '#4caf50', '#ff6384']
           }
         ]
       },

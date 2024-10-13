@@ -23,7 +23,7 @@ export class ActividadSiComponent {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly entregableService: EntregableService) {
-    this.proyectoId = this.route.snapshot.paramMap.get('id')!;
+    this.proyectoId = this.route.snapshot.paramMap.get('idProyecto')!;
   }
 
   ngOnInit(): void {

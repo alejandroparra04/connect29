@@ -111,7 +111,11 @@ export class EntregablesComponent implements OnInit {
   }
 
   volver() {
-    this.router.navigate(['/procesos']);
+    if (this.proceso === 'PM') {
+      this.router.navigate([`/actividad-pm/${this.selectedProyecto}`]);
+    } else {
+      this.router.navigate([`/actividad-si/${this.selectedProyecto}`]);
+    }
   }
 
   irABuscar() {
@@ -129,7 +133,9 @@ export class EntregablesComponent implements OnInit {
     this.entregableService.ObtenerEntregables(this.selectedProyecto!, this.proceso).subscribe({
       next: entregables => {
         this.entregables = entregables;
-        this.entregablesFiltrados = entregables;
+        this.entregablesFiltrados = entregables.filter(
+          (entregable: { actividad: string; }) => entregable.actividad === this.nombreActividad
+        );
       },
       error: error => {
         console.error('Error al cargar los entregables', error);

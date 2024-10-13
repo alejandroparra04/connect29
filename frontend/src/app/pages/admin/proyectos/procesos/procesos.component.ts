@@ -19,7 +19,7 @@ export class ProcesosComponent {
 
   constructor(private readonly route: ActivatedRoute, private readonly router: Router) {
     // Obtener el ID del proyecto de la ruta
-    this.proyectoId = this.route.snapshot.paramMap.get('id')!;
+    this.proyectoId = this.route.snapshot.paramMap.get('idProyecto')!;
   }
   toggleMenu() {
     this.menuCerrado = !this.menuCerrado;
