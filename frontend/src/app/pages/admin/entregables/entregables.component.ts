@@ -43,10 +43,11 @@ export class EntregablesComponent implements OnInit {
   selectedEntregable: any = null;
   selectedEntregableEliminar: Entregable | null = null;
   crearNuevoEntregable: boolean = false;
-  mostrarModalEliminar = false;
-  mostrarModalEditar = false;
-  mostrarModalSubir = false;
+  mostrarModalEliminar: boolean = false;
+  mostrarModalEditar: boolean = false;
+  mostrarModalSubir: boolean = false;
   mostrarModalVer: boolean = false;
+  cargandoDocumento: boolean = false;
 
   documentoUrl: SafeResourceUrl | null = null;
 
@@ -315,38 +316,32 @@ export class EntregablesComponent implements OnInit {
   }
 
   verDocumento(entregable: Deliverable): void {
-    const codigoEntregable = entregable.codigo;
+    this.cargandoDocumento = true;  // Activar el spinner
+    this.mostrarModalVer = true;    // Mostrar el modal
 
+    const codigoEntregable = entregable.codigo;
     this.entregableService.obtenerArchivo(codigoEntregable).subscribe({
       next: (response: HttpResponse<Blob>) => {
-        if (response.body && response.headers.get('Content-Type') === 'application/pdf') {
+        this.cargandoDocumento = false;  // Desactivar el spinner cuando termine
+        if (response.body) {
           const fileURL = URL.createObjectURL(response.body);
           this.documentoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
-          this.mostrarModalVer = true;
-        } else {
+        } else if (response.status !== 204) {
           Swal.fire({
             icon: 'error',
             title: 'Error al cargar el archivo',
-            text: 'El archivo no está disponible o no es un PDF válido.',
+            text: 'El archivo está vacío',
           });
         }
       },
-      error: (error: HttpErrorResponse) => {
-        if (error.status === 404) {
-          const errorMsg = error.error?.error || 'Archivo no encontrado';
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al cargar el archivo',
-            text: errorMsg,
-          });
-        } else {
-          // Otros errores (500, etc.)
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al cargar el archivo',
-            text: 'Hubo un problema al intentar cargar el archivo.',
-          });
-        }
+      error: (error: any) => {
+        console.error('Error al cargar el archivo:', error);
+        this.cargandoDocumento = false;  // Desactivar el spinner en caso de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al cargar el archivo',
+          text: 'No se pudo cargar el documento PDF',
+        });
       }
     });
   }

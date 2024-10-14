@@ -137,11 +137,22 @@
       <div class="ver-modal-content">
         <span class="close" (click)="cerrarModalVer()">&times;</span>
         <h2>Ver Documento</h2>
-        @if(documentoUrl){
+
+        @if(cargandoDocumento){
+        <div class="spinner">
+          <p>Cargando documento...</p>
+          <div class="spinner-border" role="status">
+            <span class="sr-only">Cargando...</span>
+          </div>
+        </div>
+        }
+
+        @if(!cargandoDocumento && documentoUrl){
         <iframe title="Ver Documento" [src]="documentoUrl" width="100%" height="500px"></iframe>
         }@else {
         <p>No hay documento disponible</p>
         }
+
         <div class="button-container">
           <button class="btn-cerrar" (click)="cerrarModalVer()">Cerrar</button>
         </div>

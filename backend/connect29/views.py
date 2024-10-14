@@ -391,7 +391,7 @@ class DescargarArchivoView(APIView):
             return Response({'error': 'Acceso no autorizado'}, status=status.HTTP_404_NOT_FOUND)
 
         if not os.path.exists(ruta_archivo):
-            return Response({'error': 'El archivo no fue encontrado'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'El archivo no fue encontrado'}, status=status.HTTP_204_NO_CONTENT)
 
         try:
             archivo = open(ruta_archivo, 'rb')
