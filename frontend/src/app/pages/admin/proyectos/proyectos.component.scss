@@ -128,13 +128,22 @@ button {
     background-color: #f1f1f1;
   }
 
+  .btn-group {
+    display: flex;
+    gap: 2px;
+  }
+
   button {
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px;
     margin-right: 5px;
     cursor: pointer;
     border-radius: 4px;
+    flex-grow: 1;
+    min-width: 100px;
+    text-align: center;
+    font-size: 14px;
 
     &:hover {
       background-color: #0056b3;
@@ -150,6 +159,10 @@ button {
 
     &.procesos-button {
       background-color: #0af866;
+    }
+
+    &.detalles-button {
+      background-color: #4285f4;
     }
   }
 }

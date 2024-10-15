@@ -35,13 +35,14 @@
             <td>{{ proyecto.fecha_fin }}</td>
             <td>{{ proyecto.responsable}}</td>
             <td>
-              <button class="procesos-button" (click)="Procesos(proyecto.id)">Procesos</button>
-              <button class="detalles-button" (click)="verDetalles(proyecto.id)">Detalles</button>
-              @if(role === 'admin') {
-              <button class="editar-button" (click)="abrirModalEditar(proyecto)">Editar</button>
-              <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id)">Eliminar</button>
-              }
-
+              <div class="btn-group">
+                <button class="procesos-button" (click)="Procesos(proyecto.id)">Procesos</button>
+                <button class="detalles-button" (click)="verDetalles(proyecto.id)">Detalles</button>
+                @if(role === 'admin') {
+                <button class="editar-button" (click)="abrirModalEditar(proyecto)">Editar</button>
+                <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id)">Eliminar</button>
+                }
+              </div>
             </td>
           </tr>
           }

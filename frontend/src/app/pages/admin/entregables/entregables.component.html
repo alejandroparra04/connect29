@@ -19,7 +19,6 @@
       <table class="entregables-table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Estado</th>
@@ -31,21 +30,22 @@
         <tbody>
           @for(entregable of entregablesFiltrados; track entregable.id){
           <tr>
-            <td>{{ entregable.id}}</td>
             <td>{{ entregable.nombre }}</td>
             <td>{{ entregable.descripcion }}</td>
             <td>{{ entregable.estado }}</td>
             <td>{{ entregable.fecha_creacion }}</td>
             <td>{{ entregable.codigo }}</td>
             <td>
-              <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
-              <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
-              <button class="ver-button" (click)="verDocumento(entregable)">Ver Documento</button>
-              @if(role === 'admin') {
-              <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
-              <button class="eliminar-button"
-                      (click)="eliminarEntregable(entregable.id)">Eliminar</button>
-              }
+              <div class="btn-group">
+                <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
+                <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
+                <button class="ver-button" (click)="verDocumento(entregable)">Ver</button>
+                @if(role === 'admin') {
+                <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
+                <button class="eliminar-button"
+                        (click)="eliminarEntregable(entregable.id)">Eliminar</button>
+                }
+              </div>
             </td>
           </tr>
           }

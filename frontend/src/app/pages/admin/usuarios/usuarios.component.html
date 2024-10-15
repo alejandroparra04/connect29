@@ -30,8 +30,10 @@
             <td>{{ usuario.email }}</td>
             <td>{{ usuario.is_staff ? 'Administrador' : 'Usuario' }}</td>
             <td>
-              <button class="editar-button" (click)="abrirModalEditar(usuario)">Editar</button>
-              <button class="eliminar-button" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+              <div class="btn-group">
+                <button class="editar-button" (click)="abrirModalEditar(usuario)">Editar</button>
+                <button class="eliminar-button" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+              </div>
             </td>
           </tr>
           }
@@ -69,7 +71,7 @@
               <div class="password-container">
                 <div class="password-wrapper">
                   <input id="password" name="password" [type]="passwordFieldType" [(ngModel)]="usuarioEditar.password"
-                         placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+                         placeholder="Ingresa tu contraseña" />
                 </div>
                 <button type="button" (click)="togglePasswordVisibility()" class="toggle-password-btn">
                   <mat-icon>{{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
@@ -78,9 +80,15 @@
             </div>
             <div class="form-group">
               <label for="repeatPassword">Repetir Contraseña</label>
-              <div class="password-wrapper">
-                <input id="repeatPassword" name="repeatPassword" [type]="passwordFieldType" [(ngModel)]="repeatPassword"
-                       placeholder="Repite tu contraseña" />
+              <div class="password-container">
+                <div class="password-wrapper">
+                  <input id="repeatPassword" name="repeatPassword" [type]="repeatPasswordFieldType"
+                         [(ngModel)]="repeatPassword"
+                         placeholder="Repite tu contraseña" />
+                </div>
+                <button type="button" (click)="toggleRepeatPasswordVisibility()" class="toggle-repeat-password-btn">
+                  <mat-icon>{{ repeatPasswordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
               </div>
               @if(passwordMismatch){
               <div class="error-message">

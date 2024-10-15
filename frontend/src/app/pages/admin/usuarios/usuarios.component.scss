@@ -127,13 +127,23 @@ button {
     background-color: #f1f1f1;
   }
 
+  .btn-group {
+    display: flex;
+    gap: 2px;
+
+  }
+
   button {
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px;
     margin-right: 5px;
     cursor: pointer;
     border-radius: 4px;
+    flex-grow: 1;
+    min-width: 80px;
+    text-align: center;
+    font-size: 14px;
 
     &:hover {
       background-color: #0056b3;
@@ -315,6 +325,30 @@ button {
     .toggle-password-btn:hover mat-icon {
       color: #357ae8;
     }
+
+    .toggle-repeat-password-btn {
+      width: 20%;
+      position: absolute;
+      right: 20px;
+      top: 0.5px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .toggle-repeat-password-btn mat-icon {
+      font-size: 20px;
+      color: #4285f4;
+    }
+
+    .toggle-repeat-password-btn:hover mat-icon {
+      color: #357ae8;
+    }
+
+
   }
 
 }
