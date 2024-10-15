@@ -4,11 +4,16 @@
     <app-navbar></app-navbar>
 
     <div class="content">
-      <!-- Barra de búsqueda -->
-      <div class="search-container">
+
+      <div class="title-container">
         <button (click)="volver()" class="icon-button">
           <span class="material-icons">arrow_back</span>
         </button>
+        <h1 class="page-title">Gestión de Entregables</h1>
+      </div>
+
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
         <div class="search-bar">
           <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o código..." />
           <button (click)="filtrarEntregables()">Buscar</button>
