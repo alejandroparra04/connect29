@@ -39,7 +39,12 @@
             <button class="btn-reporte" (click)="Reporte()">Filtrar datos para reporte</button>
             <button class="btn-reset" (click)="resetearFormulario()">Reiniciar</button>
             <button class="btn-download" (click)="descargar()">Descargar Reporte</button>
-            <button class="btn-avance" (click)="Avance()">Descargar Certificado</button>
+            <button class="btn-avance"
+                    (click)="Avance()"
+                    [disabled]="progreso < 100"
+                    title="Completa el progreso al 100% para habilitar el botón.">
+              Descargar Certificado
+            </button>
           </div>
         </div>
 
@@ -54,7 +59,7 @@
             <div class="info-column">
               <p><strong>Fecha de Inicio:</strong> {{proyecto.fecha_inicio}}</p>
               <p><strong>Fecha de Fin:</strong> {{proyecto.fecha_fin}}</p>
-              <p><strong>Progreso:</strong> {{progreso}}%</p>
+              <p><strong>Progreso:</strong> {{ progreso | number:'1.2-2' }}%</p>
             </div>
           </div>
 

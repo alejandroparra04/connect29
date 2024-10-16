@@ -129,10 +129,17 @@
       }
 
       &.btn-avance {
-        background-color: #1e82a0;
+        background-color: #ccc;
+        color: #fff;
+        cursor: not-allowed;
 
-        &:hover {
-          background-color: #2f75af;
+        &:not([disabled]) {
+          background-color: #1e82a0;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #2f75af;
+          }
         }
       }
 
