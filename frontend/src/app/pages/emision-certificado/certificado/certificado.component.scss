@@ -1,7 +1,6 @@
 .certificado-container {
   display: flex;
   height: 100vh;
-  /* Para ocupar la altura completa de la vista */
 }
 
 .main-content {
@@ -9,21 +8,16 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  /* Permite el scroll vertical si el contenido excede la altura */
 }
 
 .content {
   display: flex;
   justify-content: space-between;
-  /* Asegura que los bloques queden uno al lado del otro */
   flex: 1;
   padding: 20px;
   gap: 20px;
-  /* Espacio entre el certificado y las acciones */
   flex-wrap: wrap;
-  /* Si no cabe en una fila, los elementos saltarán a una nueva fila */
   overflow-y: auto;
-  /* Habilita scroll si es necesario */
 }
 
 .header {
@@ -57,15 +51,70 @@ h2 {
   margin: 0;
 }
 
-.certificado {
-  flex: 1;
-  min-width: 300px;
-  /* Para asegurar que tenga un tamaño mínimo */
+.container {
+  display: flex;
+  justify-content: space-between;
+  /* Cambiado para asegurar espacio entre las secciones */
+  padding: 20px;
   background-color: #f9f9f9;
-  border-radius: 8px;
+  gap: 20px;
+  /* Añadir espacio entre los contenedores */
+}
+
+.certificado {
+  flex: 2;
+  /* Flex para que la sección crezca con el contenedor */
+  max-width: 600px;
+  /* Ajuste del tamaño máximo */
+  background-color: white;
   padding: 30px;
-  text-align: left;
+  border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-section p {
+  display: flex;
+  justify-content: space-between;
+  /* Distribuye el label y el input */
+  align-items: center;
+  /* Alinea verticalmente el contenido */
+  gap: 10px;
+  /* Espacio entre el texto y el input */
+
+  strong {
+    flex: 0 0 200px;
+    /* Fija el ancho del texto */
+  }
+
+  input {
+    flex: 1;
+    /* Permite que el input ocupe el resto del espacio */
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #4285f4;
+    }
+  }
+}
+
+.info-section p input[type="date"] {
+  width: 50%;
+  /* Ajustar ancho de inputs de tipo fecha */
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+
+  img.logo {
+    max-width: 180px;
+  }
 }
 
 .certificado h3 {
@@ -81,10 +130,13 @@ h2 {
 }
 
 .certificado input[type="text"],
-.certificado input[type="date"] {
-  width: 70%;
-  padding: 8px;
-  margin: 10px 0;
+.certificado input[type="date"],
+.certificado input[type="email"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 14px;
@@ -98,16 +150,21 @@ h2 {
 
 .acciones-certificado {
   flex: 1;
-  min-width: 300px;
-  /* Asegura un tamaño mínimo */
+  /* Flex para que ocupe el resto del espacio */
+  max-width: 400px;
+  /* Limitar el tamaño de la caja */
+  background-color: white;
+  /* Fondo blanco */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra para consistencia */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  text-align: center;
+  /* Alinear el contenido al centro */
 }
 
 .acciones-certificado p {
