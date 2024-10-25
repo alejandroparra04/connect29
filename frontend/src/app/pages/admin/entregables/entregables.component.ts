@@ -17,6 +17,8 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
@@ -27,7 +29,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     EliminarEntregablesComponent, DetallesComponent,
     CrearEntregableComponent, BuscarComponent, SubirEntregablesComponent,
     FormsModule,
-    SidebarComponent, NavbarComponent,
+    SidebarComponent, NavbarComponent, MatIconModule
   ],
   templateUrl: './entregables.component.html',
   styleUrls: ['./entregables.component.scss']
@@ -235,16 +237,16 @@ export class EntregablesComponent implements OnInit {
         this.cargarEntregables();
         Swal.fire({
           icon: 'success',
-          title: 'Proyecto actualizado exitosamente',
+          title: 'Entregable actualizado exitosamente',
           showConfirmButton: false,
           timer: 1500
         });
       },
       error: (error) => {
-        console.error('Error al actualizar el proyecto:', error);
+        console.error('Error al actualizar el entregable:', error);
         Swal.fire({
           icon: 'error',
-          title: 'Error al actualizar el proyecto',
+          title: 'Error al actualizar el entregable',
           text: 'Hubo un problema al actualizar los datos',
         });
       },

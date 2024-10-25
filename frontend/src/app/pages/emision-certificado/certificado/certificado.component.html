@@ -16,7 +16,7 @@
         <div class="certificado">
 
           <div class="logo-container">
-            <img src="assets/img/imagen_logo.jpg" alt="Logo Connect29" class="logo" />
+            <img src="assets/img/logo_final.jpg" alt="Logo Connect29" class="logo" />
           </div>
 
           <h3 class="certificado-titulo">Certificado de Conformidad</h3>
@@ -73,7 +73,10 @@
             soportados por la norma ISO/IEC 29110-5.
           </p>
           <button (click)="descargarCertificado()" class="btn-descargar">
-            Descargar certificado
+            <span class="material-symbols-outlined">
+              download
+            </span>
+            <strong>Descargar certificado</strong>
           </button>
         </div>
 
@@ -81,43 +84,10 @@
 
     </div>
     <button (click)="home()" class="btn-volver">
-      Volver al inicio
+      <span class="material-symbols-outlined">
+        home
+      </span>
+      <strong>Volver al inicio</strong>
     </button>
   </div>
 </div>
-
-
-<!-- <div class="content">
-        <div class="certificado">
-          <h3>Certificado de Cumplimiento</h3>
-          <p>
-            Por medio de este formato se demuestra que la empresa
-            <input type="text" placeholder="Nombre de la empresa" [(ngModel)]="nombreEmpresa" />,
-            a cargo del proyecto
-            <input type="text" placeholder="Nombre del proyecto" [(ngModel)]="nombreProyecto" />,
-            se le certifica por el cumplimiento de todos los entregables requeridos por la norma ISO/IEC
-            29110-5, los cuales fueron cumplidos con éxito en las fechas
-            comenzando con el <input type="date" [(ngModel)]="fechaInicio" />,
-            hasta la terminación del día <input type="date" [(ngModel)]="fechaFin" />,
-            dada con éxito y mediante este certificado, complementando que la empresa
-            <input type="text" placeholder="Nombre de la empresa" [(ngModel)]="nombreEmpresa" />,
-            cumple con todos los estándares de calidad, para brindar proyectos de calidad.
-          </p>
-          <p>
-            Firma de quien certifica: ____________________<br />
-            Firma del certificante: ____________________
-          </p>
-        </div>
-
-        <div class="acciones-certificado">
-          <p>
-            Una vez se haya terminado el proceso del cumplimiento de los entregables
-            y que estos hayan sido revisados y aprobados, podrá descargar este
-            certificado que certifica que su empresa en los estándares de calidad
-            soportados por la norma ISO/IEC 29110-5.
-          </p>
-          <button (click)="descargarCertificado()" class="btn-descargar">
-            Descargar certificado
-          </button>
-        </div>
-      </div> -->

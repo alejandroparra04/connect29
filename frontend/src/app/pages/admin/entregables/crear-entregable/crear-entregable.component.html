@@ -23,7 +23,7 @@
           <select id="estado" [(ngModel)]="nuevoEntregable.estado" name="estado">
             <option value="Pendiente">Pendiente</option>
             <option value="Revisado">Revisado</option>
-            <option value="Desaprobado">Desaprobado</option>
+            <option value="Desaprobado">No Aprobado</option>
             <option value="Aprobado">Aprobado</option>
           </select>
         </div>
@@ -33,7 +33,12 @@
           <input type="date" id="fecha_creacion" [(ngModel)]="nuevoEntregable.fecha_creacion" name="fecha_creacion">
         </div>
 
-        <button type="submit">Guardar</button>
+        <button type="submit">
+          <span class="material-symbols-outlined">
+            save
+          </span>
+          <strong>Guardar</strong>
+        </button>
       </form>
     </div>
   </div>

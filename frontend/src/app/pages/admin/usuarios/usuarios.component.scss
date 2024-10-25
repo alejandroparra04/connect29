@@ -20,7 +20,7 @@
   font-weight: bold;
   color: #4285f4;
   margin-bottom: 10px;
-  padding-left: 30px;
+  padding-left: 500px;
 }
 
 .search-container {
@@ -51,14 +51,22 @@
     }
 
     button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 10px 20px;
       margin-left: 10px;
-      background-color: #4285f4;
+      background-color: #007bff;
       color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s;
+
+      .material-symbols-outlined{
+        font-size: 18px;
+        margin-right: 5px;
+      }
 
       &:hover {
         background-color: #357ae8;
@@ -101,7 +109,17 @@ h2 {
   color: #007bff;
 }
 
+.button-group {
+  display: flex;
+  gap: 20px; /* Espacio entre los botones */
+  justify-content: center; /* Centrar los botones dentro del contenedor */
+  margin-top: 20px; /* Espacio superior */
+}
+
 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #007bff;
   color: white;
   border: none;
@@ -109,6 +127,11 @@ button {
   margin-right: 5px;
   cursor: pointer;
   border-radius: 4px;
+
+  .material-symbols-outlined{
+    font-size: 18px;
+    margin-right: 10px;
+  }
 
   &:hover {
     background-color: #0056b3;
@@ -135,6 +158,14 @@ button {
     background-color: #f1f1f1;
   }
 
+  .button-marco{
+    border: 2px solid #ddd;
+    display:inline-block;
+    padding: 4px;
+    border-radius: 5px;
+    /* background-color: #888; */
+  }
+
   .btn-group {
     display: flex;
     gap: 2px;
@@ -142,6 +173,9 @@ button {
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     border: none;
     padding: 10px;
@@ -149,24 +183,29 @@ button {
     cursor: pointer;
     border-radius: 4px;
     flex-grow: 1;
-    min-width: 80px;
+    min-width: 100px;
     text-align: center;
     font-size: 14px;
 
+    .material-symbols-outlined {
+      font-size: 18px;
+      margin-right: 5px;
+    }
+
     &:hover {
-      background-color: #0056b3;
+      background-color: #007bff;
     }
 
     &.editar-button {
-      background-color: #e1c33e;
+      background-color: #007bff;
     }
 
     &.eliminar-button {
-      background-color: #e02a2a;
+      background-color: #007bff;
     }
 
     &.procesos-button {
-      background-color: #0af866;
+      background-color: #007bff;
     }
   }
 }
@@ -270,15 +309,29 @@ button {
       }
     }
 
+    .button-group {
+      display: flex;
+      gap: 20px; /* Espacio entre los botones */
+      justify-content: center; /* Centrar los botones dentro del contenedor */
+      margin-top: 20px; /* Espacio superior */
+    }
+
     .save-button {
-      background-color: #4285f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #007bff;
       color: white;
       padding: 12px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      width: 100%;
-      margin-top: 20px;
+      width: 110px;
+      
+      .material-symbols-outlined {
+        font-size: 18px;
+        margin-right: 5px;
+      }
 
       &:hover {
         background-color: #357ae8;
@@ -286,14 +339,21 @@ button {
     }
 
     .cancel-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: #ccc;
       color: white;
       padding: 12px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
+      width: 110px;
+      
+      .material-symbols-outlined {
+        font-size: 18px;
+        margin-right: 5px;
+      }
 
       &:hover {
         background-color: #aaa;

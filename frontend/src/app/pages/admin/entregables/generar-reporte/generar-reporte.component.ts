@@ -193,7 +193,7 @@ export class GenerarReporteComponent implements OnInit {
     this.chartTorta = new Chart(this.graficaProgreso.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Pendiente', 'Revisado', 'Aprobado', 'Desaprobado'],
+        labels: ['Pendiente', 'Revisado', 'Aprobado', 'No Aprobado'],
         datasets: [
           {
             label: 'Estado de Entregables',
@@ -223,7 +223,7 @@ export class GenerarReporteComponent implements OnInit {
     this.chartBarras = new Chart(this.graficaEntregables.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['Pendiente', 'Revisado', 'Aprobado', 'Desaprobado'],
+        labels: ['Pendiente', 'Revisado', 'Aprobado', 'No Aprobado'],
         datasets: [
           {
             label: 'Cantidad de Entregables',
@@ -281,7 +281,7 @@ export class GenerarReporteComponent implements OnInit {
     const entregablesAprobados = this.entregables.filter(e => e.estado === 'Aprobado').length;
     if (this.entregables.length > 0) {
       // this.progreso = (entregablesAprobados / this.entregables.length) * 100;
-      this.progreso = (entregablesAprobados / 12) * 100;
+      this.progreso = (entregablesAprobados / 5) * 100;
     } else {
       this.progreso = 0;
 
