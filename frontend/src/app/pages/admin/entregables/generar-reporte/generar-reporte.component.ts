@@ -281,7 +281,7 @@ export class GenerarReporteComponent implements OnInit {
     const entregablesAprobados = this.entregables.filter(e => e.estado === 'Aprobado').length;
     if (this.entregables.length > 0) {
       // this.progreso = (entregablesAprobados / this.entregables.length) * 100;
-      this.progreso = (entregablesAprobados / 5) * 100;
+      this.progreso = (entregablesAprobados / 33) * 100;
     } else {
       this.progreso = 0;
 
