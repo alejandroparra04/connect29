@@ -1,0 +1,29 @@
+meta {
+  name: update project
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8000/projects/2/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Proyecto33",
+    "descripcion": "Descripción del nuevo proyecto33",
+    "fecha_inicio": "2024-05-01",
+    "fecha_fin": "2024-10-01",
+    "responsable_id": "6"
+  }
+}

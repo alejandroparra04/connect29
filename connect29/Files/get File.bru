@@ -1,0 +1,26 @@
+meta {
+  name: get File
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8000/descargar-archivo/PR1PM1NUM1/
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "project_id": 1,
+    "category": "PM"
+  }
+}

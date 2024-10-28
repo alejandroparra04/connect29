@@ -1,0 +1,38 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+    <div class="procesos-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Procesos ISO 29110</h2>
+    </div>
+
+    <div class="card-container">
+      <!-- Tarjeta para Actividades PM -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Proceso de Gestión de Proyectos (PM)</h2>
+        </div>
+        <div class="card-body">
+          <button class="btn-actividades" (click)="ActividadPm()">
+            <strong>Actividades PM</strong>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta para Actividades SI -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Proceso de Implementación de Software (SI)</h2>
+        </div>
+        <div class="card-body">
+          <button class="btn-actividades" (click)="ActividadSi()">
+            <strong>Actividades SI</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+meta {
+  name: update user
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8000/users/5
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+    {
+      "username": "test22",
+      "email": "test@unimayor.edu.co",
+      "first_name": "pepito",
+      "last_name": "perez",
+      "password": "test"
+    }
+}

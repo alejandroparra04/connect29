@@ -1,0 +1,93 @@
+<div class="certificado-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+
+    <div class="content">
+      <div class="header">
+        <button (click)="volver()" class="icon-button">
+          <span class="material-icons">arrow_back</span>
+        </button>
+        <h2>Certificado</h2>
+      </div>
+
+      <div class="container">
+
+        <div class="certificado">
+
+          <div class="logo-container">
+            <img src="assets/img/logo_final.jpg" alt="Logo Connect29" class="logo" />
+          </div>
+
+          <h3 class="certificado-titulo">Certificado de Conformidad</h3>
+          <p class="subtitulo">de la Norma ISO 29110-5</p>
+
+          <div class="info-section">
+            <p><strong>Nombre de la Empresa:</strong>
+              <input type="text" placeholder="Nombre de la empresa" [(ngModel)]="nombreEmpresa" />
+            </p>
+            <p><strong>Fecha de Emisión:</strong>
+              <input type="date" [(ngModel)]="fechaInicio" />
+            </p>
+            <p><strong>Válido Hasta:</strong>
+              <input type="date" [(ngModel)]="fechaFin" />
+            </p>
+            <p><strong>Nombre del Responsable:</strong>
+              <input type="text" placeholder="Nombre del responsable" [(ngModel)]="nombreResponsable" />
+            </p>
+            <p><strong>Correo Electrónico:</strong>
+              <input type="email" placeholder="ejemplo@correo.com" [(ngModel)]="correoElectronico" />
+            </p>
+            <p><strong>Entidad Certificadora:</strong>
+              <input type="text" placeholder="Nombre de la entidad" [(ngModel)]="entidadCertificadora" />
+            </p>
+          </div>
+
+          <div class="description-section">
+            <p><strong>Descripción de la norma:</strong></p>
+            <p>
+              La norma ISO 29110-5 proporciona un marco estructurado para la gestión de proyectos en pequeñas
+              organizaciones, enfocándose en la mejora continua y la satisfacción del cliente a través de procesos
+              estandarizados y eficientes.
+            </p>
+
+            <p><strong>Alcance de la certificación:</strong></p>
+            <p>
+              La certificación confirma que la entidad ha cumplido con todos los procesos requeridos por la norma,
+              asegurando un enfoque sistemático en la gestión de proyectos y la calidad en la entrega de productos y
+              servicios.
+            </p>
+          </div>
+
+          <div class="sign-section">
+            <p>Certificante: ____________________</p>
+            <p>Firma de quien certifica: ____________________</p>
+          </div>
+        </div>
+
+        <div class="acciones-certificado">
+          <p>
+            Una vez se haya terminado el proceso del cumplimiento de los entregables
+            y que estos hayan sido revisados y aprobados, podrá descargar este
+            certificado que certifica que su empresa en los estándares de calidad
+            soportados por la norma ISO/IEC 29110-5.
+          </p>
+          <button (click)="descargarCertificado()" class="btn-descargar">
+            <span class="material-symbols-outlined">
+              download
+            </span>
+            <strong>Descargar certificado</strong>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+    <button (click)="home()" class="btn-volver">
+      <span class="material-symbols-outlined">
+        home
+      </span>
+      <strong>Volver al inicio</strong>
+    </button>
+  </div>
+</div>

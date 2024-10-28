@@ -1,0 +1,26 @@
+meta {
+  name: get activities PM
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8000/activities/PM/
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "project_id": 1,
+    "category": "PM"
+  }
+}

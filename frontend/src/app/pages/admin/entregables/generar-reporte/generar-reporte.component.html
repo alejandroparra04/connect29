@@ -1,0 +1,132 @@
+<div class="generar-reporte-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+
+    <div class="generar-reporte-header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Generar Reporte</h2>
+    </div>
+
+    <div class="content">
+
+      <div class="generar-reporte-body">
+        <div class="parametros-section">
+          <h3>Parámetros</h3>
+          <div class="form-group">
+            <label for="fechaInicio">Fecha de Inicio</label>
+            <input [(ngModel)]="fecha_inicio" type="date" id="fechaInicio">
+          </div>
+
+          <div class="form-group">
+            <label for="fechaFin">Fecha de Fin</label>
+            <input [(ngModel)]="fecha_fin" type="date" id="fechaFin">
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select [(ngModel)]="estado" id="estado">
+              <option value="">Todos</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="revisado">Revisado</option>
+              <option value="aprobado">Aprobado</option>
+              <option value="desaprobado">No Aprobado</option>
+
+            </select>
+          </div>
+
+          <div class="button-group">
+            <button class="btn-reporte" (click)="Reporte()">
+              <span class="material-symbols-outlined">
+                filter_alt
+              </span>
+              <strong>Filtrar datos para reporte</strong>
+            </button>
+            <button class="btn-reset" (click)="resetearFormulario()">
+              <span class="material-symbols-outlined">
+                restart_alt
+              </span>
+              <strong>Reiniciar</strong>
+            </button>
+            <button class="btn-download" (click)="descargar()">
+              <span class="material-symbols-outlined">
+                download
+              </span>
+              <strong>Descargar Reporte</strong>
+            </button>
+            <button class="btn-avance"
+                    (click)="Avance()"
+                    [disabled]="progreso < 100"
+                    title="Completa el progreso al 100% para habilitar el botón.">
+                    <span class="material-symbols-outlined">
+                      download
+                    </span>
+              <strong>Descargar Certificado</strong>
+            </button>
+          </div>
+        </div>
+
+        @if(proyecto){
+        <div class="reporte-section" id="reporte">
+
+          <div class="reporte-info">
+            <div class="info-column">
+              <p><strong>Proyecto:</strong> {{proyecto.nombre}}</p>
+              <p><strong>Responsable:</strong> {{proyecto.responsable}}</p>
+            </div>
+            <div class="info-column">
+              <p><strong>Fecha de Inicio:</strong> {{proyecto.fecha_inicio}}</p>
+              <p><strong>Fecha de Fin:</strong> {{proyecto.fecha_fin}}</p>
+              <p><strong>Progreso:</strong> {{ progreso | number:'1.2-2' }}%</p>
+            </div>
+          </div>
+
+
+          <div class="graficos-section">
+            @if(isDataLoaded){
+
+            <div class="grafico-torta">
+              <canvas #graficaProgreso></canvas>
+            </div>
+            <div class="grafico-barras">
+              <canvas #graficaEntregables></canvas>
+            </div>
+            }
+          </div>
+
+          <div class="tabla-entregables">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Estado</th>
+                  <th>Fecha de Creación</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for(entregable of entregablesFiltrados; track entregable.id){
+                <tr>
+                  <td>{{ entregable.id }}</td>
+                  <td>{{ entregable.nombre }}</td>
+                  <td>{{ entregable.descripcion }}</td>
+                  <td>{{ entregable.estado }}</td>
+                  <td>{{ entregable.fecha_creacion }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        }
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

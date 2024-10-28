@@ -1,0 +1,13 @@
+<div class="navbar">
+  <nav>
+    <a routerLink="/home"><strong>Inicio</strong></a>
+    <a routerLink="/proyectos"><strong>Proyectos</strong></a>
+    @if(role==='admin') {
+    <a routerLink="/usuarios"><strong>Usuarios</strong></a>
+    }
+
+    <div class="logo-img">
+      <img src="assets/img/logo_nav.jpg" alt="logo-nav">
+    </div>
+  </nav>
+</div>

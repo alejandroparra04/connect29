@@ -1,0 +1,39 @@
+<div class="edit-entregables-container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+    <div class="header">
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <h2>Editar Entregables</h2>
+    </div>
+
+    <form [formGroup]="editForm" (ngSubmit)="guardarCambios()">
+      <div class="form-group">
+        <label for="nombre">Nombre Completo</label>
+        <input id="nombre" formControlName="nombre" type="text" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" formControlName="descripcion" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" formControlName="estado" class="form-control">
+          <option value="Completado">Completado</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="En progreso">En progreso</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input id="fecha" formControlName="fecha" type="date" class="form-control">
+      </div>
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelarEdicion()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

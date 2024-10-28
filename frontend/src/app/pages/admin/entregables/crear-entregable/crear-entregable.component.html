@@ -1,0 +1,45 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+    <div class="form-container">
+      <h2>Crear Nuevo Entregable</h2>
+      <button (click)="volver()" class="icon-button">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      <form (ngSubmit)="crearEntregable()">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" [(ngModel)]="nuevoEntregable.nombre" name="nombre">
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" [(ngModel)]="nuevoEntregable.descripcion" name="descripcion"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <select id="estado" [(ngModel)]="nuevoEntregable.estado" name="estado">
+            <option value="Pendiente">Pendiente</option>
+            <option value="Revisado">Revisado</option>
+            <option value="Desaprobado">No Aprobado</option>
+            <option value="Aprobado">Aprobado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha_creacion">Fecha Creación:</label>
+          <input type="date" id="fecha_creacion" [(ngModel)]="nuevoEntregable.fecha_creacion" name="fecha_creacion">
+        </div>
+
+        <button type="submit">
+          <span class="material-symbols-outlined">
+            save
+          </span>
+          <strong>Guardar</strong>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

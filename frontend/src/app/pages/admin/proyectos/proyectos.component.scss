@@ -1,0 +1,370 @@
+.container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4285f4;
+  margin-bottom: 10px;
+  padding-left: 500px;
+}
+
+.delete-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.delete-modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+h2 {
+  color: #007bff;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px; /* Espacio entre los botones */
+  justify-content: center; /* Centrar los botones dentro del contenedor */
+  margin-top: 20px; /* Espacio superior */
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  .material-symbols-outlined{
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+
+  .search-bar {
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+
+      &:focus {
+        outline: none;
+        border-color: #4285f4;
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      margin-left: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      .material-symbols-outlined{
+        font-size: 18px;
+        margin-right: 5px;
+      }
+
+      &:hover {
+        background-color: #357ae8;
+      }
+    }
+  }
+}
+
+
+.entregables-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th,
+  td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .button-marco{
+    border: 2px solid #ddd;
+    display:inline-block;
+    padding: 4px;
+    border-radius: 5px;
+    /* background-color: #888; */
+  }
+  
+  .btn-group {
+    display: flex;
+    gap: 2px;
+    justify-content: space-between;
+  }
+
+  button {
+    border: none;
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    flex-grow: 1;
+    min-width: 75px;
+    text-align: center;
+    font-size: 13px;
+
+    .material-symbols-outlined{
+      font-size: 18px;
+      margin-right: 5px;
+    }
+
+    &:hover {
+      background-color: #007bff;
+    }
+
+    &.editar-button {
+      background-color: #007bff;
+    }
+
+    &.eliminar-button {
+      background-color: #007bff;
+    }
+
+    &.procesos-button {
+      background-color: #007bff;
+    }
+
+    &.detalles-button {
+      background-color: #007bff;
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #218838;
+    }
+  }
+}
+
+
+.edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: auto;
+
+  .edit-modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    /* Ajustado el máximo ancho */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2979ff;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: rgba(0, 0, 0, 0.7);
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        background-color: white;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        box-sizing: border-box;
+        /* Añadido box-sizing */
+      }
+
+      textarea {
+        resize: vertical;
+        height: 100px;
+        /* Ajustado el alto del textarea */
+      }
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px; /* Espacio entre los botones */
+      justify-content: center; /* Centrar los botones dentro del contenedor */
+      margin-top: 20px; /* Espacio superior */
+    }
+
+    .save-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #4285f4;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 110px;
+      height: 50px;
+
+      .material-symbols-outlined{
+        font-size: 18px;
+        margin-right: 5px;
+      }
+
+
+      &:hover {
+        background-color: #357ae8;
+      }
+    }
+
+    .cancel-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ccc;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 120px;
+      height: 50px;
+      
+      .material-symbols-outlined{
+        font-size: 18px;
+        margin-right: 5px;
+      }
+
+
+      &:hover {
+        background-color: #aaa;
+      }
+    }
+
+
+  }
+}

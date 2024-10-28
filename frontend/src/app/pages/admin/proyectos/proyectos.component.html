@@ -1,0 +1,163 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+
+    <div class="content">
+
+      <h1 class="page-title">Gestión de Proyectos</h1>
+
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
+        <div class="search-bar">
+          <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o responsable..." />
+          <button (click)="filtrarProyectos()">
+            <span class="material-symbols-outlined">
+              search
+              </span>
+              <strong>Buscar</strong>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabla de Entregables -->
+      <table class="entregables-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha fin</th>
+            <th>Responsable</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(proyecto of proyectosFiltrados; track proyecto.id) {
+          <tr>
+            <td>{{ proyecto.id}}</td>
+            <td>{{ proyecto.nombre }}</td>
+            <td>{{ proyecto.descripcion }}</td>
+            <td>{{ proyecto.fecha_inicio }}</td>
+            <td>{{ proyecto.fecha_fin }}</td>
+            <td>{{ proyecto.responsable}}</td>
+            <td>
+              <div class="button-marco">
+                <div class="btn-group">
+                  <button class="procesos-button" (click)="Procesos(proyecto.id)">
+                    <span class="material-symbols-outlined">
+                      rule_settings
+                    </span>
+                    <strong>Procesos</strong>
+                  </button>
+                  <button class="detalles-button" (click)="verDetalles(proyecto.id)">
+                    <span class="material-symbols-outlined">
+                      description
+                    </span>
+                    <strong>Detalles</strong>
+                  </button>
+                  @if(role === 'admin') {
+                  <button class="editar-button" (click)="abrirModalEditar(proyecto)">
+                    <span class="material-symbols-outlined">
+                      edit
+                    </span>
+                    <strong>Editar</strong>
+                  </button>
+                  <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id)">
+                    <span class="material-symbols-outlined">
+                      delete
+                    </span>
+                    <strong>Eliminar</strong>
+                  </button>
+                  }
+                </div>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+
+      <!-- Modal para editar proyecto -->
+      @if(mostrarModalEditar){
+      <div class="edit-modal">
+        <div class="edit-modal-content">
+          <span class="close" (click)="cancelarEdicion()">&times;</span>
+          <h2>Editar Proyecto</h2>
+          <form (ngSubmit)="guardarCambios()">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" [(ngModel)]="proyectoEditar.nombre" name="nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="descripcion">Descripción</label>
+              <textarea id="descripcion" [(ngModel)]="proyectoEditar.descripcion" name="descripcion"
+                        required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="fecha_inicio">Fecha de Inicio</label>
+              <input type="date" id="fecha_inicio" [(ngModel)]="proyectoEditar.fecha_inicio" name="fecha_inicio"
+                     required />
+            </div>
+            <div class="form-group">
+              <label for="fecha_fin">Fecha de Fin</label>
+              <input type="date" id="fecha_fin" [(ngModel)]="proyectoEditar.fecha_fin" name="fecha_fin" required />
+            </div>
+            <div class="form-group">
+              <label for="responsable_id">Responsable</label>
+              <select id="responsable_id" name="responsable_id" [(ngModel)]="proyectoEditar.responsable_id" required>
+                <option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                  {{ usuario.first_name }} {{ usuario.last_name }} ({{ usuario.email }})
+                </option>
+              </select>
+            </div>
+            <div class="button-group">
+            <button type="submit" class="save-button">
+              <span class="material-symbols-outlined">
+                save
+              </span>
+                <strong>Guardar</strong>
+            </button>
+            <button type="button" class="cancel-button" (click)="cancelarEdicion()">
+              <span class="material-symbols-outlined">
+                cancel
+                </span>
+                <strong>Cancelar</strong>
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      }
+
+      <!-- Modal para eliminar proyecto -->
+      @if(mostrarModalEliminar){
+      <div class="delete-modal">
+        <div class="delete-modal-content">
+          <span class="close" (click)="cancelarEliminacion()">&times;</span>
+          <h2>Confirmar Eliminación</h2>
+          <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
+          <div class="button-group">
+          <button (click)="confirmarEliminacion()">
+            <span class="material-symbols-outlined">
+              delete
+            </span>
+            <strong>Eliminar</strong>
+          </button>
+          <button (click)="cancelarEliminacion()">
+            <span class="material-symbols-outlined">
+              cancel
+            </span>
+              <strong>Cancelar</strong>
+          </button>
+          </div>
+        </div>
+      </div>
+      }
+
+    </div>
+
+  </div>
+
+</div>

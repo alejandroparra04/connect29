@@ -1,0 +1,29 @@
+meta {
+  name: delete deliverable
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:8000/deliverables/3/
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Token {{token}}
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+    {
+      "username": "test",
+      "email": "test@unimayor.edu.co",
+      "first_name": "pepito",
+      "last_name": "perez",
+      "password": "test"
+    }
+}

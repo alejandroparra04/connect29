@@ -1,0 +1,41 @@
+<div class="sidebar" [class.closed]="menuCerrado">
+  <button class="menu-button" (click)="toggleMenu()">☰</button>
+  <ul>
+    @if(role === 'admin') {
+    <li>
+      <button [routerLink]="['/crearproyecto']">
+        <span class="icon">
+          <img src="assets/icons/icono_crear_proyecto.png" alt="icono_crear_proyecto">
+        </span>
+        <span><strong>Crear Proyecto</strong></span>
+      </button>
+    </li>
+    <li>
+      <button [routerLink]="['/crear-usuario']">
+        <span class="material-symbols-outlined icon">
+          person_add
+          </span>
+        <span><strong>Crear Usuario</strong></span>
+      </button>
+    </li>
+    }
+    <li>
+      <button (click)="abrirAcercaDe()">
+        <span class="material-symbols-outlined icon">
+          info
+          </span>
+        <span><strong>Acerca de</strong></span>
+      </button>
+    </li>
+    <li>
+      <button [routerLink]="['/inicio-sesion']">
+        <span class="material-icons icon">logout</span>
+        <span><strong>Cerrar Sesión</strong></span>
+      </button>
+    </li>
+  </ul>
+
+  <div class="logo-img">
+    <img src="assets/img/logo_final.jpg" alt="logo-connect">
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+
+    <div class="detalle-entregable-container">
+      <div class="detalle-modal-content">
+        <h2>Detalles del Entregable</h2>
+        <button (click)="volver()" class="icon-button">
+          <span class="material-icons">arrow_back</span>
+        </button>
+
+        <form>
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input id="id" type="text" [value]="entregable.id" readonly />
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" [value]="entregable.nombre" readonly />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" [value]="entregable.descripcion" readonly></textarea>
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <input id="estado" type="text" [value]="entregable.estado" readonly />
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha Creación</label>
+            <input id="fecha" type="text" [value]="entregable.fecha_creacion" readonly />
+          </div>
+          <div class="form-group">
+            <label for="codigo">Código</label>
+            <input id="codigo" type="text" [value]="entregable.codigo" readonly />
+          </div>
+          <div class="form-group">
+            <label for="project">Proyecto</label>
+            <input id="project" type="text" [value]="proyecto" readonly />
+          </div>
+          <div class="form-group">
+            <label for="categoria">Tipo Proceso</label>
+            <input id="categoria" type="text" [value]="entregable.categoria" readonly />
+          </div>
+          <div class="form-group">
+            <label for="actividad">Actividad</label>
+            <input id="actividad" type="text" [value]="entregable.actividad" readonly />
+          </div>
+
+          <button class="btn-cerrar" (click)="volver()">
+            <span class="material-symbols-outlined">cancel</span>
+            <strong>Cerrar</strong>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

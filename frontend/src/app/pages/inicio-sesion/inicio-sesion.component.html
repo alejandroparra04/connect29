@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="inicio-sesion-container">
+    <h3>INICIO DE SESIÓN</h3>
+    <div class="img-container">
+      <img src="assets/img/logo_final.jpg" alt="logo-connect">
+    </div>
+    <p style="color: #999;">Digite su correo y contraseña</p>
+    <form class="form-group">
+      <div>
+        <input type="email" id="correoElectronico" name="correoElectronico" [(ngModel)]="user.correo" required
+               placeholder="Correo" autocomplete="email" />
+      </div>
+      <div class="password-group">
+        <input
+               type="password"
+               id="password"
+               [type]="passwordFieldType"
+               [(ngModel)]="user.password"
+               name="password"
+               placeholder="Contraseña"
+               autocomplete="new-password" />
+        <button type="button" (click)="togglePasswordVisibility()" class="toggle-password-btn">
+          <mat-icon>{{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </div>
+      <button type="submit" (click)="iniciarSesion()">Iniciar Sesión</button>
+    </form>
+    <!-- <div class="footer">
+      <a routerLink="/restablecer-contrasena">¿Olvidó su contraseña?</a>
+    </div> -->
+  </div>
+</div>

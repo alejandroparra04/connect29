@@ -1,0 +1,39 @@
+<div class="container">
+  <app-sidebar></app-sidebar>
+  <div class="main-content">
+    <app-navbar></app-navbar>
+
+    <div class="content">
+      <div class="actividadPm-header">
+        <button (click)="volver()" class="icon-button">
+          <span class="material-icons">arrow_back</span>
+        </button>
+        <h2>Actividades del Proceso de Gestión de Proyectos (PM)</h2>
+      </div>
+
+      <table class="actividad-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre de la Actividad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (actividad of actividades_pm; track actividad.id){
+          <tr>
+            <td>{{ actividad.id }}</td>
+            <td>{{ actividad.nombre_actividad }}</td>
+            <td>
+              <button (click)="Entregables(actividad.id, actividad.nombre_actividad)">
+                <strong>Entregables</strong>
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
