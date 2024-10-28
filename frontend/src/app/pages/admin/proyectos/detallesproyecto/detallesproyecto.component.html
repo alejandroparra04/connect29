@@ -5,10 +5,10 @@
 
     <div class="detalle-container">
       <div class="detalle-modal-content">
+        <h2>Detalle Proyecto</h2>
         <button (click)="volver()" class="icon-button">
           <span class="material-icons">arrow_back</span>
         </button>
-        <h2>Detalle Proyecto</h2>
         <form>
           <div class="form-group">
             <label for="nombre">Nombre</label>
@@ -30,7 +30,12 @@
             <label for="responsable">Responsable</label>
             <input type="text" id="responsable" [(ngModel)]="proyecto.responsable" name="responsable" />
           </div>
-          <button (click)="cerrar()" type="button" class="btn-cerrar">Cerrar</button>
+          <button (click)="cerrar()" type="button" class="btn-cerrar">
+            <span class="material-symbols-outlined">
+              cancel
+            </span>
+            <strong>Cerrar</strong>
+          </button>
         </form>
       </div>
     </div>

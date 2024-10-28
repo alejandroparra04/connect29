@@ -7,35 +7,22 @@
   padding: 10px 20px;
 
   nav {
+    display: flex;
+    align-items: center;
+
     a {
       color: white;
       text-decoration: none;
       margin-right: 20px;
     }
-  }
 
-  .search-bar {
-    display: flex;
-    align-items: center;
-
-    input {
-      padding: 5px;
-      margin-right: 10px;
-    }
-
-    button {
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .logo-img{
+      margin-left: 900px;
 
       img {
-        width: 40px; // Ajusta el ancho de la imagen según tus necesidades
-        height: 40px; // Ajusta la altura de la imagen según tus necesidades
+        height: 25px;
+        width: auto;
       }
     }
-  }
+  }     
 }

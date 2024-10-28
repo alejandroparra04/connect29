@@ -36,10 +36,20 @@
     h2 {
       margin-bottom: 20px;
       color: #2979ff;
+      margin-left: 60px;
+    }
+
+    .icon-button {
+      position: relative;
+      display: block;
+      margin-bottom: 10px;
+      margin-left: 120px;
+      /* Reduce el espacio entre la flecha y el título */
     }
 
     form {
       width: 100%;
+      margin-top: 10px;
 
       .form-group {
         width: 100%;
@@ -76,20 +86,27 @@
       }
 
       .btn-cerrar {
-        width: 100%;
-        padding: 12px;
-        margin: 0 30px;
-        background-color: #d9534f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 100px ;
+        background-color: #007bff;
         color: white;
         border: none;
+        padding: 10px 20px;
         border-radius: 4px;
         font-size: 16px;
-        font-weight: 500;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+
+        .material-symbols-outlined{
+          font-size: 18px;
+          margin-right: 5px;
+        }
 
         &:hover {
-          background-color: #c9302c;
+          background-color: #357ae8;
         }
       }
     }

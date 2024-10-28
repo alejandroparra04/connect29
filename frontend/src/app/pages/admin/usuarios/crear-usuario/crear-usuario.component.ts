@@ -26,6 +26,7 @@ export class CrearUsuarioComponent {
 
   repeatPassword: string = '';
   passwordFieldType: string = 'password';
+  repeatPasswordFieldType: string = 'password'
   passwordMismatch: boolean = false;
 
   // constructor (private router: Router, private authService: AuthService, private firestore:  Firestore) { }
@@ -42,6 +43,15 @@ export class CrearUsuarioComponent {
       this.passwordFieldType = 'password';
     }
   }
+
+  toggleRepeatPasswordVisibility() {
+    if (this.repeatPasswordFieldType === 'password') {
+      this.repeatPasswordFieldType = 'text';
+    } else {
+      this.repeatPasswordFieldType = 'password';
+    }
+  }
+
   volver(): void {
     this.router.navigate(['/usuarios']);
   }

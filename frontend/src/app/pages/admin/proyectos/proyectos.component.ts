@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
@@ -23,7 +24,7 @@ import { NavbarComponent } from '../../../components/navbar/navbar.component';
     RouterLink, CrearproyectoComponent,
     EliminarproyectoComponent, DetallesComponent,
     BuscarComponent, FormsModule,
-    SidebarComponent, NavbarComponent,
+    SidebarComponent, NavbarComponent, MatIconModule
   ],
   templateUrl: './proyectos.component.html',
   styleUrl: './proyectos.component.scss'

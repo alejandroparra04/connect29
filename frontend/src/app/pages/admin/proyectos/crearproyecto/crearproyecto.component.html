@@ -33,7 +33,11 @@
           <label for="descripcion">Descripción</label>
           <textarea id="descripcion" name="descripcion" [(ngModel)]="nuevoProyecto.descripcion" required></textarea>
         </div>
-        <button type="submit" [disabled]="proyectoForm.invalid">Guardar Proyecto</button>
+        <button type="submit" [disabled]="proyectoForm.invalid">
+          <span class="material-symbols-outlined">
+            save
+            </span>
+            <strong>Guardar Proyecto</strong></button>
       </form>
     </div>
   </div>

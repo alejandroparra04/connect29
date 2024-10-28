@@ -4,11 +4,19 @@
     <app-navbar></app-navbar>
 
     <div class="content">
+
+      <h1 class="page-title">Gestión de Usuarios</h1>
+
       <!-- Barra de búsqueda -->
       <div class="search-container">
         <div class="search-bar">
           <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o email..." />
-          <button (click)="filtrarUsuarios()">Buscar</button>
+          <button (click)="filtrarUsuarios()">
+            <span class="material-symbols-outlined">
+              search
+            </span>
+            <strong>Buscar</strong>
+          </button>
         </div>
       </div>
 
@@ -30,8 +38,22 @@
             <td>{{ usuario.email }}</td>
             <td>{{ usuario.is_staff ? 'Administrador' : 'Usuario' }}</td>
             <td>
-              <button class="editar-button" (click)="abrirModalEditar(usuario)">Editar</button>
-              <button class="eliminar-button" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+              <div class="button-marco">
+                <div class="btn-group">
+                  <button class="editar-button" (click)="abrirModalEditar(usuario)">
+                    <span class="material-symbols-outlined">
+                      edit
+                    </span>
+                    <strong>Editar</strong>
+                  </button>
+                  <button class="eliminar-button" (click)="eliminarUsuario(usuario.id)">
+                    <span class="material-symbols-outlined">
+                      delete
+                    </span>
+                    <strong>Eliminar</strong>
+                  </button>
+                </div>
+              </div>
             </td>
           </tr>
           }
@@ -69,7 +91,7 @@
               <div class="password-container">
                 <div class="password-wrapper">
                   <input id="password" name="password" [type]="passwordFieldType" [(ngModel)]="usuarioEditar.password"
-                         placeholder="Ingresa tu contraseña" autocomplete="current-password" />
+                         placeholder="Ingresa tu contraseña" />
                 </div>
                 <button type="button" (click)="togglePasswordVisibility()" class="toggle-password-btn">
                   <mat-icon>{{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
@@ -78,9 +100,15 @@
             </div>
             <div class="form-group">
               <label for="repeatPassword">Repetir Contraseña</label>
-              <div class="password-wrapper">
-                <input id="repeatPassword" name="repeatPassword" [type]="passwordFieldType" [(ngModel)]="repeatPassword"
-                       placeholder="Repite tu contraseña" />
+              <div class="password-container">
+                <div class="password-wrapper">
+                  <input id="repeatPassword" name="repeatPassword" [type]="repeatPasswordFieldType"
+                         [(ngModel)]="repeatPassword"
+                         placeholder="Repite tu contraseña" />
+                </div>
+                <button type="button" (click)="toggleRepeatPasswordVisibility()" class="toggle-repeat-password-btn">
+                  <mat-icon>{{ repeatPasswordFieldType === 'password' ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
               </div>
               @if(passwordMismatch){
               <div class="error-message">
@@ -88,8 +116,20 @@
               </div>
               }
             </div>
-            <button type="submit" class="save-button">Guardar Cambios</button>
-            <button type="button" class="cancel-button" (click)="cancelarEdicion()">Cancelar</button>
+            <div class="button-group">
+              <button type="submit" class="save-button">
+                <span class="material-symbols-outlined">
+                  save
+                </span>
+                  <strong>Guardar</strong>
+                </button>
+              <button type="button" class="cancel-button" (click)="cancelarEdicion()">
+                <span class="material-symbols-outlined">
+                  cancel
+                </span>
+                  <strong>Cancelar</strong> 
+                </button>
+              </div>
           </form>
         </div>
       </div>
@@ -101,9 +141,21 @@
         <div class="delete-modal-content">
           <span class="close" (click)="cancelarEliminacion()">&times;</span>
           <h2>Confirmar Eliminación</h2>
-          <p>¿Estás seguro de que deseas eliminar el proyecto: {{ usuarioEliminar?.nombre }}?</p>
-          <button (click)="confirmarEliminacion()">Eliminar</button>
-          <button (click)="cancelarEliminacion()">Cancelar</button>
+          <p>¿Estás seguro de que deseas eliminar el usuario: {{ usuarioEliminar?.nombre }}?</p>
+          <div class="button-group">
+          <button (click)="confirmarEliminacion()">
+            <span class="material-symbols-outlined">
+              delete
+            </span>
+            <strong>Eliminar</strong>
+          </button>
+          <button (click)="cancelarEliminacion()">
+            <span class="material-symbols-outlined">
+              cancel
+            </span>
+              <strong>Cancelar</strong> 
+          </button>
+          </div>
         </div>
       </div>
       }

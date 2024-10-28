@@ -4,14 +4,24 @@
     <app-navbar></app-navbar>
 
     <div class="content">
-      <!-- Barra de búsqueda -->
-      <div class="search-container">
+
+      <div class="title-container">
         <button (click)="volver()" class="icon-button">
           <span class="material-icons">arrow_back</span>
         </button>
+        <h1 class="page-title">Gestión de Entregables</h1>
+      </div>
+
+      <!-- Barra de búsqueda -->
+      <div class="search-container">
         <div class="search-bar">
           <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o código..." />
-          <button (click)="filtrarEntregables()">Buscar</button>
+          <button (click)="filtrarEntregables()">
+            <span class="material-symbols-outlined">
+              search
+            </span>
+            <strong>Buscar</strong>
+          </button>
         </div>
       </div>
 
@@ -19,7 +29,6 @@
       <table class="entregables-table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Estado</th>
@@ -31,21 +40,48 @@
         <tbody>
           @for(entregable of entregablesFiltrados; track entregable.id){
           <tr>
-            <td>{{ entregable.id}}</td>
             <td>{{ entregable.nombre }}</td>
             <td>{{ entregable.descripcion }}</td>
             <td>{{ entregable.estado }}</td>
             <td>{{ entregable.fecha_creacion }}</td>
             <td>{{ entregable.codigo }}</td>
             <td>
-              <button class="detalles-button" (click)="abrirDetalles(entregable.id)">Detalles</button>
-              <button class="subir-button" (click)="subirEntregable(entregable)">Subir</button>
-              <button class="ver-button" (click)="verDocumento(entregable)">Ver Documento</button>
-              @if(role === 'admin') {
-              <button class="editar-button" (click)="abrirModalEditar(entregable)">Editar</button>
-              <button class="eliminar-button"
-                      (click)="eliminarEntregable(entregable.id)">Eliminar</button>
-              }
+              <div class="button-marco">
+                <div class="btn-group">
+                  <button class="detalles-button" (click)="abrirDetalles(entregable.id)">
+                    <span class="material-symbols-outlined">
+                      description
+                    </span>
+                    <strong>Detalles</strong>
+                    </button>
+                  <button class="subir-button" (click)="subirEntregable(entregable)">
+                    <span class="material-symbols-outlined">
+                      upload
+                    </span>
+                    <strong>Subir</strong>
+                  </button>
+                  <button class="ver-button" (click)="verDocumento(entregable)">
+                    <span class="material-symbols-outlined">
+                      folder_eye
+                    </span>
+                    <strong>Ver</strong>
+                    </button>
+                  @if(role === 'admin') {
+                  <button class="editar-button" (click)="abrirModalEditar(entregable)">
+                    <span class="material-symbols-outlined">
+                      edit
+                    </span>
+                    <strong>Editar</strong>
+                  </button>
+                  <button class="eliminar-button"(click)="eliminarEntregable(entregable.id)">
+                    <span class="material-symbols-outlined">
+                      delete
+                    </span>
+                    <strong>Eliminar</strong>
+                  </button>
+                  }
+                </div>
+              </div>
             </td>
           </tr>
           }
@@ -55,9 +91,11 @@
 
       <!-- Botones de Acción -->
       <div class="action-buttons">
-        <button (click)="generarReporte()">Generar Reporte</button>
+        <button (click)="generarReporte()">
+          <strong>Generar Reporte</strong></button>
         @if(role === 'admin') {
-        <button class="btn btn-primary" (click)="crearEntregableConDatos()">Crear Entregable</button>
+        <button class="btn btn-primary" (click)="crearEntregableConDatos()">
+          <strong>Crear Entregable</strong></button>
         }
       </div>
     </div>
@@ -84,11 +122,22 @@
               <option value="Pendiente">Pendiente</option>
               <option value="Revisado">Revisado</option>
               <option value="Aprobado">Aprobado</option>
-              <option value="Desaprobado">Desaprobado</option>
+              <option value="Desaprobado">No Aprobado</option>
             </select>
           </div>
-          <button type="submit" class="save-button">Guardar Cambios</button>
-          <button type="button" class="cancel-button" (click)="cancelarEdicion()">Cancelar</button>
+          <div class="button-group">
+            <button type="submit" class="save-button">
+              <span class="material-symbols-outlined">
+                save
+                </span>
+                <strong>Guardar</strong>
+              </button>
+            <button type="button" class="cancel-button" (click)="cancelarEdicion()">
+              <span class="material-symbols-outlined">
+                cancel
+                </span>
+                <strong>Cancelar</strong></button>
+            </div>
         </form>
       </div>
     </div>
@@ -101,8 +150,19 @@
         <span class="close" (click)="cancelarEliminacion()">&times;</span>
         <h2>Confirmar Eliminación</h2>
         <p>¿Estás seguro de que deseas eliminar el entregable: {{ selectedEntregableEliminar?.nombre }}?</p>
-        <button (click)="confirmarEliminacion()">Eliminar</button>
-        <button (click)="cancelarEliminacion()">Cancelar</button>
+        <div class="button-group">
+        <button (click)="confirmarEliminacion()">
+          <span class="material-symbols-outlined">
+            delete
+          </span>
+          <strong>Eliminar</strong>
+        </button>
+        <button (click)="cancelarEliminacion()">
+          <span class="material-symbols-outlined">
+            cancel
+          </span>
+            <strong>Cancelar</strong></button>
+        </div>
       </div>
     </div>
     }
@@ -119,13 +179,21 @@
             <div class="file-upload">
               <label for="archivo">Subir Archivo</label>
               <input type="file" id="archivo" accept="application/pdf" (change)="onFileSelected($event)">
-              <button class="btn-submit" (click)="onSubmit()">Enviar</button>
+              <button class="btn-submit" (click)="onSubmit()">
+                <span class="material-symbols-outlined">
+                  upload
+                </span>
+                <strong>Subir</strong>
+              </button>
             </div>
           </div>
         </div>
 
         <div class="button-container">
-          <button class="btn-atras" (click)="cerrarModalSubir()">Atrás</button>
+          <button class="btn-atras" (click)="cerrarModalSubir()">
+            <span class="material-icons icon">arrow_back</span>
+            <span><strong>Atrás</strong></span>
+            </button>
         </div>
       </div>
     </div>
@@ -154,7 +222,12 @@
         }
 
         <div class="button-container">
-          <button class="btn-cerrar" (click)="cerrarModalVer()">Cerrar</button>
+          <button class="btn-cerrar" (click)="cerrarModalVer()">
+            <span class="material-symbols-outlined">
+              cancel
+            </span>
+              <strong>Cerrar</strong>
+          </button>
         </div>
       </div>
     </div>

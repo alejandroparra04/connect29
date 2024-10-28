@@ -28,6 +28,7 @@
     .logo-img img {
       width: 40px; // Reducir el tamaño del logo cuando el menú está cerrado
       height: auto;
+
     }
   }
 
@@ -94,9 +95,10 @@
     justify-content: center;
     align-items: center;
     padding: 10px 0;
+    margin-bottom: 20px;
 
     img {
-      width: 130px;
+      width: 180px;
       height: auto;
       transition: width 0.3s ease;
     }

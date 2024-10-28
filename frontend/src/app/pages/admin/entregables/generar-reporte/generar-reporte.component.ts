@@ -123,6 +123,7 @@ export class GenerarReporteComponent implements OnInit {
         this.isDataLoaded = true; this.isDataLoaded = true;
         this.cdr.detectChanges();
         this.actualizarGraficos();
+        this.calcularProgreso();
       },
       error: (error) => {
         console.error('Error al obtener entregables:', error);
@@ -177,17 +178,10 @@ export class GenerarReporteComponent implements OnInit {
       return;
     }
 
-    console.log("E".repeat(20) + " Obj: this.entregablesFiltrados: " + JSON.stringify(this.entregablesFiltrados));
     const entregablesPendientes = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'pendiente').length;
     const entregablesEnRevisado = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'revisado').length;
     const entregablesEnAprobado = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'aprobado').length;
     const entregablesEnDesprobado = this.entregablesFiltrados.filter(e => e.estado.toLowerCase() === 'desaprobado').length;
-
-    console.log('Datos para gráfico de torta: ', {
-      pendientes: entregablesPendientes,
-      enProgreso: entregablesEnRevisado,
-      completados: entregablesEnAprobado,
-    });
 
     const totalEntregables = entregablesPendientes + entregablesEnRevisado + entregablesEnAprobado + entregablesEnDesprobado;
 
@@ -199,7 +193,7 @@ export class GenerarReporteComponent implements OnInit {
     this.chartTorta = new Chart(this.graficaProgreso.nativeElement, {
       type: 'pie',
       data: {
-        labels: ['Pendiente', 'Revisado', 'Aprobado', 'Desaprobado'],
+        labels: ['Pendiente', 'Revisado', 'Aprobado', 'No Aprobado'],
         datasets: [
           {
             label: 'Estado de Entregables',
@@ -229,7 +223,7 @@ export class GenerarReporteComponent implements OnInit {
     this.chartBarras = new Chart(this.graficaEntregables.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['Pendiente', 'Revisado', 'Aprobado', 'Desaprobado'],
+        labels: ['Pendiente', 'Revisado', 'Aprobado', 'No Aprobado'],
         datasets: [
           {
             label: 'Cantidad de Entregables',
@@ -277,12 +271,6 @@ export class GenerarReporteComponent implements OnInit {
     });
   }
 
-  // Avance() {
-  //   this.router.navigate([`/generar-avance/${this.selectedProyecto}/${this.selectedActividad}`],
-  //     { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } });
-
-  // }
-
   Avance() {
     this.router.navigate([`/certificado/${this.selectedProyecto}/${this.selectedActividad}`],
       { queryParams: { nombre: this.nombreActividad, proceso: this.proceso } });
@@ -290,9 +278,10 @@ export class GenerarReporteComponent implements OnInit {
   }
 
   calcularProgreso() {
-    const entregablesCompletos = this.entregables.filter(e => e.estado === 'Completado').length;
+    const entregablesAprobados = this.entregables.filter(e => e.estado === 'Aprobado').length;
     if (this.entregables.length > 0) {
-      this.progreso = (entregablesCompletos / this.entregables.length) * 100;
+      // this.progreso = (entregablesAprobados / this.entregables.length) * 100;
+      this.progreso = (entregablesAprobados / 33) * 100;
     } else {
       this.progreso = 0;
 

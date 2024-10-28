@@ -36,6 +36,7 @@ export class UsuariosComponent implements OnInit {
 
   repeatPassword: string = '';
   passwordFieldType: string = 'password';
+  repeatPasswordFieldType: string = 'password';
   passwordMismatch: boolean = false;
 
 
@@ -190,4 +191,12 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
+
+  toggleRepeatPasswordVisibility() {
+    if (this.repeatPasswordFieldType === 'password') {
+      this.repeatPasswordFieldType = 'text';
+    } else {
+      this.repeatPasswordFieldType = 'password';
+    }
+  }
 }

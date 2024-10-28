@@ -5,10 +5,10 @@
 
     <div class="detalle-entregable-container">
       <div class="detalle-modal-content">
+        <h2>Detalles del Entregable</h2>
         <button (click)="volver()" class="icon-button">
           <span class="material-icons">arrow_back</span>
         </button>
-        <h2>Detalles del Entregable</h2>
 
         <form>
           <div class="form-group">
@@ -40,7 +40,7 @@
             <input id="project" type="text" [value]="proyecto" readonly />
           </div>
           <div class="form-group">
-            <label for="categoria">Tipo Actividad</label>
+            <label for="categoria">Tipo Proceso</label>
             <input id="categoria" type="text" [value]="entregable.categoria" readonly />
           </div>
           <div class="form-group">
@@ -48,7 +48,10 @@
             <input id="actividad" type="text" [value]="entregable.actividad" readonly />
           </div>
 
-          <button class="btn-cerrar" (click)="volver()">Cerrar</button>
+          <button class="btn-cerrar" (click)="volver()">
+            <span class="material-symbols-outlined">cancel</span>
+            <strong>Cerrar</strong>
+          </button>
         </form>
       </div>
     </div>

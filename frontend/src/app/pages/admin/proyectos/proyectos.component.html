@@ -4,11 +4,19 @@
     <app-navbar></app-navbar>
 
     <div class="content">
+
+      <h1 class="page-title">Gestión de Proyectos</h1>
+
       <!-- Barra de búsqueda -->
       <div class="search-container">
         <div class="search-bar">
           <input type="text" [(ngModel)]="filtroBusqueda" placeholder="Buscar por nombre o responsable..." />
-          <button (click)="filtrarProyectos()">Buscar</button>
+          <button (click)="filtrarProyectos()">
+            <span class="material-symbols-outlined">
+              search
+              </span>
+              <strong>Buscar</strong>
+          </button>
         </div>
       </div>
 
@@ -35,13 +43,36 @@
             <td>{{ proyecto.fecha_fin }}</td>
             <td>{{ proyecto.responsable}}</td>
             <td>
-              <button class="procesos-button" (click)="Procesos(proyecto.id)">Procesos</button>
-              <button class="detalles-button" (click)="verDetalles(proyecto.id)">Detalles</button>
-              @if(role === 'admin') {
-              <button class="editar-button" (click)="abrirModalEditar(proyecto)">Editar</button>
-              <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id)">Eliminar</button>
-              }
-
+              <div class="button-marco">
+                <div class="btn-group">
+                  <button class="procesos-button" (click)="Procesos(proyecto.id)">
+                    <span class="material-symbols-outlined">
+                      rule_settings
+                    </span>
+                    <strong>Procesos</strong>
+                  </button>
+                  <button class="detalles-button" (click)="verDetalles(proyecto.id)">
+                    <span class="material-symbols-outlined">
+                      description
+                    </span>
+                    <strong>Detalles</strong>
+                  </button>
+                  @if(role === 'admin') {
+                  <button class="editar-button" (click)="abrirModalEditar(proyecto)">
+                    <span class="material-symbols-outlined">
+                      edit
+                    </span>
+                    <strong>Editar</strong>
+                  </button>
+                  <button class="eliminar-button" (click)="eliminarProyecto(proyecto.id)">
+                    <span class="material-symbols-outlined">
+                      delete
+                    </span>
+                    <strong>Eliminar</strong>
+                  </button>
+                  }
+                </div>
+              </div>
             </td>
           </tr>
           }
@@ -81,8 +112,20 @@
                 </option>
               </select>
             </div>
-            <button type="submit" class="save-button">Guardar Cambios</button>
-            <button type="button" class="cancel-button" (click)="cancelarEdicion()">Cancelar</button>
+            <div class="button-group">
+            <button type="submit" class="save-button">
+              <span class="material-symbols-outlined">
+                save
+              </span>
+                <strong>Guardar</strong>
+            </button>
+            <button type="button" class="cancel-button" (click)="cancelarEdicion()">
+              <span class="material-symbols-outlined">
+                cancel
+                </span>
+                <strong>Cancelar</strong>
+            </button>
+            </div>
           </form>
         </div>
       </div>
@@ -95,8 +138,20 @@
           <span class="close" (click)="cancelarEliminacion()">&times;</span>
           <h2>Confirmar Eliminación</h2>
           <p>¿Estás seguro de que deseas eliminar el proyecto: {{ proyectoEliminar?.nombre }}?</p>
-          <button (click)="confirmarEliminacion()">Eliminar</button>
-          <button (click)="cancelarEliminacion()">Cancelar</button>
+          <div class="button-group">
+          <button (click)="confirmarEliminacion()">
+            <span class="material-symbols-outlined">
+              delete
+            </span>
+            <strong>Eliminar</strong>
+          </button>
+          <button (click)="cancelarEliminacion()">
+            <span class="material-symbols-outlined">
+              cancel
+            </span>
+              <strong>Cancelar</strong>
+          </button>
+          </div>
         </div>
       </div>
       }
