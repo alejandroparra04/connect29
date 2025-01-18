@@ -18,17 +18,10 @@ import { ActividadPmComponent } from './pages/admin/proyectos/actividad-pm/activ
 import { ActividadSiComponent } from './pages/admin/proyectos/actividad-si/actividad-si.component';
 import { ProcesosComponent } from './pages/admin/proyectos/procesos/procesos.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-// import { EditarEntregablesComponent } from './pages/admin/entregables/editar-entregables/editar-entregables.component';
-// import { EliminarEntregablesComponent } from './pages/admin/entregables/eliminar-entregables/eliminar-entregables.component';
-// import { RolesComponent } from './pages/admin/roles/roles.component';
-// import { EditarproyectosComponent } from './pages/admin/proyectos/editarproyectos/editarproyectos.component';
-// import { BuscarComponent } from './pages/admin/buscar/buscar.component';
-// import { OlvidarContrasenaComponent } from './pages/inicio-sesion/olvidar-contrasena/olvidar-contrasena.component';
-// import { RestablecerContrasenaComponent } from './pages/inicio-sesion/restablecer-contrasena/restablecer-contrasena.component';
-// import { ContrasenaComponent } from './pages/inicio-sesion/contrasena/contrasena.component';
-// import { EmisionCertificadoComponent } from './pages/emision-certificado/emision-certificado.component';
+
+
 export const routes: Routes = [
-  // { path: '', component: HomeComponent, canActivate: [AdminGuardService] },
+  { path: '', redirectTo: 'inicio-sesion', pathMatch: 'full' },
   {
     path: 'home',
     component: HomeComponent,
@@ -126,19 +119,6 @@ export const routes: Routes = [
     data: { breadCrumb: 'Generar Avance' }
   },
   { path: 'inicio-sesion', component: InicioSesionComponent },
-  // { path: 'emision-certificado', component: EmisionCertificadoComponent, canActivate: [AdminGuardService] },
-  // { path: 'buscar', component: BuscarComponent, canActivate: [AdminGuardService] },
-  // { path: 'editar-entregables/:id', component: EditarEntregablesComponent, canActivate: [AdminGuardService] },
-  // { path: 'eliminar-entregables', component: EliminarEntregablesComponent },
-  // { path: 'editarproyectos/:id', component: EditarproyectosComponent, canActivate: [AdminGuardService] },
-  // { path: 'roles', component: RolesComponent, canActivate: [AdminGuardService] },
-  // { path: 'olvidar-contrasena', component: OlvidarContrasenaComponent, canActivate: [AdminGuardService] },
-  // { path: 'restablecer-contrasena', component: RestablecerContrasenaComponent, canActivate: [AdminGuardService] },
-  // { path: 'contrasena', component: ContrasenaComponent, canActivate: [AdminGuardService] },
-
   { path: 'not-found', component: NotFoundComponent },
-
-
-
   { path: '**', pathMatch: 'full', redirectTo: 'not-found' }
 ];

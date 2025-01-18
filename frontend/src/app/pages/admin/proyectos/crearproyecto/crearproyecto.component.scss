@@ -25,6 +25,7 @@
     box-sizing: border-box;
     margin: auto;
     overflow: auto;
+    margin-bottom: 20px;
 
     h2 {
       margin-bottom: 20px;
@@ -79,6 +80,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        margin-bottom: 20px;
 
 
         .material-symbols-outlined {

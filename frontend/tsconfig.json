@@ -27,6 +27,22 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "allowedCommonJsDependencies": [
+      "core-js/modules/es.promise.js",
+      "core-js/modules/es.string.match.js",
+      "core-js/modules/es.string.replace.js",
+      "core-js/modules/es.string.starts-with.js",
+      "core-js/modules/es.array.iterator.js",
+      "core-js/modules/web.dom-collections.iterator.js",
+      "core-js/modules/es.array.reduce.js",
+      "core-js/modules/es.string.ends-with.js",
+      "core-js/modules/es.string.split.js",
+      "raf",
+      "rgbcolor",
+      "sweetalert2",
+      "html2canvas",
+      "dompurify"
+    ]
   }
 }

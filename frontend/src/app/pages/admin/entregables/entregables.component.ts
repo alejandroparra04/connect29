@@ -43,7 +43,7 @@ export class EntregablesComponent implements OnInit {
 
 
   selectedEntregable: any = null;
-  selectedEntregableEliminar: Entregable | null = null;
+  selectedEntregableEliminar: any = null;
   crearNuevoEntregable: boolean = false;
   mostrarModalEliminar: boolean = false;
   mostrarModalEditar: boolean = false;
@@ -174,7 +174,7 @@ export class EntregablesComponent implements OnInit {
 
   // Métodos para eliminar entregables
   eliminarEntregable(id: number) {
-    this.selectedEntregable = this.entregables.find(entregable => entregable.id === id) || null;
+    this.selectedEntregableEliminar = this.entregables.find(entregable => entregable.id === id) || null;
     this.mostrarModalEliminar = true;
   }
 
@@ -184,7 +184,40 @@ export class EntregablesComponent implements OnInit {
   }
 
   confirmarEliminacion(): void {
-
+    if (this.selectedEntregableEliminar) {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.entregableService.eliminarEntregable(this.selectedEntregableEliminar.id).subscribe({
+            next: () => {
+              this.cargarEntregables();
+              this.cancelarEliminacion();
+              Swal.fire(
+                'Eliminado',
+                'El Entregable ha sido eliminado.',
+                'success'
+              );
+            },
+            error: (error) => {
+              console.error('Error al eliminar el entregable:', error);
+              Swal.fire({
+                icon: 'error',
+                title: 'Error al eliminar',
+                text: 'Hubo un problema al eliminar el entregable',
+              });
+            },
+          });
+        }
+      });
+    }
   }
 
 
